@@ -1,0 +1,77 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600)
+
+// Variables
+@import "variables"
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap"
+
+@import "vendor/bower_dl/metisMenu/dist/metisMenu"
+
+$fa-font-path:        "../../fonts" !default
+@import "vendor/bower_dl/font-awesome/scss/font-awesome"
+
+@import "vendor/bower_dl/materialize/sass/materialize.scss"
+
+.container-banner
+    background-position: center center
+    height: 160px
+    width: 100%
+    background: url("../../images/bg-banner.jpg")
+    .banner
+        background: url("../../images/bannerTitle.png") no-repeat scroll center top !important
+        height: 100%
+        margin: auto
+        padding: 65px
+.main-content
+    .container-fluid
+        margin-top: 21px
+        .nav-left
+            margin: -15px
+            height: 300px
+            position: relative
+            color: #FFF
+            font-family: 'Lato', sans-serif
+            ul
+                list-style: none
+                padding: 0px
+            .group-menu
+                background-color: rgb(116,175,173)
+                margin-bottom: 20px
+                .menu-head
+                    padding: 20px
+                    position: relative
+                    background-color: rgb(217, 133, 59)
+                    &:before
+                        content: ""
+                        position: absolute
+                        width: 0
+                        right: -9px
+                        top: 0
+                        border-top: 30px solid transparent
+                        border-bottom: 30px solid transparent
+                        border-left: 9px solid #D9853B
+                ul
+                    li
+                        padding: 10px 20px
+                        cursor: pointer
+                        a
+                            text-decoration: none
+                            color: #fff
+                            font-size: 14px
+                .menu
+                    li
+                        &:hover, &.active
+                            border-left: 3px solid #ECECEA
+                        &.active
+                            color: yellow
+        .body-content
+            margin: -15px -5px
+            height: 300px
+            background-color: yellow
+        .nav-right
+            margin: -15px
+            height: 300px
+            background-color: blue

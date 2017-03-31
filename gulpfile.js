@@ -15,8 +15,9 @@ require('laravel-elixir-vue-2');
  */
 
 elixir((mix) => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+    mix.sass(['app.sass'], 'public/css/app.css')
+    .version(['css/app.css']);
+       // .webpack('app.js');
 });
 gulp.task('bower', function() {
   return bower({ cmd: 'update'})
@@ -36,11 +37,12 @@ gulp.task("copyfiles", function () {
         ['vendor/bower_dl/jquery-form/jquery.form.js', publicDest[0]],
         ['vendor/bower_dl/datatables/media/js/jquery.dataTables.min.js', publicDest[0]],
         ['resources/assets/css/adminScript.js', publicDest[0]],
+        ['vendor/bower_dl/materialize/dist/js/materialize.min.js', publicDest[0]],
     //cssCopyPath
         ['vendor/bower_dl/bootstrap/dist/css/bootstrap.min.css', publicDest[1]],
-        ['vendor/bower_dl/bootstrap/dist/css/bootstrap.min.css.map', publicDest[1]],
-        ['vendor/bower_dl/font-awesome/css/font-awesome.min.css', publicDest[1]],
-        ['vendor/bower_dl/metisMenu/dist/metisMenu.min.css', publicDest[1]],
+        // ['vendor/bower_dl/bootstrap/dist/css/bootstrap.min.css.map', publicDest[1]],
+        // ['vendor/bower_dl/font-awesome/css/font-awesome.min.css', publicDest[1]],
+        // ['vendor/bower_dl/metisMenu/dist/metisMenu.min.css', publicDest[1]],
         ['vendor/bower_dl/datatables/media/css/jquery.dataTables.min.css', publicDest[1]],
         ['vendor/bower_dl/datatables.net-select-dt/css/select.dataTables.min.css', publicDest[1]],
         ['vendor/bower_dl/datatables.net-select-dt/css/buttons.dataTables.min.css', publicDest[1]],
