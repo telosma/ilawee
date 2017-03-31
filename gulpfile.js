@@ -37,6 +37,7 @@ gulp.task("copyfiles", function () {
         //fontsCopyPath
         ['vendor/bower_dl/bootstrap/dist/fonts/**', publicDest[2]],
         ['vendor/bower_dl/font-awesome/fonts/**', publicDest[2]],
+        ['resources/assets/css/mystyle.css', publicDest[2]],
     ];
 
     for (var i = 0; i < assetsCopy.length; i++) {
