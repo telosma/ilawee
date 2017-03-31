@@ -17,3 +17,7 @@ Route::get('/', function () {
 Route::get('/home', function() {
     return view('layouts.userMaster');
 });
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+    Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
+});
