@@ -19837,7 +19837,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin: -15px;
   height: 300px;
   position: relative;
-  color: #FFF;
+  color: #000;
   font-family: 'Lato', sans-serif;
 }
 
@@ -19847,14 +19847,16 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 }
 
 .main-content .container-fluid .nav-left .group-menu {
-  background-color: #74afad;
+  background-color: #fff;
   margin-bottom: 20px;
 }
 
 .main-content .container-fluid .nav-left .group-menu .menu-head {
-  padding: 20px;
+  padding: 10px;
   position: relative;
-  background-color: #d9853b;
+  background-color: #9ad4ff;
+  font-size: 1.2em;
+  font-weight: 300;
 }
 
 .main-content .container-fluid .nav-left .group-menu .menu-head:before {
@@ -19863,8 +19865,8 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   width: 0;
   right: -9px;
   top: 0;
-  border-top: 30px solid transparent;
-  border-bottom: 30px solid transparent;
+  border-top: 22px solid transparent;
+  border-bottom: 22px solid transparent;
   border-left: 9px solid #D9853B;
 }
 
@@ -19875,12 +19877,13 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 
 .main-content .container-fluid .nav-left .group-menu ul li a {
   text-decoration: none;
-  color: #fff;
+  color: black;
   font-size: 14px;
 }
 
 .main-content .container-fluid .nav-left .group-menu .menu li:hover, .main-content .container-fluid .nav-left .group-menu .menu li.active {
-  border-left: 3px solid #ECECEA;
+  border-left: 3px solid #ff8000;
+  background-color: #f5f8fa;
 }
 
 .main-content .container-fluid .nav-left .group-menu .menu li.active {
@@ -19889,14 +19892,63 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 
 .main-content .container-fluid .body-content {
   margin: -15px -5px;
-  height: 300px;
-  background-color: yellow;
 }
 
 .main-content .container-fluid .nav-right {
   margin: -15px;
   height: 300px;
-  background-color: blue;
+  position: relative;
+  color: #000;
+  font-family: 'Lato', sans-serif;
+}
+
+.main-content .container-fluid .nav-right ul {
+  list-style: none;
+  padding: 0px;
+}
+
+.main-content .container-fluid .nav-right .group-menu {
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.main-content .container-fluid .nav-right .group-menu .menu-head {
+  padding: 10px;
+  position: relative;
+  background-color: #9ad4ff;
+  font-size: 1.2em;
+  font-weight: 300;
+}
+
+.main-content .container-fluid .nav-right .group-menu .menu-head:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  right: -9px;
+  top: 0;
+  border-top: 22px solid transparent;
+  border-bottom: 22px solid transparent;
+  border-left: 9px solid #D9853B;
+}
+
+.main-content .container-fluid .nav-right .group-menu ul li {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.main-content .container-fluid .nav-right .group-menu ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.main-content .container-fluid .nav-right .group-menu .menu li:hover, .main-content .container-fluid .nav-right .group-menu .menu li.active {
+  border-left: 3px solid #ff8000;
+  background-color: #f5f8fa;
+}
+
+.main-content .container-fluid .nav-right .group-menu .menu li.active {
+  color: yellow;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -32,26 +32,28 @@ $fa-font-path:        "../../fonts" !default
             margin: -15px
             height: 300px
             position: relative
-            color: #FFF
+            color: #000
             font-family: 'Lato', sans-serif
             ul
                 list-style: none
                 padding: 0px
             .group-menu
-                background-color: rgb(116,175,173)
+                background-color: #fff
                 margin-bottom: 20px
                 .menu-head
-                    padding: 20px
+                    padding: 10px
                     position: relative
-                    background-color: rgb(217, 133, 59)
+                    background-color: rgb(154, 212, 255)
+                    font-size: 1.2em
+                    font-weight: 300
                     &:before
                         content: ""
                         position: absolute
                         width: 0
                         right: -9px
                         top: 0
-                        border-top: 30px solid transparent
-                        border-bottom: 30px solid transparent
+                        border-top: 22px solid transparent
+                        border-bottom: 22px solid transparent
                         border-left: 9px solid #D9853B
                 ul
                     li
@@ -59,19 +61,56 @@ $fa-font-path:        "../../fonts" !default
                         cursor: pointer
                         a
                             text-decoration: none
-                            color: #fff
+                            color: black
                             font-size: 14px
                 .menu
                     li
                         &:hover, &.active
-                            border-left: 3px solid #ECECEA
+                            border-left: 3px solid rgb(255, 128, 0)
+                            background-color: rgb(245,248,250)
                         &.active
                             color: yellow
         .body-content
             margin: -15px -5px
-            height: 300px
-            background-color: yellow
         .nav-right
             margin: -15px
             height: 300px
-            background-color: blue
+            position: relative
+            color: #000
+            font-family: 'Lato', sans-serif
+            ul
+                list-style: none
+                padding: 0px
+            .group-menu
+                background-color: #fff
+                margin-bottom: 20px
+                .menu-head
+                    padding: 10px
+                    position: relative
+                    background-color: rgb(154, 212, 255)
+                    font-size: 1.2em
+                    font-weight: 300
+                    &:before
+                        content: ""
+                        position: absolute
+                        width: 0
+                        right: -9px
+                        top: 0
+                        border-top: 22px solid transparent
+                        border-bottom: 22px solid transparent
+                        border-left: 9px solid #D9853B
+                ul
+                    li
+                        padding: 10px 20px
+                        cursor: pointer
+                        a
+                            text-decoration: none
+                            color: black
+                            font-size: 14px
+                .menu
+                    li
+                        &:hover, &.active
+                            border-left: 3px solid rgb(255, 128, 0)
+                            background-color: rgb(245,248,250)
+                        &.active
+                            color: yellow

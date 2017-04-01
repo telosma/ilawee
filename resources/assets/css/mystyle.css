@@ -49,7 +49,6 @@
 .topbar-nav .metismenu a {
     position: relative;
     display: block;
-    padding: 15px;
     color: #ffffff;
     outline-width: 0;
     transition: all .3s ease-out;
@@ -97,3 +96,31 @@
     }
 }
 /**/
+/*
+Content
+*/
+.item-title {
+    background-color: rgb(241,241,241)!important ;
+}
+.item-title > h3 {
+    font-weight: 900;
+}
+.list-law .item .link li a {
+    font-size: 12px;
+    text-decoration: none;
+}
+.list-law .item .link .source {
+    padding-left: 5px!important;
+    padding-right: 5px!important;
+}
+.list-law .item .left {
+    border-right: 1px dotted #181515;
+}
+.list-law .item .right table .law-date > td {
+    font-size: 12px;
+    color:  rgb(76,175,80);
+}
+.list-law .item .right table .law-effect > td {
+    font-size: 12px;
+    color:  red;
+}
