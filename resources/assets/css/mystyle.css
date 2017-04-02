@@ -1,17 +1,4 @@
 /*header*/
-.container-banner {
-    background-position: center center;
-    height: 160px;
-    width: 100%;
-    background: url("../images/bg-banner.jpg");
-}
-.banner {
-    background: url("../images/bannerTitle.png")
-    no-repeat scroll center top !important;
-    height: 100%;
-    margin: auto;
-    padding: 65px;
-}
 .topbar-nav {
     padding: 0 60px;
     border-bottom: 1px solid #d7d7d7;
@@ -49,14 +36,13 @@
 .topbar-nav .metismenu a {
     position: relative;
     display: block;
-    color: #ffffff;
     outline-width: 0;
     transition: all .3s ease-out;
     font-size: 1.1em;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #000;
-    font-weight: 500;
+    font-weight: 800;
 }
 .topbar-nav .metismenu a:hover,
 .topbar-nav .metismenu a:focus,
@@ -97,30 +83,5 @@
 }
 /**/
 /*
-Content
+content
 */
-.item-title {
-    background-color: rgb(241,241,241)!important ;
-}
-.item-title > h3 {
-    font-weight: 900;
-}
-.list-law .item .link li a {
-    font-size: 12px;
-    text-decoration: none;
-}
-.list-law .item .link .source {
-    padding-left: 5px!important;
-    padding-right: 5px!important;
-}
-.list-law .item .left {
-    border-right: 1px dotted #181515;
-}
-.list-law .item .right table .law-date > td {
-    font-size: 12px;
-    color:  rgb(76,175,80);
-}
-.list-law .item .right table .law-effect > td {
-    font-size: 12px;
-    color:  red;
-}

@@ -19837,7 +19837,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin: -15px;
   height: 300px;
   position: relative;
-  color: #000;
+  color: #fff;
   font-family: 'Lato', sans-serif;
 }
 
@@ -19854,9 +19854,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 .main-content .container-fluid .nav-left .group-menu .menu-head {
   padding: 10px;
   position: relative;
-  background-color: #9ad4ff;
-  font-size: 1.2em;
-  font-weight: 300;
+  background-color: #1A2930;
 }
 
 .main-content .container-fluid .nav-left .group-menu .menu-head:before {
@@ -19865,9 +19863,13 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   width: 0;
   right: -9px;
   top: 0;
-  border-top: 22px solid transparent;
-  border-bottom: 22px solid transparent;
-  border-left: 9px solid #D9853B;
+  border-top: 21px solid transparent;
+  border-bottom: 21px solid transparent;
+  border-left: 9px solid #1A2930;
+}
+
+.main-content .container-fluid .nav-left .group-menu .menu-head span {
+  color: #fff;
 }
 
 .main-content .container-fluid .nav-left .group-menu ul li {
@@ -19881,9 +19883,12 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   font-size: 14px;
 }
 
+.main-content .container-fluid .nav-left .group-menu .menu li a {
+  color: black;
+}
+
 .main-content .container-fluid .nav-left .group-menu .menu li:hover, .main-content .container-fluid .nav-left .group-menu .menu li.active {
-  border-left: 3px solid #ff8000;
-  background-color: #f5f8fa;
+  border-left: 3px solid #ECECEA;
 }
 
 .main-content .container-fluid .nav-left .group-menu .menu li.active {
@@ -19894,11 +19899,43 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin: -15px -5px;
 }
 
+.main-content .container-fluid .body-content .law-list .law-item .item-title {
+  background-color: #f7f7f7;
+}
+
+.main-content .container-fluid .body-content .law-list .law-item .item-left {
+  border-right: 1px dotted black;
+}
+
+.main-content .container-fluid .body-content .law-list .law-item .item-left .link ul li {
+  padding: 5px 5px !important;
+}
+
+.main-content .container-fluid .body-content .law-list .law-item .item-left .link ul li a {
+  font-size: 12px;
+  color: red;
+  font-family: sans-serif;
+  text-decoration: none;
+}
+
+.main-content .container-fluid .body-content .law-list .law-item .item-right table tr td {
+  padding: 5px 5px;
+}
+
+.main-content .container-fluid .body-content .law-list .law-item .item-right table .pro-date {
+  font-size: 12px;
+}
+
+.main-content .container-fluid .body-content .law-list .law-item .item-right table .pro-effect {
+  font-size: 12px;
+  color: red;
+}
+
 .main-content .container-fluid .nav-right {
   margin: -15px;
   height: 300px;
   position: relative;
-  color: #000;
+  color: #fff;
   font-family: 'Lato', sans-serif;
 }
 
@@ -19915,9 +19952,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 .main-content .container-fluid .nav-right .group-menu .menu-head {
   padding: 10px;
   position: relative;
-  background-color: #9ad4ff;
-  font-size: 1.2em;
-  font-weight: 300;
+  background-color: #1A2930;
 }
 
 .main-content .container-fluid .nav-right .group-menu .menu-head:before {
@@ -19926,9 +19961,13 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   width: 0;
   right: -9px;
   top: 0;
-  border-top: 22px solid transparent;
-  border-bottom: 22px solid transparent;
-  border-left: 9px solid #D9853B;
+  border-top: 21px solid transparent;
+  border-bottom: 21px solid transparent;
+  border-left: 9px solid #1A2930;
+}
+
+.main-content .container-fluid .nav-right .group-menu .menu-head span {
+  color: #fff;
 }
 
 .main-content .container-fluid .nav-right .group-menu ul li {
@@ -19942,9 +19981,12 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   font-size: 14px;
 }
 
+.main-content .container-fluid .nav-right .group-menu .menu li a {
+  color: black;
+}
+
 .main-content .container-fluid .nav-right .group-menu .menu li:hover, .main-content .container-fluid .nav-right .group-menu .menu li.active {
-  border-left: 3px solid #ff8000;
-  background-color: #f5f8fa;
+  border-left: 3px solid #ECECEA;
 }
 
 .main-content .container-fluid .nav-right .group-menu .menu li.active {

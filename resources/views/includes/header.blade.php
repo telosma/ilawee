@@ -9,15 +9,13 @@
         <nav class="topbar-nav is-hoverable">
             <ul class="metismenu" id="menu">
                 <li>
-                    <a href="#" aria-expanded="false">
-                        Trang chu
-                    </a>
+                    <a href="#">Trang chu</a>
                 </li>
                 <li>
-                    <a href="#" aria-expanded="false">Tim kiem</a>
+                    <a href="#">Tim kiem</a>
                 </li>
                 <li>
-                    <a href="#" aria-expanded="false">Tinh huong phap luat</a>
+                    <a href="#">Tinh huong phap luat</a>
                 </li>
             </ul>
         </nav>
