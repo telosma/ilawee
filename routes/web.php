@@ -17,6 +17,9 @@ Route::get('/', function () {
 Route::get('/home', function() {
     return view('user.home');
 });
+Route::get('/trang-chu', function() {
+    return view('user.index');
+});
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
