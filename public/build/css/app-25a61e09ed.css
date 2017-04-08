@@ -19829,6 +19829,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   padding: 65px;
 }
 
+.main-content {
+  margin: 20px 40px;
+}
+
 .main-content .container-fluid {
   margin-top: 21px;
 }
