@@ -17,6 +17,7 @@ Route::get('/', function () {
 Route::get('/home', function() {
     return view('user.home');
 });
+Route::get('/import-data', ['as' => 'import.data', 'uses' => 'Controller@importData']);
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);

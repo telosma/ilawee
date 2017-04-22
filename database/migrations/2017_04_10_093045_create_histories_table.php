@@ -15,8 +15,9 @@ class CreateHistoriesTable extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('documents_id')->unsigned();
+            $table->integer('document_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->string('content');
             $table->timestamps();
         });
     }

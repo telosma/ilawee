@@ -15,20 +15,18 @@ class CreateDocumentsTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('item_id')->unsigned();
-            $table->integer('type_id')->unsigned();
-            $table->integer('organization_id')->unsigned();
-            $table->integer('file_id')->unsigned();
+            $table->integer('item_id')->unsigned()->nullable()->default(null);
+            $table->integer('doc_type_id')->unsigned();
             $table->string('limit');
             $table->string('notation');
             $table->string('fields')->nullable()->default(null);
-            $table->date('puclic_date')->nullable()->default(null);
-            $table->date('start_date');
+            $table->date('publish_date')->nullable()->default(null);
+            $table->date('start_date')->nullable()->default(null);
             $table->string('effective', 200);
-            $table->string('signer');
-            $table->string('description');
+            $table->text('description');
             $table->string('source');
-            $table->string('more_info');
+            $table->text('content');
+            $table->boolean('confirmed')->default(false);
             $table->timestamps();
         });
     }

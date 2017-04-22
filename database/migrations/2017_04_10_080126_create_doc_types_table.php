@@ -16,7 +16,6 @@ class CreateDocTypesTable extends Migration
         Schema::create('doc_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 200);
-            $table->integer('parent_id')->unsigned();
             $table->timestamps();
         });
     }

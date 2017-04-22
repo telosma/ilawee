@@ -16,7 +16,8 @@ class CreateOrganizationsTable extends Migration
         Schema::create('organizations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->tinyInteger('type');
+            $table->integer('parent_id')->unsigned()->nullable()->default(null);
+            $table->tinyInteger('type'); //type o day la coquanchinhphu - diaphuong - bonganh
         });
     }
 

@@ -7,7 +7,16 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+use App\Providers\ImportDatabaseServiceProvider;
+use App\Models\{Document, DocType};
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function importData()
+    {
+        $importDataClass = new ImportDatabaseServiceProvider();
+        $importDataClass->import();
+    }
 }
