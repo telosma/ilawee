@@ -3,7 +3,7 @@
     <head>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('page_title')</title>
-        {{-- <link rel="stylesheet" href=".{{ elixir('css/app.css') }}"> --}}
+        {!! Html::style('css/bootstrap.min.css') !!}
         {!! Html::style('css/style.css') !!}
         {!! Html::style('css/reset.css') !!}
         @yield('style')
@@ -22,9 +22,5 @@
         {!! Html::script('js/materialize.min.js') !!}
         @yield('script')
         @stack('scripts')
-        <script type="text/javascript">
-            $("#menu").metisMenu();
-            $('#tabVB_lv1').tabs();
-        </script>
     </body>
 </html>

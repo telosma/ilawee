@@ -18,81 +18,83 @@
                                         <div class="box-container">
                                             <div class="box-tab" id="tabVB_lv1">
                                                 <div class="header">
-                                                    <ul>
-                                                        <li><a href="#tabVB_lv1_01"><span>Văn bản mới</span></a></li>
-                                                        <li><a href="#tabVB_lv1_02"><span>Văn bản có hiệu lực trong tháng</span></a></li>
-                                                        <li><a href="#tabVB_lv1_03"><span>Văn bản hết hiệu lực trong tháng</span></a></li>
+                                                    <ul class="nav nav-tabs">
+                                                        <li class="active"><a href="#tabVB_lv1_01" data-toggle="tab"><span>Văn bản mới</span></a></li>
+                                                        <li><a href="#tabVB_lv1_02" data-toggle="tab"><span>Văn bản có hiệu lực trong tháng</span></a></li>
+                                                        <li><a href="#tabVB_lv1_03" data-toggle="tab"><span>Văn bản hết hiệu lực trong tháng</span></a></li>
                                                     </ul>
                                                 </div>
-                                                <div class="content" id="tabVB_lv1_01">
-                                                    <!-- danh sách văn bản -->
-                                                    <ul class="listLaw">
-                                                        <li>
-                                                            <div class="item">
-                                                                <p class="title">
-                                                                    <a href="#">
-                                                                        Quyết định 07/2017/QĐ-TTg
-                                                                    </a>
-                                                                </p>
-                                                                <div class="left">
-                                                                    <div class="des">
-                                                                        <p>
-                                                                            Về việc thu giá dịch vụ sử dụng đường bộ theo hình thức điện tử tự động không dừng
+                                                <div class="tab-content">
+                                                    <div class="content tab-pane fade in active" id="tabVB_lv1_01">
+                                                        <!-- danh sách văn bản -->
+                                                        <ul class="listLaw">
+                                                            <li>
+                                                                <div class="item">
+                                                                    <p class="title">
+                                                                        <a href="#">
+                                                                            Quyết định 07/2017/QĐ-TTg
+                                                                        </a>
+                                                                    </p>
+                                                                    <div class="left">
+                                                                        <div class="des">
+                                                                            <p>
+                                                                                Về việc thu giá dịch vụ sử dụng đường bộ theo hình thức điện tử tự động không dừng
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="link">
+                                                                            <ul>
+
+                                                                                <li class="ref"><a href="#">
+                                                                                    VB liên quan</a></li>
+                                                                                <li class="thuoctinh"><a href="#">
+                                                                                    Thuộc tính</a></li>
+                                                                                <li class="map"><a href="#">
+                                                                                    Lược đồ</a></li>
+
+                                                                                <li class="download"><a href="javascript:downloadfile('07-2017-QD-TTg.doc','/TW/Lists/vbpq/Attachments/120226/07-2017-QD-TTg.doc');">Tải về</a></li>
+
+
+                                                                                <div id="divShowDialogDownload_120226" title="Danh sách văn bản tải về"
+                                                                                    style="display: none">
+                                                                                    <ul class="fileAttack">
+
+                                                                                    </ul>
+                                                                                </div>
+                                                                                <script type="text/javascript">
+                                                                                    function ShowDialogDownload(id) {
+                                                                                        $('#divShowDialogDownload_' + id + '').dialog();
+                                                                                    }
+                                                                                </script>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <p class="green">
+                                                                            <label>
+                                                                                Ban hành:</label>
+                                                                            27/03/2017</p>
+                                                                        <p class="green">
+                                                                            <label>
+                                                                                Hiệu lực:</label>
+                                                                            15/05/2017</p>
+
+                                                                        <p class="red">
+                                                                            <label>
+                                                                                Trạng thái:</label>
+                                                                            Chưa có hiệu lực
                                                                         </p>
                                                                     </div>
-                                                                    <div class="link">
-                                                                        <ul>
-
-                                                                            <li class="ref"><a href="#">
-                                                                                VB liên quan</a></li>
-                                                                            <li class="thuoctinh"><a href="#">
-                                                                                Thuộc tính</a></li>
-                                                                            <li class="map"><a href="#">
-                                                                                Lược đồ</a></li>
-
-                                                                            <li class="download"><a href="javascript:downloadfile('07-2017-QD-TTg.doc','/TW/Lists/vbpq/Attachments/120226/07-2017-QD-TTg.doc');">Tải về</a></li>
-
-
-                                                                            <div id="divShowDialogDownload_120226" title="Danh sách văn bản tải về"
-                                                                                style="display: none">
-                                                                                <ul class="fileAttack">
-
-                                                                                </ul>
-                                                                            </div>
-                                                                            <script type="text/javascript">
-                                                                                function ShowDialogDownload(id) {
-                                                                                    $('#divShowDialogDownload_' + id + '').dialog();
-                                                                                }
-                                                                            </script>
-                                                                        </ul>
-                                                                    </div>
                                                                 </div>
-                                                                <div class="right">
-                                                                    <p class="green">
-                                                                        <label>
-                                                                            Ban hành:</label>
-                                                                        27/03/2017</p>
-                                                                    <p class="green">
-                                                                        <label>
-                                                                            Hiệu lực:</label>
-                                                                        15/05/2017</p>
-
-                                                                    <p class="red">
-                                                                        <label>
-                                                                            Trạng thái:</label>
-                                                                        Chưa có hiệu lực
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- danh sách văn bản -->
-                                                </div>
-                                                <div class="content" id="tabVB_lv1_02">
-                                                    abc
-                                                </div>
-                                                <div class="content" id="tabVB_lv1_03">
-                                                    cde
+                                                            </li>
+                                                        </ul>
+                                                        <!-- danh sách văn bản -->
+                                                    </div>
+                                                    <div class="content tab-pane fade" id="tabVB_lv1_02">
+                                                        abc
+                                                    </div>
+                                                    <div class="content tab-pane fade" id="tabVB_lv1_03">
+                                                        cde
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
