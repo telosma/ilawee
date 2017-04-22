@@ -18,6 +18,12 @@ Route::get('/home', function() {
     return view('user.home');
 });
 Route::get('/import-data', ['as' => 'import.data', 'uses' => 'Controller@importData']);
+Route::get('/', function() {
+    return view('user.index');
+});
+Route::get('/detail', function() {
+    return view('user.detail');
+});
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);

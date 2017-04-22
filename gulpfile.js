@@ -48,6 +48,8 @@ gulp.task("copyfiles", function () {
         ['vendor/bower_dl/datatables.net-select-dt/css/buttons.dataTables.min.css', publicDest[1]],
         ['vendor/bower_dl/sb-admin-2/css/sb-admin-2.css', publicDest[1]],
         ['resources/assets/css/mystyle.css', publicDest[1]],
+        ['resources/assets/css/style.css', publicDest[1]],
+        ['resources/assets/css/reset.css', publicDest[1]],
     //fontsCopyPath
         ['vendor/bower_dl/bootstrap/dist/fonts/**', publicDest[2]],
         ['vendor/bower_dl/font-awesome/fonts/**', publicDest[2]],
