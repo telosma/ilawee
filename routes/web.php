@@ -20,6 +20,9 @@ Route::get('/home', function() {
 Route::get('/trang-chu', function() {
     return view('user.index');
 });
+Route::get('/chi-tiet', function() {
+    return view('user.detail');
+});
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);

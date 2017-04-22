@@ -227,9 +227,9 @@ div.multiSelectOptions {width:420px !important; height:350px;}
 .box-tab .header ul li a {display:block; background:url(../images/tab-bg.gif) no-repeat top left; padding-left:10px;}
 .box-tab .header ul li a span {text-decoration:none; display:block; background:url(../images/tab-bg.gif) no-repeat top right;padding:5px 10px 5px 0px; color:#fff; font:normal 10pt Arial, Helvetica, sans-serif;}
 .box-tab .header ul li a:hover,
-.box-tab .header ul li a.selected {background:url(../images/tab-bg-hover.gif) no-repeat top left; text-decoration:none;}
+.box-tab .header ul li a.active {background:url(../images/tab-bg-hover.gif) no-repeat top left; text-decoration:none;}
 .box-tab .header ul li a:hover span,
-.box-tab .header ul li a.selected span{background:url(../images/tab-bg-hover.gif) no-repeat top right;text-decoration:none; }
+.box-tab .header ul li a.active span{background:url(../images/tab-bg-hover.gif) no-repeat top right;text-decoration:none; }
 .box-tab .bottom {background:url(../images/content-02-bg.gif) no-repeat top left; padding-left:50%;}
 .box-tab .bottom div{background:url(../images/content-02-bg.gif) no-repeat top right; padding-right:50%; height:8px; line-height:8px;}
 .box-tab .content {border:1px solid #ccc; background:#fff;}
@@ -303,10 +303,13 @@ div.multiSelectOptions {width:420px !important; height:350px;}
 
 .box-tab-vb .header ul li a:hover,
 .box-tab-vb .header ul li a.selected {background:url(../images/tabvb-item-hover.gif) no-repeat top right;text-decoration:none;}
+.box-tab-vb .header ul li a.active {background:url(../images/tabvb-item-hover.gif) no-repeat top right;text-decoration:none;}
 .box-tab-vb .header ul li a:hover span,
 .box-tab-vb .header ul li a.selected span {background:url(../images/tabvb-item-hover.gif) no-repeat top left;}
+.box-tab-vb .header ul li a.active span {background:url(../images/tabvb-item-hover.gif) no-repeat top left;}
 .box-tab-vb .header ul li a:hover span b,
 .box-tab-vb .header ul li a.selected span b{background-repeat:no-repeat; color:#fff;}
+.box-tab-vb .header ul li a.active span b{background-repeat:no-repeat; color:#fff;}
 
 
 .box-tab-vb .bottom {background:url(../images/content-02-bg.gif) no-repeat top left; padding-left:50%;}

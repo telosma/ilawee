@@ -4,5 +4,5 @@
 
 @section('content')
 @include('includes.header2')
-@include('includes.userContentIndex2')
+@include('includes.userContentDetail')
 @endsection()
