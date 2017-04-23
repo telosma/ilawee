@@ -3,10 +3,31 @@
         <div>
             <div class="header-top">
                 <div class="content-heder-top">
-                    <a href="#" data-toggle="modal" data-target="#auth-modal">Đăng nhập/Đăng ký</a>
                     <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>Liên hệ</a>
                     <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>Sơ đồ cổng thông tin</a>
                     <a href="#"><i class="fa fa-headphones" aria-hidden="true"></i>Hướng dẫn khai thác</a>
+                    @if (Auth::check())
+                        <div class="account dropdown">
+                            <div data-toggle="dropdown" style="display: inline-flex;">
+                                <span class="icon round-image">
+                                    <img src="{{ Auth::user()->avatar_link }}">
+                                </span>
+                                <span class="name">
+                                    {{ Auth::user()->name }}
+                                    <span class="caret"></span>
+                                </span>
+                            </div>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{ route('logout') }}">Đăng xuất</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>Tùy chỉnh</li>
+                            </ul>
+                        </div>
+                    @else
+                        <a href="#" data-toggle="modal" data-target="#auth-modal">Đăng nhập/Đăng ký</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -48,5 +69,5 @@
     </div>
 </div>
 @if(!Auth::check())
-    @include('includes.authModal');
+    @include('includes.authModal')
 @endif()
