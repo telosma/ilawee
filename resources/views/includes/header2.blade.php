@@ -3,10 +3,10 @@
         <div>
             <div class="header-top">
                 <div class="content-heder-top">
+                    <a href="#" data-toggle="modal" data-target="#auth-modal">Đăng nhập/Đăng ký</a>
                     <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>Liên hệ</a>
                     <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>Sơ đồ cổng thông tin</a>
                     <a href="#"><i class="fa fa-headphones" aria-hidden="true"></i>Hướng dẫn khai thác</a>
-                    <a href="#" data-toggle="modal" data-target="#auth-modal">Đăng nhập/Đăng ký</a>
                 </div>
             </div>
         </div>

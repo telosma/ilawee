@@ -10,7 +10,6 @@
         @stack('header')
     </head>
     <body>
-        {{-- @include('includes.header2') --}}
         <div class="container-fluid page-body">
             @yield('content')
         </div>
