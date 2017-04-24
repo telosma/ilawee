@@ -46,12 +46,12 @@ class AuthSocialController extends Controller
                 'name' => $socialUser->name,
                 'email' => $socialUser->email,
                 'avatar_link' => $socialUser->avatar,
-                'confimred' => true,
+                'confirmed' => true
             ]);
 
             if ($newUser) {
                 $createSocialUser =  Social::firstOrCreate([
-                    'user_id' => $existUser->id,
+                    'user_id' => $newUser->id,
                     'provider' => $provider,
                     'provider_user_id' => $socialUser->id
                 ]);
