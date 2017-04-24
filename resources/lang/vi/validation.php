@@ -8,6 +8,7 @@ return [
         'required' => 'Bạn chưa nhập địa chỉ email',
         'email' => 'Địa chỉ email không hợp lệ',
         'unique' => 'Địa email đã đưọc sử dụng',
+        'exists' => 'Tài khoản sai',
     ],
     'password' => [
         'required' => 'Yêu cầu nhập vào mật khẩu',

@@ -21,8 +21,8 @@
                             <div class="social-login">
                                 <h4 align="center">Đăng nhập với</h4>
                                 <ul>
-                                    <li><a href=""><i class="fa fa-facebook"></i> Facebook</a></li>
-                                    <li><a href=""><i class="fa fa-google-plus"></i> Google+</a></li>
+                                    <li><a href="{{ route('redirectToProvider', 'facebook') }}"><i class="fa fa-facebook"></i> Facebook</a></li>
+                                    <li><a href="{{ route('redirectToProvider', 'google') }}"><i class="fa fa-google-plus"></i> Google+</a></li>
                                 </ul>
                                 <a data-dismiss="modal" data-toggle="modal" href="#resend-confirm-modal" style="margin-top: 20px; display: inline-block;">
                                     <b>Gửi lại mã xác nhận tài khoản</b>
@@ -47,8 +47,8 @@
                             <div class="social-login">
                                 <h4 align="center">Đăng ký qua</h4>
                                 <ul>
-                                    <li><a href=""><i class="fa fa-facebook"></i> Facebook</a></li>
-                                    <li><a href=""><i class="fa fa-google-plus"></i> Google+</a></li>
+                                    <li><a href="{{ route('redirectToProvider', 'facebook') }}"><i class="fa fa-facebook"></i> Facebook</a></li>
+                                    <li><a href="{{ route('redirectToProvider', 'google') }}"><i class="fa fa-google-plus"></i> Google+</a></li>
                                 </ul>
                             </div>
                         </div>

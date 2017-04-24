@@ -20,6 +20,8 @@ Route::post('/signin', ['as' => 'signin', 'uses' => 'AuthUserController@postSign
 Route::get('/logout', ['as' => 'logout', 'uses' => 'AuthUserController@getLogout']);
 Route::get('u/activate/{code}', ['as' => 'user.activate', 'uses' => 'AuthUserController@activateUser']);
 Route::post('u/resend-confirm', ['as' => 'user.confirm', 'uses' => 'AuthUserController@sendConfirmation']);
+Route::get('auth/{provider}', ['as' => 'redirectToProvider', 'uses' => 'AuthSocialController@redirectToProvider']);
+Route::get('auth/{provider}/callback', 'AuthSocialController@handleProviderCallback');
 Route::get('/', function() {
     return view('user.index');
 })->name('home');

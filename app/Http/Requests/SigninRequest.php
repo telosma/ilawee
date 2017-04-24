@@ -18,7 +18,7 @@ class SigninRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required',
+            'email' => 'required|exists:users',
             'password' => 'required',
         ];
     }
@@ -28,6 +28,7 @@ class SigninRequest extends FormRequest
         return [
             'email.required' => trans('validation.email.required'),
             'email.email' => trans('validation.email.email'),
+            'email.exists' => trans('validation.email.exists'),
             'password.required' => trans('validation.password.required'),
         ];
     }

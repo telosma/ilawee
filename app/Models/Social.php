@@ -18,4 +18,37 @@ class Social extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public static function findOrCreate($socialUser, $provider, $userId)
+    {
+        $existUser = Social::where('provider_user_id', $socialUser->id)->first();
+        if (!$existUser) {
+            try {
+                $user = Social::create([
+                    'user_id' => $userId,
+                    'provider' => $provider,
+                    'provider_user_id' => $socialUser->id,
+                ]);
+
+                return $user;
+            } catch (Exception $e) {
+                return [
+                    'message' => $e->getMessage(),
+                ];
+            }
+        }
+
+        if ($existUser->user_id !== $userId) {
+            $existUser->user_id = $userId;
+            try {
+                $existUser->save();
+            } catch (Exception $e) {
+                return [
+                    'message' => $e->getMessage(),
+                ];
+            }
+        }
+
+        return $existUser;
+    }
 }

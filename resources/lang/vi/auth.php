@@ -16,4 +16,5 @@ return [
     'failed' => 'Tài khoản hoặc mật khẩu không đúng',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'login_success' => 'Xin chào :name',
+    'login_success_via' => 'Đăng nhập thành công qua :provider',
 ];

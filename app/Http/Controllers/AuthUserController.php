@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests\{SignupRequest, SigninRequest};
-use App\Models\User;
+use App\Models\{User, Role};
 
 class AuthUserController extends Controller
 {
@@ -21,6 +21,7 @@ class AuthUserController extends Controller
         try {
             $user = User::create($params);
             if ($user) {
+                $user->roles()->attach(Role::where('name', 'User')->first());
                 $contactInfo = $user;
                 $contactInfo['subject'] = 'Xác nhận tài khoản';
                 $mailer->to($contactInfo['email'])
