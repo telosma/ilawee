@@ -28,6 +28,7 @@
                                                     <div class="content tab-pane fade in active" id="tabVB_lv1_01">
                                                         <!-- danh sách văn bản -->
                                                         <ul class="listLaw">
+                                                            @foreach($hits as $hit)
                                                             <li>
                                                                 <div class="item">
                                                                     <p class="title">
@@ -37,9 +38,7 @@
                                                                     </p>
                                                                     <div class="left">
                                                                         <div class="des">
-                                                                            <p>
-                                                                                Về việc thu giá dịch vụ sử dụng đường bộ theo hình thức điện tử tự động không dừng
-                                                                            </p>
+                                                                                {!! $hit['highlight']['description'][0] !!}
                                                                         </div>
                                                                         <div class="link">
                                                                             <ul>
@@ -86,6 +85,7 @@
                                                                     </div>
                                                                 </div>
                                                             </li>
+                                                            @endforeach()
                                                         </ul>
                                                         <!-- danh sách văn bản -->
                                                     </div>

@@ -181,6 +181,8 @@ return [
 
         Laravel\Socialite\SocialiteServiceProvider::class,
 
+        Elasticquent\ElasticquentServiceProvider::class,
+
     ],
 
     /*
@@ -233,6 +235,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        // Elasticsearch Facade
+        'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
     ],
 
 ];

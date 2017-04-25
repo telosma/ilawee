@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Elasticquent\ElasticquentTrait;
 use App\Models\{FileStore, DocType, Organization, Singer, History, Document};
 
 class Document extends Model
 {
+    use ElasticquentTrait;
+
     protected $table = 'documents';
     protected $fillable = [
         'item_id',
@@ -22,6 +25,91 @@ class Document extends Model
         'content',
         'confirmed',
     ];
+    // protected $indexSettings = [
+    //     'analysis' => [
+    //         'char_filter' => [
+    //             'replace' => [
+    //                 'type' => 'mapping',
+    //                 'mappings' => [
+    //                     '&=> and '
+    //                 ],
+    //             ],
+    //         ],
+    //         'filter' => [
+    //             'word_delimiter' => [
+    //                 'type' => 'word_delimiter',
+    //                 'split_on_numerics' => false,
+    //                 'split_on_case_change' => true,
+    //                 'generate_word_parts' => true,
+    //                 'generate_number_parts' => true,
+    //                 'catenate_all' => true,
+    //                 'preserve_original' => true,
+    //                 'catenate_numbers' => true,
+    //             ]
+    //         ],
+    //         'analyzer' => [
+    //             'default' => [
+    //                 'type' => 'custom',
+    //                 'char_filter' => [
+    //                     'html_strip',
+    //                     'replace',
+    //                 ],
+    //                 'tokenizer' => 'whitespace',
+    //                 'filter' => [
+    //                     'lowercase',
+    //                     'word_delimiter',
+    //                 ],
+    //             ],
+    //         ],
+    //     ],
+    // ];
+    protected $mappingProperties = array(
+        'description' => array(
+            'type' => 'text',
+            'analyzer' => 'standard',
+            'store' => true
+        ),
+        'publish_date' => array(
+            'type' => 'date',
+            'store' => true
+        ),
+        'content' => array(
+            'type' => 'text',
+            'analyzer' => 'standard',
+            'store' => true
+        ),
+        'start_date' => array(
+            'type' => 'date',
+            'store' => true
+        ),
+        'doc_type_id' => array(
+            'type' => 'integer'
+        ),
+        'doc_type_id' => array(
+            'type' => 'integer'
+        ),
+        'limit' => array(
+            'type' => 'string'
+        ),
+        'fields' => array(
+            'type' => 'string'
+        ),
+        'notation' => array(
+            'type' => 'string'
+        ),
+        'effective' => array(
+            'type' => 'boolean'
+        ),
+        'source' => array(
+            'type' => 'string'
+        ),
+        'context' => array(
+            'type' => 'text'
+        ),
+        'confirmed' => array(
+            'type' => 'boolean'
+        )
+    );
 
     public function docType()
     {

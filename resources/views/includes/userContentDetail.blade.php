@@ -33,59 +33,27 @@
                                     <span><b class="print">Bản in</b></span></a></li>
                             </ul>
                         </div>
+
+                        @foreach($documents as $document)
+                            {{-- {{ dd($document) }} --}}
                         <div class="content">
                             <div class="fulltext">
                                 <div class="vbInfo">
                                     <ul>
-                                        <li class="red"><span>Hiệu lực: </span>
-                                            Chưa có hiệu lực</li>
+                                        <li class="red">{{ $document->effective }}</li>
                                         <li class="green">
                                             <span>Ngày có hiệu lực: </span>
-                                                15/05/2017
+                                                {{ $document->start_date }}
                                         </li>
                                     </ul>
                                 </div>
                                 <div>
-                                    <table width="30%" cellpadding="1" border="0" align="left" style="margin-left: 5px;">
-                                        <tbody>
-                                            <tr>
-                                                <td width="22%" valign="baseline" align="center">
-                                                    <div align="center" style="margin-top: 10px;">
-                                                        <b>THỦ TƯỚNG</b>
-                                                    </div>
-                                                    <div style="border-bottom: 1px solid #000000;width:40px;"></div>
-                                                    <div style="padding-top:5px;text-align:center;">
-                                                        Số:
-                                                        07/2017/QĐ-TTg
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <table width="40%" cellpadding="1" border="0" align="right">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div style="padding: 5px; text-align: center;">
-                                                        <b>CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM</b>
-                                                    </div>
-                                                    <div style="padding: 5px; text-align: center;">
-                                                        <b style="border-bottom: 1px solid #000000; margin-left: 10px; padding-bottom: 3px;">
-                                                            Độc lập - Tự do - Hạnh phúc</b>
-                                                    </div>
-                                                    <div style="padding: 5px; text-align: center;">
-                                                        <i>
-                                                            Hà Nội,
-                                                                ngày
-                                                                27 tháng
-                                                                    3 năm
-                                                                        2017
-                                                        </i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                            <article style="display: none;">
+                                <textarea id="sourceTA" cols="30" rows="70">
+                                    {!! $document->content !!}
+                                </textarea>
+                            </article>
+                            <div id="targetDiv"></div>
 
                                     <div style="clear:both;"></div>
                                     <div class="toanvancontent" id="toanvancontent">
@@ -98,7 +66,7 @@
                                                 .table_cqbh_cd_nk td p {text-align:center !important; font-weight:bold; padding:0px; font:bold 12px Arial,Helvetica,sans-serif !important;}
                                                 .table_cqbh_cd_nk .upper {text-transform:uppercase;}
                                             </style>
-                                             <table style="width:100%;" cellpadding="0px" cellspacing="0px" class="table_cqbh_cd_nk"><tbody><tr><td class="upper" style="width:775px"><p></p></td></tr><tr><td class="upper" style="width:775px"><p>Phó Thủ tướng </p></td></tr><tr><td style="width:775px"><p><i>(Đã ký)</i></p></td></tr><tr><td colspan="4">&nbsp;</td></tr><tr><td style="width:775px"><p>Trịnh Đình Dũng</p></td></tr></tbody></table>
+                                             {{-- <table style="width:100%;" cellpadding="0px" cellspacing="0px" class="table_cqbh_cd_nk"><tbody><tr><td class="upper" style="width:775px"><p></p></td></tr><tr><td class="upper" style="width:775px"><p>Phó Thủ tướng </p></td></tr><tr><td style="width:775px"><p><i>(Đã ký)</i></p></td></tr><tr><td colspan="4">&nbsp;</td></tr><tr><td style="width:775px"><p>Trịnh Đình Dũng</p></td></tr></tbody></table> --}}
                                         </div>
                                         <!-- file toàn văn -->
                                         <div class="vbFile">
@@ -108,8 +76,12 @@
                                             </div>
                                             <div class="content">
                                                 <ul>
-                                                <li><span>Bản PDF:</span>
-                                                </li>
+                                                    <li>
+                                                        <span>Bản PDF:</span>
+                                                  {{--       <a href="#" download="{{$document->fileStore->link}}">
+                                                            {{ basename($document->fileStore->link) }}
+                                                        </a> --}}
+                                                    </li>
                                                 <li><span>File đính kèm:</span>
                                                     <ul>
                                                         <li>
@@ -159,6 +131,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endforeach()
                     </div>
                 </div>
             </div>
@@ -208,3 +181,19 @@
     });
 
 </script> --}}
+@push('scripts')
+    {{ Html::script('js/showdown.min.js') }}
+    <script type="text/javascript">
+            function run() {
+                var text = document.getElementById('sourceTA').value,
+                    target = document.getElementById('targetDiv'),
+                    converter = new showdown.Converter(),
+                html = converter.makeHtml(text);
+
+                targetDiv.innerHTML = html;
+            }
+        $(function() {
+            var x = new run();
+        })
+    </script>
+@endpush

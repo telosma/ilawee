@@ -38,6 +38,7 @@ gulp.task("copyfiles", function () {
         ['vendor/bower_dl/datatables/media/js/jquery.dataTables.min.js', publicDest[0]],
         ['resources/assets/css/adminScript.js', publicDest[0]],
         ['vendor/bower_dl/materialize/dist/js/materialize.min.js', publicDest[0]],
+        ['vendor/bower_dl/showdown/dist/showdown.min.js', publicDest[0]],
     //cssCopyPath
         ['vendor/bower_dl/bootstrap/dist/css/bootstrap.min.css', publicDest[1]],
         // ['vendor/bower_dl/bootstrap/dist/css/bootstrap.min.css.map', publicDest[1]],

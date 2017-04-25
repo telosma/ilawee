@@ -22,6 +22,7 @@ Route::get('u/activate/{code}', ['as' => 'user.activate', 'uses' => 'AuthUserCon
 Route::post('u/resend-confirm', ['as' => 'user.confirm', 'uses' => 'AuthUserController@sendConfirmation']);
 Route::get('auth/{provider}', ['as' => 'redirectToProvider', 'uses' => 'AuthSocialController@redirectToProvider']);
 Route::get('auth/{provider}/callback', 'AuthSocialController@handleProviderCallback');
+Route::resource('document', 'DocumentController');
 Route::get('/', function() {
     return view('user.index');
 })->name('home');

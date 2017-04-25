@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\{Signer, DocType, Document, FileStore, Organization, RelatedDocument};
 use Carbon\Carbon;
+use DateTime;
 use File;
 
 class ImportDatabaseServiceProvider
@@ -24,8 +25,10 @@ class ImportDatabaseServiceProvider
         /*-----------------------------------------*/
 
         /*----------------------------------------*/
-        // $dir = storage_path('data_crawl');
+        // $dir = storage_path('data_crawl12');
         // $dataFolders = array_diff(scandir($dir, 1), array('..', '.'));
+        // $document_data = array();
+        // $data = NULL;
         // foreach ($dataFolders as $key => $folderPath) {
         //     if (is_dir($dir . "/" . $folderPath)) {
         //         // $filePaths = array_diff(scandir($dir . "/" . $folderPath), array('..', '.'));
@@ -33,44 +36,51 @@ class ImportDatabaseServiceProvider
         //         $fileJson = glob($dir . "/" . $folderPath . "/*.json");
         //         $filePdf =  glob($dir . "/" . $folderPath . "/*.pdf");
 
-        //         $document_data = array();
-        //         if (empty($fileTexts)) {
-        //            $document_data['content'] = 'Đang cập nhật';
-        //         } else {
-        //             $document_data['content'] = file_get_contents($fileText[0]);
-        //         }
-        //         if (!empty($fileJson[0])) {
+        //         $document_data['content'] = NULL;
+        //         if (!empty($fileJson)) {
+        //             if (!empty($fileText)) {
+        //                 $document_data['content'] = file_get_contents($fileText[0]);
+        //             }
         //             $data = json_decode(file_get_contents($fileJson[0]), true);
         //             $document_data['item_id'] = $data['itemID'];
         //             $document_data['fields'] = $data['linhvuc'];
         //             $document_data['limit'] = $data['phamvi'];
         //             $document_data['notation'] = $data['sokihieu'];
-        //             $document_data['publish_date'] = isset($document_data['publish_date']) ?
-        //                 Carbon::createFromFormat('d/m/Y', $data['ngaybanhanh'])->toDateString() :
+        //             $ngaybanhanh = DateTime::createFromFormat('d/m/Y', $data['ngaybanhanh']);   // Tra ve false neu $data['ngaybanhanh'] null or khong format duoc
+        //             $ngaycohieuluc = DateTime::createFromFormat('d/m/Y', $data['ngaycohieuluc']);
+        //             $document_data['publish_date'] = ($ngaybanhanh) ?
+        //                 $ngaybanhanh->format('Y-m-d') :
         //                 NULL;
-        //             $document_data['start_date'] = isset($document_data['start_date']) ?
-        //                 Carbon::createFromFormat('d/m/Y', $data['ngaycohieuluc'])->toDateString() :
+        //             $document_data['start_date'] = $ngaycohieuluc ?
+        //                 $ngaycohieuluc->format('Y-m-d') :
         //                 NULL;
         //             $document_data['effective'] = $data['tinhtranghieuluc'];
         //             $document_data['description'] = $data['type'];
         //             $document_data['source'] = $data['nguonthuthap'];
         //             $document_data['confirmed'] = true;
         //             // Tao doctype
-        //             $doc_type = Doctype::where('name', $data['loaivanban'])->first() ?
-        //                         Doctype::where('name', $data['loaivanban'])->first() :
-        //                         DocType::create([
+        //             // $doc_type = Doctype::where('name', $data['loaivanban'])->first() ?
+        //             //             Doctype::where('name', $data['loaivanban'])->first() :
+        //             //             DocType::create([
+        //             //                 'name' => $data['loaivanban']
+        //             //             ]);
+        //             $doc_type = DocType::firstOrCreate([
         //                             'name' => $data['loaivanban']
         //                         ]);
         //             //Tao document thong qua doctype
         //             if ($doc_type) {
         //                 $document = $doc_type->documents()->create($document_data);
         //                 //Attaching / Detaching
-        //                 for ($i = 1; $i < 4; $i ++)
+        //                 for ($i = 1; $i < 3; $i ++)
         //                 {
         //                     if (isset($data['coquanbanhanh' . $i])) {
-        //                         $coquanbanhanh = Organization::where('name', $data['coquanbanhanh' . $i])->first() ?
-        //                             Organization::where('name', $data['coquanbanhanh' . $i])->first() :
-        //                             Organization::create([
+        //                         // $coquanbanhanh = Organization::where('name', $data['coquanbanhanh' . $i])->first() ?
+        //                             // Organization::where('name', $data['coquanbanhanh' . $i])->first() :
+        //                             // Organization::create([
+        //                             //     'name' => $data['coquanbanhanh' . $i],
+        //                             //     'type' => 4
+        //                             // ]);
+        //                             $coquanbanhanh = Organization::firstOrCreate([
         //                                 'name' => $data['coquanbanhanh' . $i],
         //                                 'type' => 4
         //                             ]);
@@ -104,7 +114,7 @@ class ImportDatabaseServiceProvider
         // }
         /*-----------------------------------------*/
         /* Import Related Document sau khi da co cac ban document*/
-        $dir = storage_path('data_crawl');
+        $dir = storage_path('data_crawl12');
         $dataFolders = array_diff(scandir($dir, 1), array('..', '.'));
         foreach ($dataFolders as $key => $folderPath) {
             if (is_dir($dir . "/" . $folderPath)) {
