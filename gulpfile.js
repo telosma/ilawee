@@ -39,6 +39,8 @@ gulp.task("copyfiles", function () {
         ['resources/assets/css/adminScript.js', publicDest[0]],
         ['vendor/bower_dl/materialize/dist/js/materialize.min.js', publicDest[0]],
         ['vendor/bower_dl/showdown/dist/showdown.min.js', publicDest[0]],
+        ['node_modules/gojs/release/go-debug.js', publicDest[0]],
+        ['resources/assets/js/tree.js', publicDest[0]],
     //cssCopyPath
         ['vendor/bower_dl/bootstrap/dist/css/bootstrap.min.css', publicDest[1]],
         // ['vendor/bower_dl/bootstrap/dist/css/bootstrap.min.css.map', publicDest[1]],

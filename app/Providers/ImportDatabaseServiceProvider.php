@@ -8,6 +8,8 @@ use App\Models\{Signer, DocType, Document, FileStore, Organization, RelatedDocum
 use Carbon\Carbon;
 use DateTime;
 use File;
+use Exception;
+use DB;
 
 class ImportDatabaseServiceProvider
 {
@@ -17,15 +19,12 @@ class ImportDatabaseServiceProvider
         // $organization_datas = json_decode(file_get_contents(storage_path('data_crawl') . "/organizations.json"), true);
         // foreach ($organization_datas as $row)
         // {
-        //     $existOr = Organization::where('name', $row['name'])->first();
-        //     if (empty($existOr)) {
-        //         Organization::create($row);
-        //     }
+        //     Organization::firstOrCreate($row);
         // }
         /*-----------------------------------------*/
 
         /*----------------------------------------*/
-        // $dir = storage_path('data_crawl12');
+        // $dir = storage_path('data_crawl2');
         // $dataFolders = array_diff(scandir($dir, 1), array('..', '.'));
         // $document_data = array();
         // $data = NULL;
@@ -69,33 +68,38 @@ class ImportDatabaseServiceProvider
         //                         ]);
         //             //Tao document thong qua doctype
         //             if ($doc_type) {
-        //                 $document = $doc_type->documents()->create($document_data);
         //                 //Attaching / Detaching
-        //                 for ($i = 1; $i < 3; $i ++)
-        //                 {
-        //                     if (isset($data['coquanbanhanh' . $i])) {
-        //                         // $coquanbanhanh = Organization::where('name', $data['coquanbanhanh' . $i])->first() ?
-        //                             // Organization::where('name', $data['coquanbanhanh' . $i])->first() :
-        //                             // Organization::create([
-        //                             //     'name' => $data['coquanbanhanh' . $i],
-        //                             //     'type' => 4
-        //                             // ]);
-        //                             $coquanbanhanh = Organization::firstOrCreate([
-        //                                 'name' => $data['coquanbanhanh' . $i],
-        //                                 'type' => 4
-        //                             ]);
-        //                         $signer = Signer::where('name', $data['nguoiki' . $i])->where('jobTitle', $data['chucdanh' . $i])->first();
-        //                         if (empty($signer)) {
-        //                             $signer = $coquanbanhanh->signers()->create([
-        //                                 'name' => $data['nguoiki' . $i],
-        //                                 'jobTitle' => $data['chucdanh' . $i]
-        //                             ]);
+        //                 try {
+
+        //                     DB::beginTransaction();
+        //                     $document = $doc_type->documents()->create($document_data);
+        //                     unset($document_data);
+        //                     for ($i = 1; $i < 3; $i ++)
+        //                     {
+        //                         if (isset($data['coquanbanhanh' . $i])) {
+        //                             $coquanbanhanh = Organization::where('name', $data['coquanbanhanh' . $i])->first() ?
+        //                                 Organization::where('name', $data['coquanbanhanh' . $i])->first() :
+        //                                 Organization::create([
+        //                                     'name' => $data['coquanbanhanh' . $i],
+        //                                     'type' => 1
+        //                                 ]);
+        //                             $signer = Signer::where('name', $data['nguoiki' . $i])->where('jobTitle', $data['chucdanh' . $i])->first();
+        //                             if (empty($signer)) {
+        //                                 $signer = $coquanbanhanh->signers()->create([
+        //                                     'name' => $data['nguoiki' . $i],
+        //                                     'jobTitle' => $data['chucdanh' . $i]
+        //                                 ]);
+        //                             }
+        //                             $document->organizations()->attach($coquanbanhanh);
+        //                             if (!$document->signers()->get()->contains('id', $signer->id)) {
+        //                                 $document->signers()->attach($signer);
+        //                             };
         //                         }
-        //                         $document->organizations()->attach($coquanbanhanh);
-        //                         if (!$document->signers()->get()->contains('id', $signer->id)) {
-        //                             $document->signers()->attach($signer);
-        //                         };
         //                     }
+        //                     DB::commit();
+        //                 } catch (Exception $e) {
+        //                     DB::rollBack();
+        //                     dd($e->getMessage());
         //                 }
         //             }
         //             if (!empty($filePdf)) {
@@ -114,7 +118,7 @@ class ImportDatabaseServiceProvider
         // }
         /*-----------------------------------------*/
         /* Import Related Document sau khi da co cac ban document*/
-        $dir = storage_path('data_crawl12');
+        $dir = storage_path('data_crawl');
         $dataFolders = array_diff(scandir($dir, 1), array('..', '.'));
         foreach ($dataFolders as $key => $folderPath) {
             if (is_dir($dir . "/" . $folderPath)) {

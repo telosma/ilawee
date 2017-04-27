@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/home', function() {
+Route::get('/home/{tab}', function() {
     return view('user.home');
 });
 Route::get('/import-data', ['as' => 'import.data', 'uses' => 'Controller@importData']);
@@ -23,11 +23,12 @@ Route::post('u/resend-confirm', ['as' => 'user.confirm', 'uses' => 'AuthUserCont
 Route::get('auth/{provider}', ['as' => 'redirectToProvider', 'uses' => 'AuthSocialController@redirectToProvider']);
 Route::get('auth/{provider}/callback', 'AuthSocialController@handleProviderCallback');
 Route::resource('document', 'DocumentController');
-Route::get('/', function() {
-    return view('user.index');
-})->name('home');
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
 Route::get('/detail', function() {
     return view('user.detail');
+});
+Route::group(['prefix' => 'vanban'], function() {
+    Route::get('/loaivanban', ['uses' => 'SearchController@filterByType', 'as' => 'document.filter.type']);
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
@@ -35,3 +36,4 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 });
 Route::group(['prefix' => 'user'], function() {
 });
+Route::get('tree-view', ['uses' => 'HomeController@treeView']);

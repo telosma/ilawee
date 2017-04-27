@@ -6,5 +6,5 @@
 @include('includes.message')
 @include('includes.header2')
 @include('includes.error')
-@include('includes.userContentIndex2')
+@include('includes.content.filter')
 @endsection()

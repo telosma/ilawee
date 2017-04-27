@@ -24,4 +24,38 @@ class Organization extends Model
     {
         return $this->hasMany(Signer::class);
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(Organization::class, 'parent_id');
+    }
+
+    public function organizations()
+    {
+        return $this->hasMany(Organization::class, 'parent_id');
+    }
+
+    public function documentsThrough($take = null)
+    {
+        $result = $this->hasManyThrough( Document::class, Organization::class)->orderBy('created_at', 'desc');
+        switch ($take) {
+            case 'all':
+                return $result;
+            case null:
+                return $result->limit(5);
+            default:
+                return $result->limit($take);
+        }
+    }
+
+    public function allDocumentsThrough()
+    {
+        return $result = $this->hasManyThrough( Document::class, Organization::class,
+            'parent_id', 'organization_id')->orderBy('created_at', 'desc')->with('fileStore');
+    }
+
+    public function getSubOrganization($id)
+    {
+        return $this->where('parent_id', $id)->get();
+    }
 }

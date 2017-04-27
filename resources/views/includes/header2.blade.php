@@ -43,7 +43,7 @@
         <div id="menu">
             <div class="menu-container">
                 <ul class="topMenu">
-                    <li><a href="#"><span>CSDL Quốc Gia</span></a></li>
+                    <li><a href="{{ route('home') }}"><span>CSDL Quốc Gia</span></a></li>
 
                     <li><a href="#"><span>Trang chủ</span></a></li>
                     <li><a href="#"><span>Tìm kiếm</span></a></li>
@@ -54,14 +54,115 @@
                 </div>
                 <div class="right" id="HovershowListBo">
                 </div>
-                <div class="right" id="HovershowListBo2">
-                    <a href="#" id="showListBo">Trung ương</a>
+                <div class="right dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Trung Ương <b class="caret"></b></a>
+                    <div class="dropdown-menu list-bo" style="left: 0;">
+                        <div class="container">
+                            <table width="100%" cellspacing="1" cellpadding="5">
+                                <tbody>
+                                    <tr class="header">
+                                        <td colspan="3">Danh sách các cơ quan Trung Ương</td>
+                                    </tr>
+                                    <?php $govChunks = $governments->chunk(count($governments) / 2); ?>
+                                    <tr>
+                                        @foreach( $govChunks as $govChunk )
+                                            <td>
+                                                <ul>
+                                                    @foreach ( $govChunk as $government )
+                                                    <li><a href="">{{ $government->name }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="right" id="HovershowListBo2">
-                    <a href="#" id="showListBo">Bo, Nganh</a>
+                <div class="right dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bộ, Ngành <b class="caret"></b></a>
+                    <div class="dropdown-menu list-bo" style="left: 0;">
+                        <div class="container">
+                            <table width="100%" cellspacing="1" cellpadding="5">
+                                <tbody>
+                                    <tr class="header">
+                                        <td colspan="3">Danh sách các Bộ, Ngành</td>
+                                    </tr>
+                                    <?php $minisChunks = $ministries->chunk(count($ministries) / 2); ?>
+                                    <tr>
+                                        @foreach( $minisChunks as $minisChunk )
+                                            <td>
+                                                <ul>
+                                                    @foreach ( $minisChunk as $ministry )
+                                                    <li><a href="">{{ $ministry->name }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                        @endforeach
+                                      {{--   <td>
+                                            <ul>
+                                                <li><a href="/bocongan">Bộ Công an</a></li>
+                                                <li><a href="/bocongthuong">Bộ Công thương</a></li>
+                                                <li><a href="/bogiaoducdaotao">Bộ Giáo dục và Đào tạo</a></li>
+                                                <li><a href="/bogiaothong">Bộ Giao thông vận tải</a></li>
+                                                <li><a href="/bokehoachvadautu">Bộ Kế hoạch và Đầu tư</a></li>
+                                                <li><a href="/bokhoahoccongnghe">Bộ Khoa học và Công nghệ</a></li>
+                                                <li><a href="/bolaodong">Bộ Lao động - Thương Binh và Xã hội</a></li>
+                                                <li><a href="/bonongnghiep">Bộ Nông nghiệp và Phát triển nông thôn</a></li>
+                                                <li><a href="/bonoivu">Bộ Nội vụ</a></li>
+                                                <li><a href="/bongoaigiao">Bộ Ngoại giao</a></li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                <li><a href="/boquocphong">Bộ Quốc phòng</a></li>
+                                                <li><a href="/botaichinh">Bộ Tài chính</a></li>
+                                                <li><a href="/botainguyen">Bộ Tài nguyên và Môi trường</a></li>
+                                                <li><a href="/botuphap">Bộ Tư pháp</a></li>
+                                                <li><a href="/bothongtin">Bộ Thông tin và Truyền thông</a></li>
+                                                <li><a href="/bovanhoathethao">Bộ Văn hóa - Thể thao và Du lịch</a></li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                <li><a href="/kiemtoannhanuoc">Kiểm toán Nhà nước</a></li>
+                                                <li><a href="/toaannhandantoicao">Tòa án nhân dân tối cao</a></li>
+                                                <li><a href="/vienkiemsatnhandantoicao">Viện kiểm sát nhân dân tối cao</a></li>
+                                            </ul>
+                                        </td> --}}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="right" id="HovershowListBo2">
-                    <a href="#" id="showListBo">Dia phuong</a>
+
+                <div class="right dropdown">
+                    <a href="{{ route('home') }}" class="dropdown-toggle" data-toggle="dropdown">Địa Phưong <b class="caret"></b></a>
+                    <div class="dropdown-menu list-bo" style="left: 0;">
+                        <div class="container">
+                            <table width="100%" cellspacing="1" cellpadding="5">
+                                <tbody>
+                                    <tr class="header">
+                                        <td colspan="3">Danh sách các Tỉnh</td>
+                                    </tr>
+                                    <?php $provChunks = $provinces->chunk(count($provinces) / 3); ?>
+                                    <tr>
+                                        @foreach( $provChunks as $provChunk )
+                                            <td>
+                                                <ul>
+                                                    @foreach ( $provChunk as $province )
+                                                    <li><a href="">{{ $province->name }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <div id='bttop'>Lên đầu trang</div>
             </div>
@@ -71,3 +172,18 @@
 @if(!Auth::check())
     @include('includes.authModal')
 @endif()
+@push('scripts')
+    <script>
+        $(function(){
+        $(".dropdown").hover(
+                function() {
+                    $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
+                    $(this).toggleClass('open');
+                },
+                function() {
+                    $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
+                    $(this).toggleClass('open');
+                });
+        });
+    </script>
+@endpush

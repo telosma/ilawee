@@ -183,6 +183,8 @@ return [
 
         Elasticquent\ElasticquentServiceProvider::class,
 
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+
     ],
 
     /*
@@ -235,8 +237,11 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Str' => Illuminate\Support\Str::class,
         // Elasticsearch Facade
         'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
+
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
     ],
 
 ];

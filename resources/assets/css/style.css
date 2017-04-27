@@ -100,8 +100,9 @@ a:hover {text-decoration:none;}
     max-width: 780px;
     min-width: 0;
     overflow: hidden;
+    display: inline-block;
 }
-.left-580 {float:left; max-width:580px}
+.left-580 {float:left; max-width:580px; min-width: 560px;}
 .right-200 {float:right; max-width:200px;}
 .center-left {float:left; max-width:490px;}
 .center-right {float:right; max-width:490px;}
@@ -559,7 +560,6 @@ div.box-map ul li:first-child {background:url(../images/portal-icon-home.png) no
 #menu .menu-container .right .list-diaphuong table {border-spacing:1px; border-collapse:separate; width:100%;}
 #menu .menu-container .right .list-bo .container {
     background: rgba(0, 0, 0, 0) url("../images/list-tinhthanh-bg.gif") no-repeat scroll left top;
-    display: none;
     height: 437px;
     padding: 10px;
     width: 776px;
@@ -1085,3 +1085,24 @@ input[type="checkbox"], input[type="radio"]{vertical-align:top;}
   display: none;
 }
 /*  */
+.highlight {
+    color: green;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+.guide-search {
+    margin-left: 12px;
+}
+.normal-search .input-query {
+    margin-left: 10px;
+}
+.container-fluid { padding: 0; }
+.modal-open { overflow: hidden; padding-right: 0 !important;}
+/*.scrollbar-measure {
+  width: 1px;
+  height: 1px;
+  overflow: scroll;
+  position: absolute;
+  top: -9999px;
+}*/

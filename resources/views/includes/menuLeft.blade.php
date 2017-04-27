@@ -51,56 +51,20 @@
                             <div class="box-content-01">
                                 <div class="top">
                                     <div>
-                                        <a href="javascript:;">Loại văn bản</a>
+                                        <a href="">Loại văn bản</a>
                                     </div>
                                 </div>
                                 <div class="content">
                                     <ul class="category" id="loaiVB">
-                                        <li>
-                                            <span>
-                                                <a href="/TW/Pages/vanban.aspx?idLoaiVanBan=15&dvid=13">
-                                                    Hiến pháp
-                                                </a>
-                                            </span>
-                                        </li>
-
-                                        <li>
-                                            <span>
-                                                <a href="/TW/Pages/vanban.aspx?idLoaiVanBan=16&dvid=13">
-                                                    Bộ luật
-                                                </a>
-                                            </span>
-                                        </li>
-
-                                        <li>
-                                            <span><a href="/TW/Pages/vanban.aspx?idLoaiVanBan=17&dvid=13">
-                                            Luật</a></span>
-                                        </li>
-
-                                        <li><span><a href="/TW/Pages/vanban.aspx?idLoaiVanBan=19&dvid=13">
-                                            Pháp lệnh</a></span></li>
-
-                                        <li><span><a href="/TW/Pages/vanban.aspx?idLoaiVanBan=2&dvid=13">
-                                            Lệnh</a></span></li>
-
-                                        <li><span><a href="/TW/Pages/vanban.aspx?idLoaiVanBan=18&dvid=13">
-                                            Nghị quyết</a></span></li>
-
-                                        <li><span><a href="/TW/Pages/vanban.aspx?idLoaiVanBan=3&dvid=13">
-                                            Nghị quyết liên tịch</a></span></li>
-
-                                        <li><span><a href="/TW/Pages/vanban.aspx?idLoaiVanBan=20&dvid=13">
-                                            Nghị định</a></span></li>
-
-                                        <li><span><a href="/TW/Pages/vanban.aspx?idLoaiVanBan=21&dvid=13">
-                                            Quyết định</a></span></li>
-
-                                        <li><span><a href="/TW/Pages/vanban.aspx?idLoaiVanBan=22&dvid=13">
-                                            Thông tư</a></span></li>
-
-                                        <li><span><a href="/TW/Pages/vanban.aspx?idLoaiVanBan=23&dvid=13">
-                                            Thông tư liên tịch</a></span></li>
-
+                                        @foreach($doctypes as $doctype)
+                                            <li>
+                                                <span>
+                                                    <a href="{{ route('document.filter.type') . '/?loaivanban=' . $doctype->name . '&typeId=' . $doctype->id }}" class="item-doctype" data-type-id="{{ $doctype->id }}">
+                                                       {{ $doctype->name }}
+                                                    </a>
+                                                </span>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>

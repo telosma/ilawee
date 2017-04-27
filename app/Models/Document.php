@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Elasticquent\ElasticquentTrait;
 use App\Models\{FileStore, DocType, Organization, Singer, History, Document};
+use Str;
+use Carbon\Carbon;
 
 class Document extends Model
 {
@@ -24,6 +26,9 @@ class Document extends Model
         'source',
         'content',
         'confirmed',
+    ];
+    protected $appends = [
+        'short_description',
     ];
     // protected $indexSettings = [
     //     'analysis' => [
@@ -149,5 +154,20 @@ class Document extends Model
     public function baseDocument()
     {
         return $this->belongsToMany(Document::class, 'related_documents', 'document_id', 'base_doc_id');
+    }
+
+    public function getStartDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
+    }
+
+    public function getPublishDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
+    }
+
+    public function getShortDescriptionAttribute()
+    {
+        return $this->attributes['short_description'] = Str::words($this->attributes['description'], 300);
     }
 }

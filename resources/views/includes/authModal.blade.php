@@ -88,3 +88,29 @@
         </div>
     </div>
 </div>
+{{-- @push('scripts')
+<script>
+    function measureScrollBar() {
+      // david walsh
+        var scrollDiv = document.createElement('div')
+        scrollDiv.className = 'scrollbar-measure'
+        document.body.appendChild(scrollDiv)
+        var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth
+        document.body.removeChild(scrollDiv)
+        return scrollbarWidth
+    }
+
+    $(document.body)
+    .on('show.bs.modal', function () {
+        if (this.clientHeight < window.innerHeight)
+            return
+                var scrollbarWidth = measureScrollBar()
+        if (scrollbarWidth)
+            $(document.body).css('padding-right', scrollbarWidth)
+    })
+    .on('hidden.bs.modal', function () {
+        $(document.body).css('padding-right', 0)
+    });
+</script>
+@endpush
+ --}}
