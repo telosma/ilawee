@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Document, DocType};
+use App\Models\{Document, DocType, Organization};
 use Carbon\Carbon;
 
 class DocumentController extends Controller
@@ -99,6 +99,9 @@ class DocumentController extends Controller
         // //     print_r($res);
         // // }
         $doctypes = DocType::all();
+        $governments = Organization::where('type', config('common.type.trunguong'))->get();
+        $ministries = Organization::where('type', config('common.type.bonganh'))->get();
+        $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
         $document = Document::with(['fileStore', 'docType'])->findOrFail($id);
         $document['publish_day'] = Carbon::parse($document->publish_date)->day;
         $document['publish_month'] = Carbon::parse($document->publish_date)->month;
@@ -106,7 +109,10 @@ class DocumentController extends Controller
 
         return view('user.detail')->with([
             'document' => $document,
-            'doctypes' => $doctypes
+            'doctypes' => $doctypes,
+            'governments' => $governments,
+            'ministries' => $ministries,
+            'provinces' => $provinces
         ]);
     }
 

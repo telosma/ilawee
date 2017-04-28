@@ -69,7 +69,7 @@
                                             <td>
                                                 <ul>
                                                     @foreach ( $govChunk as $government )
-                                                    <li><a href="">{{ $government->name }}</a></li>
+                                                    <li><a href="{{ route('listLawByOrganization', $government->id) }}">{{ $government->name }}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </td>
@@ -95,7 +95,7 @@
                                             <td>
                                                 <ul>
                                                     @foreach ( $minisChunk as $ministry )
-                                                    <li><a href="">{{ $ministry->name }}</a></li>
+                                                    <li><a href="{{ route('listLawByOrganization', $ministry->id) }}">{{ $ministry->name }}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </td>
@@ -153,7 +153,7 @@
                                             <td>
                                                 <ul>
                                                     @foreach ( $provChunk as $province )
-                                                    <li><a href="">{{ $province->name }}</a></li>
+                                                    <li><a href="{{ route('listLawByOrganization', $province->id) }}">{{ $province->name }}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </td>

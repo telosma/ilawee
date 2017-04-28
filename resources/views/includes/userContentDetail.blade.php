@@ -74,7 +74,7 @@
                                                             Độc lập - Tự do - Hạnh phúc</b></div>
                                                     <div style="padding: 5px; text-align: center;">
                                                         <i>
-                                                                ngày{{ $document->publish_day }} tháng{{ $document->publish_month }} năm{{ $document->publish_year }}
+                                                                ngày {{ $document->publish_day }}, tháng {{ $document->publish_month }}, năm {{ $document->publish_year }}
                                                         </i>
                                                     </div>
                                                 </td>

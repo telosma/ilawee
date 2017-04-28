@@ -24,9 +24,7 @@ Route::get('auth/{provider}', ['as' => 'redirectToProvider', 'uses' => 'AuthSoci
 Route::get('auth/{provider}/callback', 'AuthSocialController@handleProviderCallback');
 Route::resource('document', 'DocumentController');
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
-Route::get('/detail', function() {
-    return view('user.detail');
-});
+Route::get('coquanbanhanh/{orId}', ['as' => 'listLawByOrganization', 'uses' => 'SearchController@filterByOrganization']);
 Route::group(['prefix' => 'vanban'], function() {
     Route::get('/loaivanban', ['uses' => 'SearchController@filterByType', 'as' => 'document.filter.type']);
 });
