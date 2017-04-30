@@ -2,11 +2,11 @@
 
 Breadcrumbs::register('home', function($breadcrumbs)
 {
-    $breadcrumbs->push('Home', route('home'));
+    $breadcrumbs->push('Ilawee.dev', route('home'));
 });
 
-Breadcrumbs::register('document.show', function($breadcrumbs, $id)
+Breadcrumbs::register('vanban.show', function($breadcrumbs, $id)
 {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('Document/Show/'. $id, route('document.show', $id));
+    $breadcrumbs->push('Vanban/'. $id, route('vanban.show', $id));
 });

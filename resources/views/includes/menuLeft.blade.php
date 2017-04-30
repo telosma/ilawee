@@ -59,7 +59,7 @@
                                         @foreach($doctypes as $doctype)
                                             <li>
                                                 <span>
-                                                    <a href="{{ route('document.filter.type') . '/?loaivanban=' . $doctype->name . '&typeId=' . $doctype->id }}" class="item-doctype" data-type-id="{{ $doctype->id }}">
+                                                    <a href="{{ route('document.filter.type', $doctype->id) }}" class="item-doctype" data-type-id="{{ $doctype->id }}">
                                                        {{ $doctype->name }}
                                                     </a>
                                                 </span>

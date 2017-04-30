@@ -3,7 +3,7 @@
     <li>
         <div class="item">
             <p class="title">
-                <a href="{!! route('document.show', $document->id) !!}">
+                <a href="{!! route('vanban.show', $document->id) !!}">
                     {{ $document->docType->name . " " . $document->notation}}
                 </a>
             </p>
@@ -14,9 +14,9 @@
                 </div>
                 <div class="link">
                     <ul>
-                        <li class="ref"><a href="#">
+                        <li class="ref"><a href="{{ route('vanban.show', $document->id) . "/?tab=itemvblienquan" }}">
                             VB liên quan</a></li>
-                        <li class="thuoctinh"><a href="#">
+                        <li class="thuoctinh"><a href="{{ route('vanban.show', $document->id) . "/?tab=itemthuoctinh" }}">
                             Thuộc tính</a></li>
                         <li class="map"><a href="#">
                             Lược đồ</a></li>

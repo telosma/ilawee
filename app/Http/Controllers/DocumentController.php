@@ -45,59 +45,9 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        // $document = Document::with('fileStore')->findOrFail($id);
 
-        // $results = Document::complexSearch(array(
-        //     'body' => array(
-        //         "query" => [
-        //             "match" => [
-        //                 "description" => "sử dụng nguồn tăng bội "
-        //             ]
-        //         ],
-        //         "highlight" => [
-        //             "order" => "score",
-        //             "fields" => [
-        //                 "description" => [
-        //                     "force_source" => true,
-        //                     "fragment_size" => 150,
-        //                     "number_of_fragments" => 3,
-        //                     "pre_tags" => ["<em class=\" highlight\">"],
-        //                     "post_tags" => ["</em>"],
-        //                     "highlight_query"=> [
-        //                         "bool"=> [
-        //                             "must"=> [
-        //                                 "match"=> [
-        //                                     "description"=> [
-        //                                         "query"=> "sử dụng nguồn tăng bội"
-        //                                     ]
-        //                                 ]
-        //                             ],
-        //                             "should"=> [
-        //                                 "match_phrase"=> [
-        //                                     "content"=> [
-        //                                         "query"=> "tăng bội",
-        //                                         "slop"=> 1,
-        //                                         "boost"=> 10.0
-        //                                     ]
-        //                                 ]
-        //                             ],
-        //                             "minimum_should_match"=> 0
-        //                         ]
-        //                     ]
-        //                 ]
-        //             ]
-        //         ]
-        //     )
-        // )
-        // )->paginate(10);
-        // // $hits = $results->getHits()['hits'];
-        // dd($results);
-        // // dd($results->getHits()['hits'][0]['highlight']);
-        // // foreach ($results as $res) {
-        // //     print_r($res);
-        // // }
         $doctypes = DocType::all();
         $governments = Organization::where('type', config('common.type.trunguong'))->get();
         $ministries = Organization::where('type', config('common.type.bonganh'))->get();
@@ -112,7 +62,8 @@ class DocumentController extends Controller
             'doctypes' => $doctypes,
             'governments' => $governments,
             'ministries' => $ministries,
-            'provinces' => $provinces
+            'provinces' => $provinces,
+            'tab' => $request->tab
         ]);
     }
 

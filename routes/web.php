@@ -22,11 +22,12 @@ Route::get('u/activate/{code}', ['as' => 'user.activate', 'uses' => 'AuthUserCon
 Route::post('u/resend-confirm', ['as' => 'user.confirm', 'uses' => 'AuthUserController@sendConfirmation']);
 Route::get('auth/{provider}', ['as' => 'redirectToProvider', 'uses' => 'AuthSocialController@redirectToProvider']);
 Route::get('auth/{provider}/callback', 'AuthSocialController@handleProviderCallback');
-Route::resource('document', 'DocumentController');
+Route::resource('vanban', 'DocumentController');
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
 Route::get('coquanbanhanh/{orId}', ['as' => 'listLawByOrganization', 'uses' => 'SearchController@filterByOrganization']);
-Route::group(['prefix' => 'vanban'], function() {
-    Route::get('/loaivanban', ['uses' => 'SearchController@filterByType', 'as' => 'document.filter.type']);
+Route::group(['prefix' => 'vanbanluat'], function() {
+    Route::get('/loaivanban/{typeId}', ['uses' => 'SearchController@filterByType', 'as' => 'document.filter.type']);
+    Route::get('/timkiem', ['uses' => 'SearchController@normalSearch', 'as' => 'document.normalSearch']);
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {

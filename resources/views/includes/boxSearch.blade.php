@@ -4,7 +4,7 @@
     </div>
     <div class="panel-body">
         <div class="form form-horizontal">
-            {{ Form::open(['url' => '', 'method' => 'get', 'class' => 'normal-search']) }}
+            {{ Form::open(['route' => 'document.normalSearch', 'method' => 'get', 'class' => 'normal-search']) }}
                 <div class="row mb-20">
                     <p class="guide-search">Nhập từ khóa tìm kiếm vào cửa sổ tìm kiếm dưới đây</p>
                 </div>
@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-sm-7">
                             <div class="input-query">
-                                {{ Form::text('query', '', ['class' => 'form-control']) }}
+                                {{ Form::text('query', old('query'), ['class' => 'form-control']) }}
                             </div>
                         </div>
                         <div class="col-sm-2">
