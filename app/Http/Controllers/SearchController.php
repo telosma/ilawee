@@ -84,7 +84,7 @@ class SearchController extends Controller
         $perPage = 10;
         $documents = Document::complexSearch(array(
             'body' => array(
-                "min_score" => 3,
+                "min_score" => 5,
                 "sort" => [
                     "_score"
                 ],
@@ -99,8 +99,10 @@ class SearchController extends Controller
                         //     "term" => [ "confirmed" => true ]
                         // ],
                         "must" => [
-                            "match" => [
-                                "description" => trim($request->input('query'))
+                            "multi_match" => [
+                                "query" => trim($request->input('query')),
+                                "fields" => ["description", "content"],
+                                "operator" => "and"
                             ]
                         ],
                         // "filter" => [
@@ -164,6 +166,21 @@ class SearchController extends Controller
             'provinces' => $provinces,
             'documents' => $documents->hits['hits'],
             'links' => $documents->appends(Input::except('page')),
+        ]);
+    }
+
+    public function getAdvancedSearch()
+    {
+        $doctypes = DocType::all();
+        $governments = Organization::where('type', config('common.type.trunguong'))->get();
+        $ministries = Organization::where('type', config('common.type.bonganh'))->get();
+        $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
+
+        return view('user.searching')->with([
+            'doctypes' => $doctypes,
+            'governments' => $governments,
+            'ministries' => $ministries,
+            'provinces' => $provinces
         ]);
     }
 }

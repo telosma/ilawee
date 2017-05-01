@@ -7,7 +7,11 @@
         </p>
         <div class="left">
             <div class="des">
+                @if (isset($document['highlight']))
                     {!! $document['highlight']['description'][0] !!}
+                @else
+                    {!! $document['_source']['description'] !!}
+                @endif
             </div>
             <div class="link">
                 <ul>

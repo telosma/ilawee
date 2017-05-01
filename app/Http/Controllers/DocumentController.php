@@ -52,7 +52,16 @@ class DocumentController extends Controller
         $governments = Organization::where('type', config('common.type.trunguong'))->get();
         $ministries = Organization::where('type', config('common.type.bonganh'))->get();
         $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
-        $document = Document::with(['fileStore', 'docType'])->findOrFail($id);
+        $document = Document::with([
+            'fileStore',
+            'docType',
+            'guideDocument' => function($query) {
+                return $query->with('docType');
+            },
+            'baseDocument' => function($query) {
+                return $query->with('docType');
+            }
+            ])->findOrFail($id);
         $document['publish_day'] = Carbon::parse($document->publish_date)->day;
         $document['publish_month'] = Carbon::parse($document->publish_date)->month;
         $document['publish_year'] = Carbon::parse($document->publish_date)->year;
