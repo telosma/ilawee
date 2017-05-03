@@ -4,7 +4,7 @@
     </div>
     <div class="panel-body">
         <div class="form form-horizontal">
-            {{ Form::open(['url' => '', 'method' => 'get', 'class' => 'advanced-search']) }}
+            {{ Form::open(['route' => 'document.ajax.search', 'method' => 'get', 'class' => 'advanced-search', 'id' => 'advanced-search-form' ]) }}
                 <div class="form-group">
                     <div class="col-sm-3">
                         <label for="query" class="control-label">Từ khóa tìm kiếm</label>
@@ -33,15 +33,43 @@
                     <div class="col-sm-3">
                         <label>Tìm trong</label>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <label>
                         {{ Form::radio('field', 'all', true) }} Tất cả
                         </label>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <label>
                         {{ Form::radio('field', 'description') }} Trích yếu
                         </label>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>
+                        {{ Form::radio('field', 'notation') }} Ký hiệu
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label>Ngày ban hành</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group date" dataprovide="datepicker">
+                            {{ Form::label('from', 'Từ', ['class' => 'input-group-addon']) }}
+                            {{ Form::text('from', old('from'), ['class' => 'form-control']) }}
+                         {{--    <div class="input-group-addon">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div> --}}
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group date" dataprovide="datepicker">
+                            {{ Form::label('to', 'Tới', ['class' => 'input-group-addon']) }}
+                            {{ Form::text('to', old('to'), ['class' => 'form-control']) }}
+                       {{--      <div class="input-group-addon">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div> --}}
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">

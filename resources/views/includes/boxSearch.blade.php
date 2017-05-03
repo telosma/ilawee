@@ -19,7 +19,7 @@
                             <button class="btn btn-info">Tìm kiếm</button>
                         </div>
                         <div class="col-sm-3">
-                            <a href="#" style="cusor: pointer; color: blue;">Tìm kiếm nâng cao</a>
+                            <a href="{{ route('document.show.advancedSearch') }}" style="cusor: pointer; color: blue;">Tìm kiếm nâng cao</a>
                         </div>
                     </div>
                 </div>

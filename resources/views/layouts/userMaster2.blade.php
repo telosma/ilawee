@@ -21,6 +21,7 @@
         {!! Html::script('js/bootstrap.min.js') !!}
         {!! Html::script('js/metisMenu.min.js') !!}
         {!! Html::script('js/materialize.min.js') !!}
+        {!! Html::script('js/user.js') !!}
         @yield('script')
         @stack('scripts')
     </body>

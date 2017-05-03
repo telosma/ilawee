@@ -7,6 +7,8 @@ use App\Models\{Document, DocType, Organization};
 use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Input;
 use App\Traits\DocumentMethod;
+use App\Http\Requests\AdvancedSearchRequest;
+use Carbon\Carbon;
 
 class SearchController extends Controller
 {
@@ -122,7 +124,7 @@ class SearchController extends Controller
                             "force_source" => true,
                             // "fragment_size" => 150,
                             // "number_of_fragments" => 3,
-                            "pre_tags" => ["<span class=\" highlight\">"],
+                            "pre_tags" => ["<span class=\"highlight\">"],
                             "post_tags" => ["</span>"],
                             // "highlight_query"=> [
                             //     "bool"=> [
@@ -154,8 +156,7 @@ class SearchController extends Controller
         )
         )->paginate($perPage);
         // $documents->appends(Input::except('page'));
-        // dd($documents->getHits());
-        // dd($documents->hits['hits']);
+        // dd($documents);
         // foreach ($documents->hits['hits'] as $document) {
         //     dd($document);
         // }
@@ -182,5 +183,107 @@ class SearchController extends Controller
             'ministries' => $ministries,
             'provinces' => $provinces
         ]);
+    }
+
+    public function ajaxGetResultSearch(AdvancedSearchRequest $request)
+    {
+        $perPage = 10;
+        $page = $request->page ? $request->page : 1;
+
+        $searchQuery = array (
+            "body" => array(
+                "min_score" => 5,
+                "sort" => [ "_score" ],
+                "query" => [
+                    "bool" => [
+                        "filter" => [
+                        ],
+                        "must" => [
+                            [
+                                "term" => [
+                                    "confirmed" => [
+                                        "value" => 1
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                "highlight" => [
+                    "order" => "score",
+                    "fields" => [
+                        "description" => [
+                            "force_source" => true,
+                            "pre_tags" => ["<span class=\"highlight\">"],
+                            "post_tags" => ["</span>"]
+                        ]
+                    ]
+                ],
+                'from' => ($page-1) * $perPage,
+                'size' => $perPage
+            )
+        );
+
+        $filterContent = array('range' => array('start_date' => array()));
+
+        if ($request->has('from') && $request->has('to')) {
+            if ($request->input('from') >= $request->input('to')) {
+                return redirect()->back();
+            }
+        }
+
+        if ($request->has('from')) {
+            $filterContent['range']['start_date']['from'] = $request->input('from');
+        }
+
+        if ($request->has('to')) {
+            $filterContent['range']['start_date']['to'] = $request->input('to');
+        }
+
+        if (count($filterContent['range']['start_date']) > 0) {
+            $filterContent['range']['start_date']['format'] = "Y-m-d";
+            $searchQuery['body']['query']['bool']['filter'] = $filterContent;
+        }
+
+        $multi_match = array(
+            'multi_match' => array(
+                "query" => $request->input('query'),
+                "fields" => config('search.options.search_in.' . $request->input('field'))
+            )
+        );
+
+        if ($request->input('match') === 'match_phrase') {
+            $multi_match['multi_match']['type'] = "phrase";
+        } else {
+            $multi_match['multi_match']['operator'] = "and";
+        }
+
+        array_push($searchQuery['body']['query']['bool']['must'], $multi_match);
+
+        // dd($searchQuery);
+        $doctypes = DocType::all();
+        $governments = Organization::where('type', config('common.type.trunguong'))->get();
+        $ministries = Organization::where('type', config('common.type.bonganh'))->get();
+        $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
+        try {
+            $documents = Document::complexSearch($searchQuery)->paginate($perPage);
+            // dd($documents);
+            if (empty($documents->hits['hits'])) {
+                return [
+                    'renderHtml' => '<span class="alert alert-info">' .
+                                    'Không tìm thấy văn bản phù hợp' .
+                                    '</span>'
+                ];
+            } else {
+                return [
+                    'renderHtml' => view('includes.elasticFilterList', [
+                            'documents' => $documents->hits['hits'],
+                            'links' => $documents->appends(Input::except('page')),
+                        ])->render()
+                ];
+            }
+        } catch (Exception $e) {
+            return redirect()->route('home');
+        }
     }
 }

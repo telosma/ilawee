@@ -44,11 +44,7 @@
             <div class="menu-container">
                 <ul class="topMenu">
                     <li><a href="{{ route('home') }}"><span>CSDL Quốc Gia</span></a></li>
-
-                    <li><a href="#"><span>Trang chủ</span></a></li>
-                    <li><a href="#"><span>Tìm kiếm</span></a></li>
-
-                    <li><a href="#"><span>English</span></a></li>
+                    <li><a href="{{ route('document.show.advancedSearch') }}"><span>Tìm kiếm</span></a></li>
                 </ul>
                 <div class="right" id="HovershowListDonVi">
                 </div>
@@ -100,37 +96,6 @@
                                                 </ul>
                                             </td>
                                         @endforeach
-                                      {{--   <td>
-                                            <ul>
-                                                <li><a href="/bocongan">Bộ Công an</a></li>
-                                                <li><a href="/bocongthuong">Bộ Công thương</a></li>
-                                                <li><a href="/bogiaoducdaotao">Bộ Giáo dục và Đào tạo</a></li>
-                                                <li><a href="/bogiaothong">Bộ Giao thông vận tải</a></li>
-                                                <li><a href="/bokehoachvadautu">Bộ Kế hoạch và Đầu tư</a></li>
-                                                <li><a href="/bokhoahoccongnghe">Bộ Khoa học và Công nghệ</a></li>
-                                                <li><a href="/bolaodong">Bộ Lao động - Thương Binh và Xã hội</a></li>
-                                                <li><a href="/bonongnghiep">Bộ Nông nghiệp và Phát triển nông thôn</a></li>
-                                                <li><a href="/bonoivu">Bộ Nội vụ</a></li>
-                                                <li><a href="/bongoaigiao">Bộ Ngoại giao</a></li>
-                                            </ul>
-                                        </td>
-                                        <td>
-                                            <ul>
-                                                <li><a href="/boquocphong">Bộ Quốc phòng</a></li>
-                                                <li><a href="/botaichinh">Bộ Tài chính</a></li>
-                                                <li><a href="/botainguyen">Bộ Tài nguyên và Môi trường</a></li>
-                                                <li><a href="/botuphap">Bộ Tư pháp</a></li>
-                                                <li><a href="/bothongtin">Bộ Thông tin và Truyền thông</a></li>
-                                                <li><a href="/bovanhoathethao">Bộ Văn hóa - Thể thao và Du lịch</a></li>
-                                            </ul>
-                                        </td>
-                                        <td>
-                                            <ul>
-                                                <li><a href="/kiemtoannhanuoc">Kiểm toán Nhà nước</a></li>
-                                                <li><a href="/toaannhandantoicao">Tòa án nhân dân tối cao</a></li>
-                                                <li><a href="/vienkiemsatnhandantoicao">Viện kiểm sát nhân dân tối cao</a></li>
-                                            </ul>
-                                        </td> --}}
                                     </tr>
                                 </tbody>
                             </table>

@@ -29,6 +29,9 @@ Route::group(['prefix' => 'vanbanluat'], function() {
     Route::get('/loaivanban/{typeId}', ['uses' => 'SearchController@filterByType', 'as' => 'document.filter.type']);
     Route::get('/timkiem', ['uses' => 'SearchController@normalSearch', 'as' => 'document.normalSearch']);
     Route::get('/timkiemnangcao', ['uses' => 'SearchController@getAdvancedSearch', 'as' => 'document.show.advancedSearch']);
+    Route::group(['prefix' => 'ajax'], function () {
+        Route::get('advanced-search', ['uses' => 'SearchController@ajaxGetResultSearch', 'as' => 'document.ajax.search']);
+    });
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {

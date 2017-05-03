@@ -31,7 +31,7 @@
                                     </div>
                                     <div>
                                         @if (!(empty($document->content)))
-                                            <div class="document-required">
+                                            <div class="document-required row">
                                                 <table width="30%" cellpadding="1" border="0" align="left" style="margin-left: 5px;">
                                                     <tbody>
                                                         <tr>
@@ -67,11 +67,11 @@
                                                 </table>
                                             </div>
                                         @endif
-                                        <article style="display: none;">
-                                            <textarea id="sourceTA" cols="30" rows="70">
-                                                {!! $document->content !!}
+                                        <div style="display: none;">
+                                            <textarea id="sourceTA" data-text="{{ $document->content }}">
+                                                {{-- {{ $document->content }} --}}
                                             </textarea>
-                                        </article>
+                                        </div>
                                         <div id="targetDiv" style="clear:both;"></div>
 
                                             {{-- <div style="clear:both;"></div> --}}
@@ -330,7 +330,7 @@
     {{ Html::script('js/showdown.min.js') }}
     <script type="text/javascript">
             function run() {
-                var text = document.getElementById('sourceTA').value,
+                var text = $('#sourceTA').data('text'),
                     target = document.getElementById('targetDiv'),
                     converter = new showdown.Converter(),
                 html = converter.makeHtml(text);
