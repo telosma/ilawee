@@ -45,10 +45,11 @@ gulp.task("copyfiles", function () {
         ['vendor/bower_dl/bootstrap-datepicker/dist/locales/bootstrap-datepicker.vi.min.js', publicDest[0]],
         ['vendor/bower_dl/jquery-validation/dist/additional-methods.min.js', publicDest[0]],
         ['vendor/bower_dl/jquery-validation/dist/jquery.validate.min.js', publicDest[0]],
+        ['vendor/bower_dl/AdminLTE/dist/js/app.min.js', publicDest[0]],
+        ['vendor/bower_dl/noty/lib/noty.min.js', publicDest[0]],
+        ['vendor/bower_dl/materialize/dist/js/materialize.min.js', publicDest[0]],
     //cssCopyPath
         ['vendor/bower_dl/bootstrap/dist/css/bootstrap.min.css', publicDest[1]],
-        // ['vendor/bower_dl/bootstrap/dist/css/bootstrap.min.css.map', publicDest[1]],
-        // ['vendor/bower_dl/font-awesome/css/font-awesome.min.css', publicDest[1]],
         ['vendor/bower_dl/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css', publicDest[1]],
         ['vendor/bower_dl/datatables/media/css/jquery.dataTables.min.css', publicDest[1]],
         ['vendor/bower_dl/datatables.net-select-dt/css/select.dataTables.min.css', publicDest[1]],
@@ -57,9 +58,20 @@ gulp.task("copyfiles", function () {
         ['resources/assets/css/mystyle.css', publicDest[1]],
         ['resources/assets/css/style.css', publicDest[1]],
         ['resources/assets/css/reset.css', publicDest[1]],
+        ['vendor/bower_dl/AdminLTE/dist/css/AdminLTE.min.css', publicDest[1]],
+        ['vendor/bower_dl/AdminLTE/dist/css/skins/_all-skins.min.css', publicDest[1]],
+        ['vendor/bower_dl/noty/lib/noty.css', publicDest[1]],
+        ['vendor/bower_dl/datatables/media/css/jquery.dataTables.min.css', publicDest[1]],
+        ['vendor/bower_dl/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css', publicDest[1]],
+        ['vendor/bower_dl/datatables.net-select-dt/css/select.dataTables.min.css', publicDest[1]],
+        ['vendor/bower_dl/datatables.net-buttons-dt/css/buttons.dataTables.min.css', publicDest[1]],
+        ['vendor/bower_dl/materialize/dist/css/materialize.min.css', publicDest[1]],
     //fontsCopyPath
         ['vendor/bower_dl/bootstrap/dist/fonts/**', publicDest[2]],
         ['vendor/bower_dl/font-awesome/fonts/**', publicDest[2]],
+        //handleJsCssPath
+        ['resources/assets/css/**', publicDest[1]],
+        ['resources/assets/js/**', publicDest[0]],
     ];
 
     for (var i = 0; i < assetsCopy.length; i++) {

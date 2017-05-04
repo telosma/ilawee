@@ -7,16 +7,14 @@
         @include('includes.adminStyle')
         @yield('style')
     </head>
-    <body>
+    <body class="skin-blue sidebar-mini" style="height: auto;">
         @include('includes.adminMenu')
-        <div id="wrapper">
-            <div id="page-wrapper">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">@yield('main_title')</h1>
-                    </div>
-                </div>
-                <!-- /.row -->
+        @include('includes.admin.sidebar');
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1>Admin</h1>
+            </section>
+            <section class="content">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
@@ -28,11 +26,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
             <!-- /#page-wrapper -->
         </div>
         <!-- /#wrapper -->
         @include('includes.adminScript')
         @yield('script')
+        @stack('scripts')
     </body>
 </html>

@@ -102,8 +102,8 @@ a:hover {text-decoration:none;}
     overflow: hidden;
     display: inline-block;
 }
-.left-580 {float:left; max-width:580px; min-width: 560px;}
-.right-200 {float:right; max-width:200px;}
+.left-580 {float:left; max-width:570px; min-width: 560px;}
+.right-200 {float:right; max-width:200px; margin-left: 10px;}
 .center-left {float:left; max-width:490px;}
 .center-right {float:right; max-width:490px;}
 .left-menu {
@@ -1106,3 +1106,18 @@ input[type="checkbox"], input[type="radio"]{vertical-align:top;}
   position: absolute;
   top: -9999px;
 }*/
+.flash-overlay {
+    display: none;
+    position: fixed;
+    background-color: rgba(40, 40, 40, 0.3);
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+.flash-overlay .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100vw);
+    height: calc(100vh);
+}

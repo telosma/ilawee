@@ -1,0 +1,52 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : Oct 21, 2016, 1:04:42 AM
+    Author     : hoanghoi
+*/
+
+.has-chil, .delete, .edit, .modal-edit, .modal-delete, .tour-photo {
+    color: blueviolet;
+    cursor: pointer;
+}
+table tbody, table tfoot, table thead {
+    vertical-align: baseline;
+}
+table.dataTable thead th {
+    position: relative;
+    background-image: none !important;
+}
+table.dataTable thead th.sorting:after,
+table.dataTable thead th.sorting_asc:after,
+table.dataTable thead th.sorting_desc:after {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    display: block;
+    font-family: FontAwesome;
+}
+table.dataTable td {
+    max-width: 100px;
+    word-wrap:break-word;
+}
+#place_id .place-item {
+    position: relative;
+    float: left;
+    margin-right: 6px;
+    margin-top: 5px;
+}
+.tour-option {
+    margin-top: 30px;
+}
+.label-option:after {
+    position: absolute;
+    content: ':';
+    right: 2px;
+}
+.body-title {
+    color: #008340;
+    padding-bottom: 10px;
+}

@@ -30,6 +30,7 @@ function getLaws(url) {
 $('#advanced-search-form').submit(function() {
     var form = this;
     $(form).find('input[type=submit]').prop('disabled', true);
+    $('#flash-overlay').css('display', 'block');
     $.ajax({
         url: $(form).prop('action'),
         method: 'GET',
@@ -45,6 +46,7 @@ $('#advanced-search-form').submit(function() {
         },
         complete: function() {
             $(form).find('input[type=submit]').prop('disabled', false);
+            $('#flash-overlay').hide();
         },
         error: function(xhr, ajaxOption, thrownerror) {
             location.reload();

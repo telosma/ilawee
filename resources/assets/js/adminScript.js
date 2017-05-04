@@ -5,6 +5,25 @@ function message(id, s, m) {
     $(id).slideDown();
     $(id).delay(3000).slideUp();
 }
+
+function drawOrganizationList(organizations, organizationParentId, pre) {
+    var response = '';
+    if (typeof organizationParentId === 'undefined') {
+        organizationParentId = null;
+    }
+    if (typeof pre === 'undefined') {
+        pre = '';
+    }
+    $.each(organizations, function (key, organization) {
+        if (organization.parent_id === organizationParentId) {
+            var drawChil = drawOrganizationList(organizations, organization.id, pre + '- ');
+            response += '<option value="' + organization.id + '">' + pre + organization.name + '</option>';
+            response += drawChil;
+        }
+    });
+    return response;
+}
+
 $(document).ready(function () {
     $('#side-menu').metisMenu();
     $('.alert').delay(3000).slideUp();

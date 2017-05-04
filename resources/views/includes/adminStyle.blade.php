@@ -9,6 +9,12 @@
 <!-- Buttons DataTables CSS -->
 {!! Html::style('css/buttons.dataTables.min.css') !!}
 <!-- sb admin -->
-{!! Html::style('css/sb-admin-2.css') !!}
+{{-- {!! Html::style('css/sb-admin-2.css') !!} --}}
 <!-- Fonts Awesome-->
 {!! Html::style('css/font-awesome.min.css') !!}
+{{-- ADminlte --}}
+{!! Html::style('css/AdminLTE.min.css') !!}
+{!! Html::style('css/_all-skins.min.css') !!}
+{!! Html::style('css/noty.css') !!}
+{{-- {!! Html::style('css/animate.min.css') !!} --}}
+{!! Html::style('css/adminStyle.css') !!}
