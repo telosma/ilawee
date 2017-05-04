@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Document, DocType, Organization};
+use App\Models\{Document, DocType, Organization, FileStore};
 use Carbon\Carbon;
+use App\Events\ViewDocumentHandler;
 
 class DocumentController extends Controller
 {
@@ -62,6 +63,10 @@ class DocumentController extends Controller
                 return $query->with('docType');
             }
             ])->findOrFail($id);
+
+        $event = new ViewDocumentHandler();
+        $event->handler($document);
+
         $document['publish_day'] = Carbon::parse($document->publish_date)->day;
         $document['publish_month'] = Carbon::parse($document->publish_date)->month;
         $document['publish_year'] = Carbon::parse($document->publish_date)->year;
@@ -110,9 +115,15 @@ class DocumentController extends Controller
 
     }
 
-    public function down($code, $name)
+    public function download($key, $id)
     {
-        Document::where();
+        $file = FileStore::findOrFail($id);
+        if ($file->key == $key && is_file(storage_path('app/doc_store/' . basename($file->link)))) {
+            $name = $file->document->name;
+            return response()->download(storage_path('app/doc_store/' . basename($file->link)));
+        }
+
+        return redirect()->back();
     }
 
     public function getLawByNotation($notation)

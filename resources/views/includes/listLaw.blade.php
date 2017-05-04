@@ -21,8 +21,9 @@
                         <li class="map"><a href="#">
                             Lược đồ</a></li>
 
-                        <li class="download"><a href="javascript:downloadfile('07-2017-QD-TTg.doc','/TW/Lists/vbpq/Attachments/120226/07-2017-QD-TTg.doc');">Tải về</a></li>
-
+                        @if ($document->fileStore)
+                            <li class="download"><a href="{{ route('vanban.download', ['key' => $document->fileStore->key, 'id' => $document->fileStore->id]) }}">Tải về</a></li>
+                        @endif
 
                         <div id="divShowDialogDownload_120226" title="Danh sách văn bản tải về"
                             style="display: none">

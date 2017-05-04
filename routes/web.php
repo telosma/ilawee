@@ -34,6 +34,8 @@ Route::group(['prefix' => 'vanbanluat'], function() {
     });
 });
 
+Route::get('download/{key}/{id}', ['uses' => 'DocumentController@download', 'as' => 'vanban.download']);
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
 });
