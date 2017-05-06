@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{DocType, Organization, Document};
+use App\Models\{DocType, Organization, Document, Field, Post};
 use App\Http\Controllers\DocumentController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
@@ -35,5 +35,45 @@ class HomeController extends Controller
             'provinces' => $provinces,
             'topDocuments' => $topDocuments
         ]);
+    }
+
+    public function advisory()
+    {
+        $doctypes = DocType::all();
+        $governments = Organization::where('type', config('common.type.trunguong'))->get();
+        $ministries = Organization::where('type', config('common.type.bonganh'))->get();
+        $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
+        $fields = Field::pluck('name', 'id');
+        return view('user.advisory')->with([
+            'doctypes' => $doctypes,
+            'governments' => $governments,
+            'ministries' => $ministries,
+            'provinces' => $provinces,
+            'fields' => $fields
+        ]);
+    }
+
+    public function getPostByUser($name, $id)
+    {
+        $Post = new Post();
+        $posts = $Post->getByUser($id);
+        $doctypes = DocType::all();
+        $governments = Organization::where('type', config('common.type.trunguong'))->get();
+        $ministries = Organization::where('type', config('common.type.bonganh'))->get();
+        $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
+        if ($posts) {
+            return view('user.post')->with([
+                'doctypes' => $doctypes,
+                'governments' => $governments,
+                'ministries' => $ministries,
+                'provinces' => $provinces,
+                'posts' => $posts
+            ]);
+        } else {
+            return redirect()->back()->with([
+                config('common.flash_message') => 'Đã có lỗi xảy ra',
+                config('common.flash_level_key') => 'danger'
+            ]);
+        }
     }
 }

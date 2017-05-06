@@ -24,7 +24,7 @@ gulp.task('bower', function() {
     .pipe(gulp.dest('vendor/'))
 });
 gulp.task("copyfiles", function () {
-    var publicDest = ['public/js', 'public/css', 'public/fonts', 'puclic/library'];
+    var publicDest = ['public/js', 'public/css', 'public/fonts', 'public/library'];
     var assetsCopy = [
     //jsCopyPath
         ['vendor/bower_dl/jquery/dist/jquery.min.js', publicDest[0]],
@@ -72,6 +72,7 @@ gulp.task("copyfiles", function () {
         //handleJsCssPath
         ['resources/assets/css/**', publicDest[1]],
         ['resources/assets/js/**', publicDest[0]],
+        ['vendor/bower_dl/ckeditor-dev/**', publicDest[3] + '/ckeditor-dev'],
     ];
 
     for (var i = 0; i < assetsCopy.length; i++) {

@@ -83,6 +83,7 @@ a:hover {text-decoration:none;}
     margin-top: -3px;
     overflow: hidden;
     width: 100%;
+    min-height: 500px;
 }
 #content-layouts {
     background: #fff none repeat scroll 0 0;
@@ -127,7 +128,7 @@ a:hover {text-decoration:none;}
 .left-menu .content ul li span a:hover,
 .left-menu .content ul li span a.actived {color:#F9651F;}
 
-.box-content-01 {}
+.box-content-01 {min-width: 150px;}
 .box-content-01 .top {background:url(../images/content-01-header.gif) no-repeat top left; padding-left:12px;}
 .box-content-01 .top div {background:url(../images/content-01-header.gif) no-repeat top right; padding:21px 5px 16px 0;}
 .box-content-01 .top div a,
@@ -1039,7 +1040,7 @@ input[type="checkbox"], input[type="radio"]{vertical-align:top;}
 }
 /* ----------------- */
 /* Notification */
-.notification-success {
+.flash-notification-success {
   height: auto;
   padding: 15px;
   border-bottom: #0a0;
@@ -1054,7 +1055,7 @@ input[type="checkbox"], input[type="radio"]{vertical-align:top;}
   text-shadow: 1px 1px 0px #999;
   display: none;
 }
-.notification-danger {
+.flash-notification-danger {
   height: auto;
   padding: 15px;
   border-bottom: #0a0;
@@ -1069,7 +1070,7 @@ input[type="checkbox"], input[type="radio"]{vertical-align:top;}
   text-shadow: 1px 1px 0px #999;
   display: none;
 }
-.notification-warning {
+.flash-notification-warning {
   height: auto;
   padding: 15px;
   border-bottom: #0a0;
@@ -1120,4 +1121,45 @@ input[type="checkbox"], input[type="radio"]{vertical-align:top;}
     justify-content: center;
     width: calc(100vw);
     height: calc(100vh);
+}
+.box-news .news-header {
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    padding: 10px 0px 10px 10px;
+}
+.content-news {
+    float: left;
+    width: 100%;
+    clear: both;
+    display: inline-block;
+    padding-bottom: 10px;
+    overflow: hidden;
+}
+.news-item {
+    clear: both;
+    display: inline-block;
+    width: 630px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    padding: 10px 0px 10px 10px;
+}
+.news-item .left {
+    border-right: 1px solid rgb(238, 238, 238);
+}
+.news-item p.title {
+    margin-bottom: 10px;
+    text-align: justify;
+}
+.news-item .field a, .news-item p.title a, .news-item p.title a:link, .news-item p.title a:visited {
+    color: rgb(0, 66, 118);
+    text-decoration: none;
+    font: bold 14px Arial, Helvetica, sans-serif;
+}
+.news-item .description {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.1em;
+    line-height: 1.2;
+}
+.news-item .field {
+    font-family: sans-serif;
+    font-weight: 600;
 }

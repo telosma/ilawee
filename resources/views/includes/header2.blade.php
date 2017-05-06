@@ -22,7 +22,9 @@
                                     <a href="{{ route('logout') }}">Đăng xuất</a>
                                 </li>
                                 <li class="divider"></li>
-                                <li>Tùy chỉnh</li>
+                                <li>
+                                    <a href="{{ route('user.question', ['name' => Auth::user()->name, 'id' => Auth::user()->id ]) }}">Câu hỏi</a>
+                                </li>
                             </ul>
                         </div>
                     @else
@@ -45,6 +47,7 @@
                 <ul class="topMenu">
                     <li><a href="{{ route('home') }}"><span>CSDL Quốc Gia</span></a></li>
                     <li><a href="{{ route('document.show.advancedSearch') }}"><span>Tìm kiếm</span></a></li>
+                    <li><a href="{{ route('advisory') }}"><span>Câu hỏi pháp luật</span></a></li>
                 </ul>
                 <div class="right" id="HovershowListDonVi">
                 </div>

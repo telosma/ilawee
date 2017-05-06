@@ -34,7 +34,11 @@ Route::group(['domain' => 'ilawee.dev'], function() {
     Route::get('/home/{tab}', function() {
         return view('user.home');
     });
-
+    Route::get('/cau-hoi-phap-luat', ['uses' => 'HomeController@advisory', 'as' => 'advisory']);
+    Route::group(['prefix' => 'tu-van-phap-luat', 'middleware' => 'auth'], function() {
+        Route::post('/create', ['uses' => 'PostController@create', 'as' => 'post.create']);
+    });
+    Route::get('/u/{name}/{id}/cau-hoi-phap-luat', ['uses' => 'HomeController@getPostByUser', 'as' => 'user.question']);
 });
 
 

@@ -25,7 +25,7 @@ class CreateDocumentsTable extends Migration
             $table->string('effective', 200);
             $table->text('description');
             $table->string('source');
-            $table->text('content');
+            $table->longtext('content');
             $table->boolean('confirmed')->default(false);
             $table->timestamps();
         });
