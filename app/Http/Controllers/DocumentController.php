@@ -126,6 +126,19 @@ class DocumentController extends Controller
         return redirect()->back();
     }
 
+    public function getPdf($key, $id)
+    {
+        $file = FileStore::findOrFail($id);
+        if ($file->key == $key && is_file(storage_path('app/doc_store/' . basename($file->link)))) {
+            $name = $file->document->name;
+            $path = storage_path('app/doc_store/' . basename($file->link));
+            return response(file_get_contents($path), 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="'.$name.'"'
+]           );
+        }
+    }
+
     public function getLawByNotation($notation)
     {
         if ($notation != "Không số") {

@@ -48,6 +48,7 @@ gulp.task("copyfiles", function () {
         ['vendor/bower_dl/AdminLTE/dist/js/app.min.js', publicDest[0]],
         ['vendor/bower_dl/noty/lib/noty.min.js', publicDest[0]],
         ['vendor/bower_dl/materialize/dist/js/materialize.min.js', publicDest[0]],
+        ['vendor/bower_dl/remarkable/dist/remarkable.min.js', publicDest[0]],
     //cssCopyPath
         ['vendor/bower_dl/bootstrap/dist/css/bootstrap.min.css', publicDest[1]],
         ['vendor/bower_dl/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css', publicDest[1]],

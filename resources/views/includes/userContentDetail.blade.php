@@ -16,6 +16,7 @@
                             <li class="{{ empty($tab) || ($tab == 'itemtoanvan') ? 'active' : ''}}"><a href="#itemtoanvan" data-toggle="tab">Toàn văn</a></li>
                             <li class="{{ (isset($tab) && $tab == 'itemthuoctinh') ? 'active' : ''}}"><a href="#itemthuoctinh" data-toggle="tab">Thuộc tính</a></li>
                             <li class="{{ (isset($tab) && $tab == 'itemvblienquan') ? 'active' : ''}}""><a href="#itemvblienquan" data-toggle="tab">Văn bản liên quan</a></li>
+                            <li class="{{ (isset($tab) && $tab == 'itembanpdf') ? 'active' : ''}}""><a href="#itembanpdf" data-toggle="tab">Bản pdf</a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="itemtoanvan" class="content tab-pane fade in {{ empty($tab) || ($tab == 'itemtoanvan') ? 'active' : ''}}">
@@ -69,7 +70,6 @@
                                         @endif
                                         <div style="display: none;">
                                             <textarea id="sourceTA" data-text="{{ $document->content }}">
-                                                {{-- {{ $document->content }} --}}
                                             </textarea>
                                         </div>
                                         <div id="targetDiv" style="clear:both;"></div>
@@ -276,6 +276,26 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="itembanpdf" class="content tab-pane fade in {{ (isset($tab) && $tab == 'itembanpdf') ? 'active' : ''}}">
+                                <div class="fulltext">
+                                    <div class="vbInfo">
+                                        <ul>
+                                            <li class="red">{{ $document->effective ? $document->effective : 'Đang cập nhật' }}</li>
+                                            <li class="green">
+                                                <span>Ngày có hiệu lực: </span>
+                                                {{ $document->start_date }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="vbProperties">
+                                        @if ($document->fileStore)
+                                            <object data="{{ route('vanban.getPdf', ['key' => $document->fileStore->key, 'id' => $document->fileStore->id]) }}" type="application/pdf" height="900" width="760"></object>
+                                        @else
+                                            <p class="alert alert-info">Bản PDF đang đưọc cập nhật</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -336,6 +356,9 @@
                 html = converter.makeHtml(text);
 
                 targetDiv.innerHTML = html;
+                $('#targetDiv').find('a').each(function() {
+                    console.log($(this).attr('name'));
+                });
             }
         $(function() {
             var x = new run();

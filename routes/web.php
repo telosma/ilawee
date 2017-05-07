@@ -31,6 +31,7 @@ Route::group(['domain' => 'ilawee.dev'], function() {
         });
     });
     Route::get('download/{key}/{id}', ['uses' => 'DocumentController@download', 'as' => 'vanban.download']);
+    Route::get('data/vanban/{key}/{id}', ['uses' => 'DocumentController@getPdf', 'as' => 'vanban.getPdf']);
     Route::get('/home/{tab}', function() {
         return view('user.home');
     });
@@ -52,4 +53,8 @@ Route::group(['domain' => 'admin.ilawee.dev', 'namespace' => 'Admin'], function(
             Route::post('update', ['uses' => 'OrganizationController@ajaxUpdate', 'as' => 'admin.organization.ajax.update']);
         });
     });
+});
+
+Route::get('/remarkable', function() {
+    return view('remarkable');
 });

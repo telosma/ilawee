@@ -264,7 +264,7 @@ div.multiSelectOptions {width:420px !important; height:350px;}
 
 
 
-.box-tab-vb {}
+.box-tab-vb {min-width: 780px;}
 
 .box-tab-vb .header{width:100%; display:inline-block; clear:both; background:url(../images/tabvb-bg.gif) repeat-x bottom left;}
 .box-tab-vb .header {display:inline-block; float:right;}

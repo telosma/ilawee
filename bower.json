@@ -30,6 +30,7 @@
     "blueimp-file-upload": "jQuery-File-Upload#^9.12.5",
     "ckeditor-dev": "^4.5.11",
     "metisMenu": "metismenu#^2.7.0",
-    "showdown": "^1.6.4"
+    "showdown": "^1.6.4",
+    "remarkable": "^1.7.1"
   }
 }
