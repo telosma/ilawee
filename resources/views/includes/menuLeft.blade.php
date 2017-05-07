@@ -1,7 +1,7 @@
 <!-- cột trái -->
 <div class="left-200">
     <div class="ms-webpart-zone ms-fullWidth">
-        <div class="s4-wpcell-plain ms-webpartzone-cell ms-webpart-cell-vertical ms-fullWidth ">
+{{--         <div class="s4-wpcell-plain ms-webpartzone-cell ms-webpart-cell-vertical ms-fullWidth ">
             <div class="ms-webpart-chrome ms-webpart-chrome-vertical ms-webpart-chrome-fullWidth ">
                 <div width="100%" class="ms-WPBody " allowDelete="false" allowExport="false" style="" >
                     <div class="box-container">
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="ms-PartSpacingVertical"></div>
-        </div>
+        </div> --}}
         <div class="box-container">
             <div class="box-content-01" id="menu-toc">
                 <div class="content">
@@ -32,11 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="s4-wpcell-plain ms-webpartzone-cell ms-webpart-cell-vertical ms-fullWidth">
-            <div class="ms-webpart-chrome ms-webpart-chrome-vertical ms-webpart-chrome-fullWidth ">
-                <div width="100%" class="ms-WPBody " allowDelete="false" allowExport="false" style="" >
-                    <div>
-                        <div class="box-container">
+{{--                         <div class="box-container">
                             <div class="box-content-01">
                                 <div class="top">
                                     <div>
@@ -53,7 +49,7 @@
                                     <div>&nbsp;</div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="box-container">
                             <div class="box-content-01">
                                 <div class="top">
@@ -76,12 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <div class="ms-clear"></div>
-                </div>
-            </div>
-            <div class="ms-PartSpacingVertical"></div>
-        </div>
     </div>
 </div>
 <!-- cột trái -->

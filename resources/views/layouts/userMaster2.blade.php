@@ -3,11 +3,12 @@
     <head>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('page_title')</title>
-        {{-- {!! Html::style('css/materialize.min.css') !!} --}}
         {!! Html::style('css/bootstrap.min.css') !!}
         {!! Html::style('css/font-awesome.min.css') !!}
         {!! Html::style('css/style.css') !!}
         {!! Html::style('css/reset.css') !!}
+        {!! Html::style('css/noty.css') !!}
+        <link rel="SHORTCUT ICON" href="{!! asset('images/favicon.ico') !!}">
         @yield('style')
         @stack('header')
     </head>
@@ -27,7 +28,7 @@
         {!! Html::script('js/materialize.min.js') !!}
         {!! Html::script('js/bootstrap.min.js') !!}
         {!! Html::script('js/metisMenu.min.js') !!}
-        {!! Html::script('js/materialize.min.js') !!}
+        {!! Html::script('js/noty.min.js') !!}
         {!! Html::script('js/user.js') !!}
         @yield('script')
         @stack('scripts')

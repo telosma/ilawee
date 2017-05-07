@@ -113,9 +113,9 @@
                             <table width="100%" cellspacing="1" cellpadding="5">
                                 <tbody>
                                     <tr class="header">
-                                        <td colspan="3">Danh sách các Tỉnh</td>
+                                        <td colspan="5">Danh sách các Tỉnh</td>
                                     </tr>
-                                    <?php $provChunks = $provinces->chunk(count($provinces) / 3); ?>
+                                    <?php $provChunks = $provinces->chunk(count($provinces) / 4); ?>
                                     <tr>
                                         @foreach( $provChunks as $provChunk )
                                             <td>
