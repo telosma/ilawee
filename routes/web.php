@@ -66,3 +66,9 @@ Route::group(['domain' => 'admin.ilawee.dev', 'namespace' => 'Admin'], function(
 Route::get('/remarkable', function() {
     return view('remarkable');
 });
+
+Route::match(['get', 'post'], 'upload/image/ckeditor', [
+    'uses' => 'UploadController@storageImageCKEditor',
+    'as' => 'upload.image.CKEditor'
+]);
+Route::post('upload/image', ['uses' => 'UploadController@storageImage', 'as' => 'upload.image']);

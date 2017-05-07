@@ -33,8 +33,8 @@
                     </div>
                 </div>
             </div>
-            <div class="right-780">
-                <div class="left-580">
+            <div class="right-780" style="display: flex;">
+                <div class="left-580" style="margin: auto;">
                     <div class="box-container">
                         <div class="box-news">
                             <div class="content-news">
@@ -45,7 +45,7 @@
                                                 <a href="">{{ $post->title }} <span class="badge" style="background-color:rgb(0, 150, 240);">{{ Lang::choice('post.num_comment', $post->comments_count, ['num' => $post->comments_count]) }}</span></a>
                                             </p>
                                             <div class="description">
-                                                {!! $post->content !!}
+                                                {!! $post->short_desc !!}
                                             </div>
                                             <div class="row">
                                                 <p class="field">
