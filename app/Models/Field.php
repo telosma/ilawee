@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+use App\Models\Post;
 class Field extends Model
 {
     protected $table = 'fields';
@@ -13,6 +13,6 @@ class Field extends Model
 
     public function posts()
     {
-        return $this->hasMany(User::class, 'field_id');
+        return $this->hasMany(Post::class, 'field_id');
     }
 }

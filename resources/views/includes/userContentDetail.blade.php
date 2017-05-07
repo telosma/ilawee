@@ -356,9 +356,23 @@
                 html = converter.makeHtml(text);
 
                 targetDiv.innerHTML = html;
+                var toc = "";
                 $('#targetDiv').find('a').each(function() {
-                    console.log($(this).attr('name'));
+                    // console.log($(this).parent().text());
+                    toc += "<li class=\"li-toc\"><span><a href=\"#" + $(this).attr('name') + "\">"
+                    toc += $(this).parent().text();
+                    toc += "</a></span></li>"
                 });
+                if (toc !== "") { // Van ban co toc
+                    $('#menu-toc').prepend(
+                        "<div class=\"top\">" +
+                            "<div>" +
+                                "<a href=\"#\">Mục lục văn bản</a>" +
+                            "</div>" +
+                        "</div>"
+                    );
+                    $('#ul-toc').append(toc);
+                }
             }
         $(function() {
             var x = new run();

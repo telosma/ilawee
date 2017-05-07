@@ -44,11 +44,13 @@ class HomeController extends Controller
         $ministries = Organization::where('type', config('common.type.bonganh'))->get();
         $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
         $fields = Field::pluck('name', 'id');
+        $posts = Post::with('field')->withCount('comments')->paginate(10);
         return view('user.advisory')->with([
             'doctypes' => $doctypes,
             'governments' => $governments,
             'ministries' => $ministries,
             'provinces' => $provinces,
+            'posts' => $posts,
             'fields' => $fields
         ]);
     }
@@ -73,6 +75,37 @@ class HomeController extends Controller
             return redirect()->back()->with([
                 config('common.flash_message') => 'Đã có lỗi xảy ra',
                 config('common.flash_level_key') => 'danger'
+            ]);
+        }
+    }
+
+    public function getPostByField($name, Request $request)
+    {
+        try {
+            $field = Field::where('name', $name)->first();
+            if ($field)
+            {
+                $posts = $field->posts()->with('field')->withCount('comments')->get();
+            }
+            $doctypes = DocType::all();
+            $governments = Organization::where('type', config('common.type.trunguong'))->get();
+            $ministries = Organization::where('type', config('common.type.bonganh'))->get();
+            $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
+            $fields = Field::pluck('name', 'id');
+
+            return view('user.advisory')->with([
+                'doctypes' => $doctypes,
+                'governments' => $governments,
+                'ministries' => $ministries,
+                'provinces' => $provinces,
+                'fields' => $fields,
+                'posts' => $posts,
+                'linhvuc' => $name
+            ]);
+        } catch(Exception $e) {
+            return redirect()->back()->with([
+                config('common.flash_message') => 'Đã có lỗi xảy ra',
+                config('common.flash_level_key') => config('common.flash_level.danger')
             ]);
         }
     }

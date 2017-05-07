@@ -1142,9 +1142,6 @@ input[type="checkbox"], input[type="radio"]{vertical-align:top;}
     border-bottom: 1px solid rgb(238, 238, 238);
     padding: 10px 0px 10px 10px;
 }
-.news-item .left {
-    border-right: 1px solid rgb(238, 238, 238);
-}
 .news-item p.title {
     margin-bottom: 10px;
     text-align: justify;
@@ -1163,3 +1160,92 @@ input[type="checkbox"], input[type="radio"]{vertical-align:top;}
     font-family: sans-serif;
     font-weight: 600;
 }
+.question-wrapper {
+    margin-top: 50px;
+    display: none;
+}
+.left-650 {
+    float: left;
+    max-width: 650px;
+    min-width: 630px;
+}
+/*Comment-Post*/
+.post-section {
+    margin: 35px 0;
+}
+.post-section .post-section-title {
+    margin: 26px 0;
+}
+#comments-form .tab-content {
+    padding: .6rem;
+    background-color: #FFF;
+    border: 1px solid #DDD;
+    border-top: none;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.flexbox {
+    display: flex;
+}
+.flex-items-center {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.comment-area {
+    padding: 1rem;
+    background-color: #FFF;
+    border-radius: 3px;
+    box-shadow: inset 0 0 3px 0 rgba(0,0,0,.2);
+}
+.comment-input {
+    width: 100%;
+    resize: none;
+    outline: 0;
+    border: none;
+    margin-left: 1rem;
+    font-size: .875rem;
+}
+.comment-actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: .6rem;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+}
+.comment-actions .btn {
+    margin-left: .6rem;
+}
+.avatar.is-sm-avatar>img {
+    width: 2rem;
+    height: auto;
+}
+.avatar>img, img.avatar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    max-width: 3.75rem;
+    max-height: 3.75rem;
+    margin: 0 auto;
+}
+.comment-input {
+    font-size: 13px;
+    padding: 10px;
+    border: 1px solid#ccc;
+    outline: none;
+    width: 100%;
+    margin: 8px 0;
+}
+.post-content p {
+    line-height: 1.5;
+    font-size: 14px;
+    color: #0b1a33;
+    font-family: initial;
+}
+.post-content {
+    margin: 20px auto auto 20px;
+}
+/*End comment-post*/

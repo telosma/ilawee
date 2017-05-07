@@ -13,28 +13,32 @@
         <!-- content -->
         <div id="content">
             <div class="left-200">
-                <div class="box-container">
-                    <div class="box-content-01">
-                        <div class="top">
-                            <div>
-                                <a href="javascript:;">Lĩnh vực tư vấn</a>
+                <div width="100%" class="ms-WPBody " allowdelete="false" allowexport="false">
+                    <div class="box-container">
+                        <div class="box-content-01" style="min-width: 190px;">
+                            <div class="top">
+                                <div>
+                                    <a href="javascript:;">Lĩnh vực tư vấn</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="content">
-                            <ul class="category" id="capCQ">
-                                @for($i = 0; $i < 5; $i++)
-                                    <li><span><a href="#">Lĩnh vực </a></span></li>
-                                @endfor()
-                            </ul>
-                        </div>
-                        <div class="bottom">
-                            <div>&nbsp;</div>
+                            <div class="content">
+                                <ul class="category" id="capCQ">
+                                    @foreach($fields as $key => $field)
+                                        <li class='{{ (isset($linhvuc) && $linhvuc == $field) ? 'active' : ''}}'>
+                                            <span><a href="{{ route('field.post.list', $field) }}">{!! $field !!} </a></span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="bottom">
+                                <div>&nbsp;</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="right-780">
-                <div class="left-580">
+            <div class="right-780" style="display: flex;">
+                <div class="left-650" style="margin: auto;">
                     <div class="box-container">
                         {{-- Box tim kiem --}}
                         <div class="panel panel-info">
@@ -42,7 +46,7 @@
                                 <h4>Tìm kiếm tình huống</h4>
                                 hoặc
 
-                        <button class="btn btn-success">
+                        <button class="btn btn-success" id="btn-question">
                             <a href="#form-submit-question" style="color: #fff; font-size: 1.1em; font-weight: 600;">Đặt câu hỏi</a>
                         </button>
                             </div>
@@ -73,35 +77,29 @@
                                 <div class="col-sm-10">
                                     <h4>Tình huống</h4>
                                 </div>
-                             {{--    <div class="col-sm-2">
-                                    <h4>Lĩnh vực</h4>
-                                </div> --}}
                             </div>
                             <div class="content-news">
-                                @for ($i=1; $i<6; $i++)
+                                @forelse ($posts as $post)
                                     <div class="row news-item">
                                         <div class="col-sm-11 left">
                                             <p class="title">
-                                                <a href="">Điều kiện tách thửa <span class="badge" style="background-color:rgb(0, 150, 240);">5 trả lời</span></a>
+                                                <a href="">{{ $post->title }} <span class="badge" style="background-color:rgb(0, 150, 240);">{{ Lang::choice('post.num_comment', $post->comments_count, ['num' => $post->comments_count]) }}</span></a>
                                             </p>
                                             <div class="description">
-                                                Hai anh em chúng hiện đang cùng sử dụng chung thửa. Chúng tôi có nhu cầu tách thửa. Diện tích mảnh đất là 7x30m. Vậy có đủ điều kiện tách thửa không?
+                                                {!! $post->short_desc !!}
                                             </div>
                                             <div class="row">
                                                 <p class="field">
-                                                    <a href=""><span class="badge">Sở hữu trí tuệ</span></a>
+                                                    <a href=""><span class="badge">{{ $post->field->name }}</span></a>
                                                 </p>
                                             </div>
                                         </div>
-                                       {{--  <div class="col-sm-3">
-                                            <div class="row">
-                                                <p class="field">
-                                                    <a href="">Sở hữu trí tuệ</a>
-                                                </p>
-                                            </div>
-                                        </div> --}}
                                     </div>
-                                @endfor
+                                @empty
+                                    <div class="alert-no-posts">
+                                        <p class="alert alert-info">Chưa có câu hỏi nào</p>
+                                    </div>
+                                @endforelse
                             </div>
                         </div>
                     </div>
@@ -140,5 +138,10 @@
 @push('scripts')
 <script>
     CKEDITOR.replace('qcontent');
+    $(document).ready(function() {
+        $('#btn-question').on('click', function() {
+            $('.question-wrapper').show()
+        });
+    });
 </script>
 @endpush

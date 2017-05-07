@@ -22,6 +22,7 @@ Route::group(['domain' => 'ilawee.dev'], function() {
     Route::resource('vanban', 'DocumentController');
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
     Route::get('coquanbanhanh/{orId}', ['as' => 'listLawByOrganization', 'uses' => 'SearchController@filterByOrganization']);
+
     Route::group(['prefix' => 'vanbanluat'], function() {
         Route::get('/loaivanban/{typeId}', ['uses' => 'SearchController@filterByType', 'as' => 'document.filter.type']);
         Route::get('/timkiem', ['uses' => 'SearchController@normalSearch', 'as' => 'document.normalSearch']);
@@ -29,16 +30,23 @@ Route::group(['domain' => 'ilawee.dev'], function() {
         Route::group(['prefix' => 'ajax'], function () {
             Route::get('advanced-search', ['uses' => 'SearchController@ajaxGetResultSearch', 'as' => 'document.ajax.search']);
         });
+        Route::get('download/{key}/{id}', ['uses' => 'DocumentController@download', 'as' => 'vanban.download']);
+        Route::get('data/{key}/{id}', ['uses' => 'DocumentController@getPdf', 'as' => 'vanban.getPdf']);
     });
-    Route::get('download/{key}/{id}', ['uses' => 'DocumentController@download', 'as' => 'vanban.download']);
-    Route::get('data/vanban/{key}/{id}', ['uses' => 'DocumentController@getPdf', 'as' => 'vanban.getPdf']);
+
     Route::get('/home/{tab}', function() {
         return view('user.home');
     });
-    Route::get('/cau-hoi-phap-luat', ['uses' => 'HomeController@advisory', 'as' => 'advisory']);
-    Route::group(['prefix' => 'tu-van-phap-luat', 'middleware' => 'auth'], function() {
-        Route::post('/create', ['uses' => 'PostController@create', 'as' => 'post.create']);
+
+    Route::group(['prefix' => 'cau-hoi-phap-luat'], function() {
+        Route::post('/create', ['uses' => 'PostController@create', 'as' => 'post.create', 'middleware' => 'auth']);
+        Route::get('/', ['uses' => 'HomeController@advisory', 'as' => 'advisory']);
+        Route::get('linh-vuc/{name}', ['uses' => 'HomeController@getPostByField', 'as' => 'field.post.list']);
+        Route::group(['prefix' => 'cau-hoi'], function() {
+            Route::get('/{id}', ['uses' => 'PostController@show', 'as' => 'post.show']);
+        });
     });
+
     Route::get('/u/{name}/{id}/cau-hoi-phap-luat', ['uses' => 'HomeController@getPostByUser', 'as' => 'user.question']);
 });
 

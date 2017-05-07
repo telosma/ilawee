@@ -24,7 +24,14 @@
             </div>
             <div class="ms-PartSpacingVertical"></div>
         </div>
+        <div class="box-container">
+            <div class="box-content-01" id="menu-toc">
+                <div class="content">
+                    <ul id="ul-toc" class="category"></ul>
 
+                </div>
+            </div>
+        </div>
         <div class="s4-wpcell-plain ms-webpartzone-cell ms-webpart-cell-vertical ms-fullWidth">
             <div class="ms-webpart-chrome ms-webpart-chrome-vertical ms-webpart-chrome-fullWidth ">
                 <div width="100%" class="ms-WPBody " allowDelete="false" allowExport="false" style="" >
