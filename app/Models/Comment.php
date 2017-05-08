@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\{User, Post};
+use Carbon\Carbon;
 
 class Comment extends Model
 {
@@ -22,5 +23,10 @@ class Comment extends Model
     public function post()
     {
         return $this->belongsTo(Post::class, 'post_id');
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('l jS F Y');
     }
 }

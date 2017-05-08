@@ -10,5 +10,12 @@ trait Common {
         $governments = Organization::where('type', config('common.type.trunguong'))->get();
         $ministries = Organization::where('type', config('common.type.bonganh'))->get();
         $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
+
+        return [
+            'doctypes' => $doctypes,
+            'governments' => $governments,
+            'ministries' => $ministries,
+            'provinces' => $provinces
+        ];
     }
 }

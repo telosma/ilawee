@@ -7,6 +7,7 @@ use Elasticquent\ElasticquentTrait;
 use App\Models\{User, Comment, Field};
 use Str;
 use Html2Text\Html2Text;
+use Carbon\Carbon;
 
 class Post extends Model
 {
@@ -83,5 +84,10 @@ class Post extends Model
     {
         $text =  Html2Text::convert($this->attributes['content']);
         return $this->attributes['short_desc'] = Str::words($text, 200);
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('l jS F Y');
     }
 }

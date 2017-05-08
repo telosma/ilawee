@@ -40,7 +40,7 @@ class AuthUserController extends Controller
 
         return redirect()->back()->with([
             config('common.flash_message') => "Đăng ký không thành công!",
-            config('common.flash_level_key') => 'danger'
+            config('common.flash_level_key') => 'error'
         ]);
     }
 
@@ -110,7 +110,7 @@ class AuthUserController extends Controller
 
         return redirect()->back()->with([
             config('common.flash_message') => 'Xác nhận thất bại, có thể hết hạn',
-            config('common.flash_level_key') => 'danger'
+            config('common.flash_level_key') => 'error'
         ]);
     }
 

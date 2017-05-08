@@ -83,7 +83,7 @@
                                     <div class="row news-item">
                                         <div class="col-sm-11 left">
                                             <p class="title">
-                                                <a href="">{{ $post->title }} <span class="badge" style="background-color:rgb(0, 150, 240);">{{ Lang::choice('post.num_comment', $post->comments_count, ['num' => $post->comments_count]) }}</span></a>
+                                                <a href="{{ route('post.show', $post->id) }}">{{ $post->title }} <span class="badge" style="background-color:rgb(0, 150, 240);">{{ Lang::choice('post.num_comment', $post->comments_count, ['num' => $post->comments_count]) }}</span></a>
                                             </p>
                                             <div class="description">
                                                 {!! $post->short_desc !!}

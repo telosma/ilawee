@@ -74,7 +74,7 @@ class HomeController extends Controller
         } else {
             return redirect()->back()->with([
                 config('common.flash_message') => 'Đã có lỗi xảy ra',
-                config('common.flash_level_key') => 'danger'
+                config('common.flash_level_key') => 'error'
             ]);
         }
     }
@@ -105,7 +105,7 @@ class HomeController extends Controller
         } catch(Exception $e) {
             return redirect()->back()->with([
                 config('common.flash_message') => 'Đã có lỗi xảy ra',
-                config('common.flash_level_key') => config('common.flash_level.danger')
+                config('common.flash_level_key') => config('common.flash_level.error')
             ]);
         }
     }

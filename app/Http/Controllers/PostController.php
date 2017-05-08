@@ -55,27 +55,30 @@ class PostController extends Controller
     public function show($id)
     {
         try {
-        $doctypes = DocType::all();
-        $governments = Organization::where('type', config('common.type.trunguong'))->get();
-        $ministries = Organization::where('type', config('common.type.bonganh'))->get();
-        $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
-            // $this->getDataMenu();
+            $data = $this->getDataMenu();
             $fields = Field::pluck('name', 'id');
-            // $post = Post::find($id);
-            // if ($post) {
+            $post = Post::with(['comments' => function ($query) {
+                return $query->with('user');
+            }, 'user'])->find($id);
+            if ($post) {
                 return view('post.show')->with([
-                    'doctypes' => $doctypes,
-                    'governments' => $governments,
-                    'ministries' => $ministries,
-                    'provinces' => $provinces,
-                    // 'post' => $post,
+                    'doctypes' => $data['doctypes'],
+                    'governments' => $data['governments'],
+                    'ministries' => $data['ministries'],
+                    'provinces' => $data['provinces'],
+                    'post' => $post,
                     'fields' => $fields
                 ]);
-            // }
+            } else {
+                return redirect()->back()->with([
+                    config('common.flash_message') => 'Không tìm thấy câu hỏi',
+                    config('common.flash_level_key') => 'error',
+                ]);
+            }
         } catch (\Exception $e) {
             return redirect()->back()->with([
                 config('common.flash_message') => 'Hệ thống đang xảy ra lỗi xin vui lòng thử lại sau',
-                config('common.flash_level_key') => 'danger'
+                config('common.flash_level_key') => 'error'
             ]);
         }
     }

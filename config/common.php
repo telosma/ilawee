@@ -8,6 +8,7 @@ return [
         'info' => 'info',
         'warning' => 'warning',
         'danger' => 'danger',
+        'error' => 'error',
     ],
     'type' => [
         'trunguong' => '1',

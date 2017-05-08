@@ -42,8 +42,13 @@ Route::group(['domain' => 'ilawee.dev'], function() {
         Route::post('/create', ['uses' => 'PostController@create', 'as' => 'post.create', 'middleware' => 'auth']);
         Route::get('/', ['uses' => 'HomeController@advisory', 'as' => 'advisory']);
         Route::get('linh-vuc/{name}', ['uses' => 'HomeController@getPostByField', 'as' => 'field.post.list']);
+
         Route::group(['prefix' => 'cau-hoi'], function() {
             Route::get('/{id}', ['uses' => 'PostController@show', 'as' => 'post.show']);
+            Route::group(['prefix' => 'tra-loi'], function() {
+                Route::post('/create', ['uses' => 'CommentController@store', 'as' => 'comment.create']);
+                Route::delete('/delete', ['uses' => 'CommentController@destroy', 'as' => 'comment.ajax.delete']);
+            });
         });
     });
 
