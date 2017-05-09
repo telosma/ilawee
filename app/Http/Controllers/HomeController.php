@@ -8,11 +8,13 @@ use App\Http\Controllers\DocumentController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 use App\Traits\DocumentMethod;
+use App\Traits\Common;
 use DB;
 
 class HomeController extends Controller
 {
     use DocumentMethod;
+    use Common;
 
     public function home(Request $request)
     {
@@ -39,17 +41,14 @@ class HomeController extends Controller
 
     public function advisory()
     {
-        $doctypes = DocType::all();
-        $governments = Organization::where('type', config('common.type.trunguong'))->get();
-        $ministries = Organization::where('type', config('common.type.bonganh'))->get();
-        $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
+        $data = $this->getDataMenu();
         $fields = Field::pluck('name', 'id');
         $posts = Post::with('field')->withCount('comments')->paginate(10);
         return view('user.advisory')->with([
-            'doctypes' => $doctypes,
-            'governments' => $governments,
-            'ministries' => $ministries,
-            'provinces' => $provinces,
+            'doctypes' => $data['doctypes'],
+            'governments' => $data['governments'],
+            'ministries' => $data['ministries'],
+            'provinces' => $data['provinces'],
             'posts' => $posts,
             'fields' => $fields
         ]);

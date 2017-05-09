@@ -14,7 +14,7 @@ class PostController extends Controller
     use Common;
 
     protected $userId;
-    public function _construct()
+    public function __construct()
     {
         if (Auth::check()) {
             $this->userId = Auth::user()->id;
@@ -22,7 +22,6 @@ class PostController extends Controller
     }
     public function create(CreatePostRequest $request)
     {
-        // dd($request);
         try {
             $post = Post::create([
                 'user_id' => Auth::user()->id,
@@ -32,7 +31,7 @@ class PostController extends Controller
             ]);
 
             if ($post) {
-                Post::with('field')->find($post->id)->addToIndex();
+                // Post::with('field')->find($post->id)->addToIndex();
                 return redirect()->back()->with([
                     config('common.flash_message') => 'Gửi câu hỏi thành công',
                     config('common.flash_level_key') => 'success'
@@ -40,14 +39,14 @@ class PostController extends Controller
             } else {
                 return redirect()->back()->with([
                     config('common.flash_message') => 'Đã có lỗi xảy ra',
-                    config('common.flash_level_key') => 'danger'
+                    config('common.flash_level_key') => 'error'
                 ]);
             }
         } catch(Exception $e)
         {
             return redirect()->back()->with([
                 config('common.flash_message') => 'Hệ thống đang xảy ra lỗi xin vui lòng thử lại sau',
-                config('common.flash_level_key') => 'danger'
+                config('common.flash_level_key') => 'error'
             ]);
         }
     }
@@ -80,6 +79,39 @@ class PostController extends Controller
                 config('common.flash_message') => 'Hệ thống đang xảy ra lỗi xin vui lòng thử lại sau',
                 config('common.flash_level_key') => 'error'
             ]);
+        }
+    }
+
+    public function search(Request $request)
+    {
+        $page = $request->page ? $request->page : 1;
+        $query = $request->input('query');
+        $posts = Post::with('field')->withCount('comments')->where('content', 'LIKE', "%{$query}%")->paginate(2);
+
+        if ($posts) {
+            $fields = Field::pluck('name', 'id');
+
+                if ($request->ajax()) {
+                    return [
+                        'postIndexRender' => view('includes.content.postIndex')->with([
+                            'posts' => $posts->appends($request->input())
+                        ])->render(),
+                        'query' => $query,
+                        'page' => $page
+                    ];
+                } else {
+                    $data = $this->getDataMenu();
+                    $fields = Field::pluck('name', 'id');
+
+                    return view('user.advisory')->with([
+                        'doctypes' => $data['doctypes'],
+                        'governments' => $data['governments'],
+                        'ministries' => $data['ministries'],
+                        'provinces' => $data['provinces'],
+                        'posts' => $posts->appends($request->input()),
+                        'fields' => $fields
+                    ]);
+                }
         }
     }
 }

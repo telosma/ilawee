@@ -1,5 +1,6 @@
 @push('header')
-{!! Html::script('library/ckeditor-dev/ckeditor.js') !!}
+{{-- {!! Html::script('library/ckeditor-dev/ckeditor.js') !!} --}}
+<script src="{{ asset('library/ckeditor-dev/ckeditor.js') }}" charset="utf-8"></script>
 @endpush
 
 @push('scripts')

@@ -56,4 +56,8 @@ CKEDITOR.editorConfig = function (config) {
         'undo,' +
         'uploadimage,' +
         'wysiwygarea';
+
+        config.entities_latin = false;
+        config.htmlEncodeOutput = false;
+        config.entities = false;
 };

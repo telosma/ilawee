@@ -45,14 +45,11 @@
                             <div class="panel-heading" style="background-color: #64B5F6; color: #fff;">
                                 <h4>Tìm kiếm tình huống</h4>
                                 hoặc
-
-                        <button class="btn btn-success" id="btn-question">
-                            <a href="#form-submit-question" style="color: #fff; font-size: 1.1em; font-weight: 600;">Đặt câu hỏi</a>
-                        </button>
+                                <a class="btn btn-success" id="btn-question" href="#form-submit-question" style="color: #fff; font-size: 1.1em; font-weight: 600;">Đặt câu hỏi</a>
                             </div>
                             <div class="panel-body">
                                 <div class="form form-horizontal">
-                                    {{ Form::open(['url' => '', 'method' => 'get', 'class' => 'normal-search']) }}
+                                    {{ Form::open(['route' => 'post.search', 'method' => 'get', 'class' => 'normal-search', 'id' => 'form-posts-search']) }}
                                         <div class="row mb-20">
                                             <p class="guide-search">Nhập từ khóa tìm kiếm vào cửa sổ tìm kiếm dưới đây</p>
                                         </div>
@@ -72,36 +69,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="box-news">
-                            <div class="row news-header">
-                                <div class="col-sm-10">
-                                    <h4>Tình huống</h4>
-                                </div>
-                            </div>
-                            <div class="content-news">
-                                @forelse ($posts as $post)
-                                    <div class="row news-item">
-                                        <div class="col-sm-11 left">
-                                            <p class="title">
-                                                <a href="{{ route('post.show', $post->id) }}">{{ $post->title }} <span class="badge" style="background-color:rgb(0, 150, 240);">{{ Lang::choice('post.num_comment', $post->comments_count, ['num' => $post->comments_count]) }}</span></a>
-                                            </p>
-                                            <div class="description">
-                                                {!! $post->short_desc !!}
-                                            </div>
-                                            <div class="row">
-                                                <p class="field">
-                                                    <a href=""><span class="badge">{{ $post->field->name }}</span></a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @empty
-                                    <div class="alert-no-posts">
-                                        <p class="alert alert-info">Chưa có câu hỏi nào</p>
-                                    </div>
-                                @endforelse
-                            </div>
+                        {{-- List cau hoi --}}
+                        <div class="box-posts">
+                            @include('includes.content.postIndex2')
                         </div>
+                        {{-- End list cau hoi --}}
                     </div>
                     <div class="row">
                         <div class="question-wrapper panel panel-info">
@@ -113,7 +85,7 @@
                                         {{ Form::select('field', $fields->toArray() + ['null' => 'Chọn lĩnh vực'], 'null', ['class' => 'form-control']) }}
                                     </div>
                                     <div class="form-group">
-                                        {{ Form::label('title', 'Tiêu đề (Khoảng 200 ký tự)') }}
+                                        {{ Form::label('title', 'Tiêu đề (Tối đa 100 ký tự)') }}
                                         {{ Form::text('title', null, ['class' => 'form-control']) }}
                                     </div>
                                     <div class="form-group">
@@ -136,6 +108,7 @@
 </div>
 @endsection()
 @push('scripts')
+{!! Html::script('js/ajaxSearchPost.js') !!}
 <script>
     CKEDITOR.replace('qcontent');
     $(document).ready(function() {

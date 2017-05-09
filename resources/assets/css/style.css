@@ -1166,8 +1166,7 @@ input[type="checkbox"], input[type="radio"]{vertical-align:top;}
 }
 .left-650 {
     float: left;
-    max-width: 650px;
-    min-width: 630px;
+    width: 650px;
 }
 /*Comment-Post*/
 .post-section {
