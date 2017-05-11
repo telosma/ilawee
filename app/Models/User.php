@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Hash;
 use App\Models\{Post, Comment, Social, Role};
 
 class User extends Authenticatable
 {
     use Notifiable;
-
+    use EntrustUserTrait;
     /**
      * The attributes that are mass assignable.
      *
@@ -51,13 +52,10 @@ class User extends Authenticatable
         return $this->hasMany(Social::class, 'user_id');
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id');
-    }
-
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
     }
+
+    // relation: roles defined in EntrustUserTrait
 }

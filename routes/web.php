@@ -64,6 +64,8 @@ Route::group(['domain' => 'admin.ilawee.dev', 'namespace' => 'Admin'], function(
             Route::get('list', ['uses' => 'OrganizationController@ajaxList', 'as' => 'admin.organization.ajax.list']);
             Route::get('list-only', ['uses' => 'OrganizationController@ajaxListOnly', 'as' => 'admin.organization.ajax.listOnly']);
             Route::post('update', ['uses' => 'OrganizationController@ajaxUpdate', 'as' => 'admin.organization.ajax.update']);
+            Route::post('create', ['uses' => 'OrganizationController@ajaxCreate', 'as' => 'admin.organization.ajax.create']);
+            Route::delete('delete', ['uses' => 'OrganizationController@ajaxDelete', 'as' => 'admin.organization.ajax.delete']);
         });
     });
 });

@@ -19,7 +19,8 @@
         "ptcong/php-image-uploader": "^6.0",
         "soundasleep/html2text": "^0.3.4",
         "fzaninotto/faker": "1.5.*@dev",
-        "elasticquent/elasticquent": "dev-master"
+        "elasticquent/elasticquent": "dev-master",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",

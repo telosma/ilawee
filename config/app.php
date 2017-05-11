@@ -184,6 +184,7 @@ return [
         Elasticquent\ElasticquentServiceProvider::class,
 
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
 
     ],
 
@@ -242,6 +243,7 @@ return [
         'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
 
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
     ],
 
 ];

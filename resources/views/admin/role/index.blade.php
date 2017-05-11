@@ -6,7 +6,6 @@
         <tr>
             <th></th>
             <th>name</th>
-            <th>Parent</th>
             <th>document count</th>
             <th>type</th>
             <th></th>
@@ -16,7 +15,7 @@
     </thead>
 </table>
 <!-- Modal edit-->
-<div class="modal fade" id="myModal" role="dialog">
+{{-- <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -36,19 +35,6 @@
                             {!! Form::select('parent_id', [], null, [
                                 'class' => 'form-control',
                                 'placeholder' => 'Chọn cơ quan trực thuộc'
-                            ]) !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label(
-                            'type',
-                            'Loại tổ chức',
-                            ['class' => 'col-md-3 control-label']
-                        ) !!}
-                        <div class="col-md-8">
-                            {!! Form::select('type', ['1' => 'Trung Ương', '2' => 'Bộ ngành', '3' => 'Địa Phương', '4' => 'Khác'], null, [
-                                'class' => 'form-control',
-                                'placeholder' => 'Chọn loại tổ chức'
                             ]) !!}
                         </div>
                     </div>
@@ -76,7 +62,7 @@
             <!--end modal-content-->
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
 
 @include('includes.ajaxSendRequest')
@@ -89,11 +75,11 @@
 
         var Organization = new organization({
             url: {
-                'ajaxList': '{!! route('admin.organization.ajax.list') !!}',
-                'ajaxCreate': '{!! route('admin.organization.ajax.create') !!}',
-                'ajaxUpdate': '{!! route('admin.organization.ajax.update') !!}',
-                'ajaxDelete': '{!! route('admin.organization.ajax.delete') !!}',
-                'ajaxListOnly': '{!! route('admin.organization.ajax.listOnly') !!}',
+                'ajaxList': '{!! route('admin.role.ajax.list') !!}',
+                'ajaxCreate': '',
+                'ajaxUpdate': '',
+                'ajaxDelete': '',
+                'ajaxListOnly': '',
             },
             lang: {
                 'trans': {
