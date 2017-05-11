@@ -13,8 +13,8 @@ function organization(option) {
     this.type = 'cde';
     this.lang = {
         'trans': {
-            'title_create': 'Create new organization',
-            'title_update': 'Update organization',
+            'title_create': 'Tạo mới cơ quan ban hành',
+            'title_update': 'Cập nhật cơ quan ban hành',
         },
     };
     this.url = {
@@ -32,6 +32,7 @@ function organization(option) {
     };
     this.columns = [
         {'data': 'name'},
+        {'defaultContent': 'NULL'},
         {'data': 'documents_count'},
         {
             'data': function (data) {
@@ -70,6 +71,8 @@ function organization(option) {
         }
 
         DatatableBase.addItem(this);
+        DatatableBase.order.column = 3;
+        DatatableBase.order.type = 'desc';
         this.addEvent();
     };
     this.addEvent = function () {
