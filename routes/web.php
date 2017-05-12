@@ -58,6 +58,7 @@ Route::group(['domain' => 'ilawee.dev'], function() {
 
 Route::group(['domain' => 'admin.ilawee.dev', 'namespace' => 'Admin'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
+
     Route::group(['prefix' => 'organization'], function() {
         Route::get('/', ['uses' => 'OrganizationController@index', 'as' => 'admin.organization.index']);
         Route::group(['prefix' => 'ajax'], function () {
@@ -66,6 +67,17 @@ Route::group(['domain' => 'admin.ilawee.dev', 'namespace' => 'Admin'], function(
             Route::post('update', ['uses' => 'OrganizationController@ajaxUpdate', 'as' => 'admin.organization.ajax.update']);
             Route::post('create', ['uses' => 'OrganizationController@ajaxCreate', 'as' => 'admin.organization.ajax.create']);
             Route::delete('delete', ['uses' => 'OrganizationController@ajaxDelete', 'as' => 'admin.organization.ajax.delete']);
+        });
+    });
+
+    Route::group(['prefix' => 'signer'], function() {
+        Route::get('/', ['uses' => 'SignerController@index', 'as' => 'admin.signer.index']);
+        Route::group(['prefix' => 'ajax'], function () {
+            Route::get('list', ['uses' => 'SignerController@ajaxList', 'as' => 'admin.signer.ajax.list']);
+            Route::get('list-only', ['uses' => 'SignerController@ajaxOrganizationListOnly', 'as' => 'admin.signer.ajax.listOnly']);
+            Route::post('update', ['uses' => 'SignerController@ajaxUpdate', 'as' => 'admin.signer.ajax.update']);
+            Route::post('create', ['uses' => 'SignerController@ajaxCreate', 'as' => 'admin.signer.ajax.create']);
+            Route::delete('delete', ['uses' => 'SignerController@ajaxDelete', 'as' => 'admin.signer.ajax.delete']);
         });
     });
 });
