@@ -51,7 +51,7 @@
                 <span class="badge" style="background-color:rgb(0, 150, 240);">{{ Lang::choice('post.num_comment', $post->comments_count, ['num' => $post->comments_count]) }}</span></a>
             </div>
             <div class="item-post-header" style="font-family: Georgia,Times,Times New Roman,serif;">
-                <a href="" style="font-family: Georgia,Times,Times New Roman,serif; font-size: 17px; line-height: 1.4; color: #333; word-wrap: break-word; tab-size: 2em; font-weight: bold;">
+                <a href="{{ route('post.show', $post->id) }}" style="font-family: Georgia,Times,Times New Roman,serif; font-size: 17px; line-height: 1.4; color: #333; word-wrap: break-word; tab-size: 2em; font-weight: bold;">
                     <span hover="text-decoration: underline">
                         {{ $post->title }}
                     </span>

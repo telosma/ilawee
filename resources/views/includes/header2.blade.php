@@ -4,8 +4,8 @@
             <div class="header-top">
                 <div class="content-heder-top">
                     <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>Liên hệ</a>
-                    <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>Sơ đồ cổng thông tin</a>
-                    <a href="#"><i class="fa fa-headphones" aria-hidden="true"></i>Hướng dẫn khai thác</a>
+                    {{-- <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>Sơ đồ cổng thông tin</a> --}}
+                    {{-- <a href="#"><i class="fa fa-headphones" aria-hidden="true"></i>Hướng dẫn khai thác</a> --}}
                     @if (Auth::check())
                         <div class="account dropdown">
                             <div data-toggle="dropdown" style="display: inline-flex;">

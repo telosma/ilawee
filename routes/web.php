@@ -23,7 +23,7 @@ Route::group(['domain' => 'ilawee.dev'], function() {
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
     Route::get('coquanbanhanh/{orId}', ['as' => 'listLawByOrganization', 'uses' => 'SearchController@filterByOrganization']);
 
-    Route::group(['prefix' => 'vanbanluat'], function() {
+    Route::group(['prefix' => 'van-ban-luat'], function() {
         Route::get('/loaivanban/{typeId}', ['uses' => 'SearchController@filterByType', 'as' => 'document.filter.type']);
         Route::get('/timkiem', ['uses' => 'SearchController@normalSearch', 'as' => 'document.normalSearch']);
         Route::get('/timkiemnangcao', ['uses' => 'SearchController@getAdvancedSearch', 'as' => 'document.show.advancedSearch']);

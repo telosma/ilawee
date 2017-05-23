@@ -27,6 +27,7 @@ class HomeController extends Controller
         $lawStartInMonths = $this->getLawStartInMonth(Carbon::now()->month, 2016, $perPage);
         $newLaws = $this->getNewLawByPublish( Carbon::createFromFormat('Y-m-d', '2016-12-10')->subDays($rangeDay), $perPage );
         $topDocuments = Document::orderBy('view_count', 'desc')->take(10)->with('docType')->get();
+
         return view('user.index')->with([
             'doctypes' => $doctypes,
             'lawStartInMonths' => $lawStartInMonths->appends(Input::except('page')),
@@ -84,7 +85,7 @@ class HomeController extends Controller
             $field = Field::where('name', $name)->first();
             if ($field)
             {
-                $posts = $field->posts()->with('field')->withCount('comments')->get();
+                $posts = $field->posts()->with('field')->withCount('comments')->paginate(10);
             }
             $doctypes = DocType::all();
             $governments = Organization::where('type', config('common.type.trunguong'))->get();
