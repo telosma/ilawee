@@ -59,7 +59,7 @@ Route::group(['domain' => 'ilawee.dev'], function() {
 Route::group(['domain' => 'admin.ilawee.dev', 'namespace' => 'Admin'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
 
-    Route::group(['prefix' => 'organization'], function() {
+    Route::group(['prefix' => 'co-quan-ban-hanh'], function() {
         Route::get('/', ['uses' => 'OrganizationController@index', 'as' => 'admin.organization.index']);
         Route::group(['prefix' => 'ajax'], function () {
             Route::get('list', ['uses' => 'OrganizationController@ajaxList', 'as' => 'admin.organization.ajax.list']);
@@ -70,7 +70,7 @@ Route::group(['domain' => 'admin.ilawee.dev', 'namespace' => 'Admin'], function(
         });
     });
 
-    Route::group(['prefix' => 'signer'], function() {
+    Route::group(['prefix' => 'nguoi-ky'], function() {
         Route::get('/', ['uses' => 'SignerController@index', 'as' => 'admin.signer.index']);
         Route::group(['prefix' => 'ajax'], function () {
             Route::get('list', ['uses' => 'SignerController@ajaxList', 'as' => 'admin.signer.ajax.list']);
@@ -78,6 +78,15 @@ Route::group(['domain' => 'admin.ilawee.dev', 'namespace' => 'Admin'], function(
             Route::post('update', ['uses' => 'SignerController@ajaxUpdate', 'as' => 'admin.signer.ajax.update']);
             Route::post('create', ['uses' => 'SignerController@ajaxCreate', 'as' => 'admin.signer.ajax.create']);
             Route::delete('delete', ['uses' => 'SignerController@ajaxDelete', 'as' => 'admin.signer.ajax.delete']);
+        });
+    });
+
+    Route::group(['prefix' => 'van-ban'], function() {
+        Route::get('/', ['uses' => 'DocumentController@index', 'as' => 'admin.document.index']);
+        Route::get('/{id}', ['uses' => 'DocumentController@preview', 'as' => 'admin.document.preview']);
+        Route::group(['prefix' => 'ajax'], function () {
+            Route::get('list', ['uses' => 'DocumentController@ajaxList', 'as' => 'admin.document.ajax.list']);
+            Route::get('show', ['uses' => 'DocumentController@ajaxShow', 'as' => 'admin.document.ajax.show']);
         });
     });
 });

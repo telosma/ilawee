@@ -305,47 +305,6 @@
         <!-- content -->
     </div>
 </div>
-
-<!-- footer -->
-<div id="footer">
-    <div>
-        <div class="content">
-            <div class="ExternalClass68A465453F634381A8A452B550A925CB">
-                <p>
-                    <strong>CƠ SỞ DỮ LIỆU VĂN BẢN PHÁP LUẬT TRUNG ƯƠNG</strong>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- footer -->
-{{-- <script>
-    $(document).ready(function () {
-
-        setTimeout(function () {
-            if ($('#toanvancontent').find('table').length) {
-                var contentwidth = $('#toanvancontent').width();
-                $('#toanvancontent').find('table').each(function (i) {
-                    var objtable = contentwidth - $(this).width();
-                    if (objtable > 0) {
-                        $(this).css("margin-left", objtable/2+"px");
-                    }
-                    if ($(this).attr('border') == 1) {
-                        $(this).find('td').each(function (k) {
-                            $(this).css("border", "1px solid");
-                        });
-                        $(this).find('th').each(function (k) {
-                            $(this).css("border", "1px solid");
-                        });
-                    }
-
-
-                });
-            }
-        }, 100);
-    });
-
-</script> --}}
 @push('scripts')
     {{ Html::script('js/showdown.min.js') }}
     <script type="text/javascript">

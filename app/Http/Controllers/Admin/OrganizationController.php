@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use App\Http\Requests\Admin\{OrganizationUpdateRequest, OrganizationCreateRequest};
+use App\Models\{Document};
 use Validator;
 
 class OrganizationController extends Controller
 {
     public function index()
     {
-        return view('admin.organization.list');
+        $numDoc = Document::count();
+
+        return view('admin.organization.list')->with(['numDoc' => $numDoc]);
     }
 
     public function ajaxList()

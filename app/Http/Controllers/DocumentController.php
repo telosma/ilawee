@@ -120,6 +120,7 @@ class DocumentController extends Controller
         $file = FileStore::findOrFail($id);
         if ($file->key == $key && is_file(storage_path('app/doc_store/' . basename($file->link)))) {
             $name = $file->document->name;
+
             return response()->download(storage_path('app/doc_store/' . basename($file->link)));
         }
 

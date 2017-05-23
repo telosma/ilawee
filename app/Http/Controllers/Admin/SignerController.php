@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\{Organization, Signer};
+use App\Models\{Organization, Signer, Document};
 use App\Http\Requests\Admin\SignerCreateRequest;
 use Validator;
 use DB;
@@ -13,7 +13,9 @@ class SignerController extends Controller
 {
     public function index()
     {
-        return view('admin.signer.index');
+        $numDoc = Document::count();
+
+        return view('admin.signer.index')->with(['numDoc' => $numDoc]);
     }
 
     public function ajaxList()
