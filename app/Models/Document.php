@@ -7,10 +7,12 @@ use Elasticquent\ElasticquentTrait;
 use App\Models\{FileStore, DocType, Organization, Singer, History, Document};
 use Str;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Document extends Model
 {
     use ElasticquentTrait;
+    use SoftDeletes;
 
     protected $table = 'documents';
     protected $fillable = [
@@ -26,7 +28,9 @@ class Document extends Model
         'source',
         'content',
         'confirmed',
+        'end_date',
     ];
+    protected $dates = ['deleted_at'];
     protected $appends = [
         'short_description',
     ];

@@ -91,6 +91,22 @@ Route::group(['domain' => 'admin.ilawee.dev', 'namespace' => 'Admin'], function(
     });
 });
 
+Route::group(['domain' => 'manager.ilawee.dev', 'namespace' => 'Manager'], function() {
+    Route::get('/', ['uses' => 'HomeController@index', 'as' => 'manager.index']);
+    Route::group(['prefix' => 'van-ban'], function () {
+        Route::group(['prefix' => 'ajax'], function () {
+            Route::get('list', ['uses' => 'HomeController@ajaxListDoc', 'as' => 'manager.document.ajax.list']);
+            Route::get('loai-van-ban/list', ['uses' => 'HomeController@ajaxListType', 'as' => 'manager.docType.ajax.list']);
+            Route::post('create', ['uses' => 'DocumentController@ajaxCreate', 'as' => 'manager.document.ajax.create']);
+        });
+    });
+    Route::group(['prefix' => 'nguoi-ky'], function () {
+        Route::group(['prefix' => 'ajax'], function () {
+            Route::get('list', ['uses' => 'SignerController@ajaxListFullInfo', 'as' => 'manager.signer.ajax.listFullInfo']);
+        });
+    });
+});
+
 Route::get('/remarkable', function() {
     return view('remarkable');
 });

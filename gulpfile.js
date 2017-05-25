@@ -49,6 +49,8 @@ gulp.task("copyfiles", function () {
         ['vendor/bower_dl/noty/lib/noty.min.js', publicDest[0]],
         ['vendor/bower_dl/materialize/dist/js/materialize.min.js', publicDest[0]],
         ['vendor/bower_dl/remarkable/dist/remarkable.min.js', publicDest[0]],
+        ['vendor/bower_dl/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js', publicDest[0]],
+        ['vendor/bower_dl/typeahead.js/dist/typeahead.bundle.min.js', publicDest[0]],
     //cssCopyPath
         ['vendor/bower_dl/bootstrap/dist/css/bootstrap.min.css', publicDest[1]],
         ['vendor/bower_dl/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css', publicDest[1]],
@@ -67,6 +69,7 @@ gulp.task("copyfiles", function () {
         ['vendor/bower_dl/datatables.net-select-dt/css/select.dataTables.min.css', publicDest[1]],
         ['vendor/bower_dl/datatables.net-buttons-dt/css/buttons.dataTables.min.css', publicDest[1]],
         ['vendor/bower_dl/materialize/dist/css/materialize.min.css', publicDest[1]],
+        ['vendor/bower_dl/bootstrap-tagsinput/dist/bootstrap-tagsinput.css', publicDest[1]],
     //fontsCopyPath
         ['vendor/bower_dl/bootstrap/dist/fonts/**', publicDest[2]],
         ['vendor/bower_dl/font-awesome/fonts/**', publicDest[2]],

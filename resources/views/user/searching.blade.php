@@ -14,7 +14,7 @@
 @push('scripts')
     {{ Html::script('js/bootstrap-datepicker.min.js') }}
     {{ Html::script('js/bootstrap-datepicker.vi.min.js') }}
-    {{ Html::script('js/jquery.validate.min.js') }}
+    {{-- {{ Html::script('js/jquery.validate.min.js') }} --}}
     {{ Html::script('js/additional-methods.min.js') }}
     {{ Html::script('js/ajaxAdvancedSearch.js') }}
     <script>

@@ -20,7 +20,7 @@ trait DocumentMethod {
 
     protected function getNewLawByPublish($time, $perPage)
     {
-        return Document::whereDate('publish_date', '>', $time)
+        return Document::whereDate('publish_date', '>', $time)->where('confirmed', 1)
             ->with(['fileStore', 'docType'])->orderBy('start_date')->paginate($perPage);
     }
 }
