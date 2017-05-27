@@ -5,17 +5,17 @@
     <thead>
         <tr>
             <th></th>
-            <th>name</th>
-            <th>document count</th>
-            <th>type</th>
+            <th>Tên role</th>
+            <th>Tên hiển thị</th>
+            <th>Mô tả</th>
             <th></th>
             <th></th>
             <th></th>
         </tr>
     </thead>
 </table>
-<!-- Modal edit-->
-{{-- <div class="modal fade" id="myModal" role="dialog">
+<!-- Modal edit/Create-->
+<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -25,66 +25,56 @@
                 <!--end modal-header-->
             </div>
             <div class="modal-body">
-                {!! Form::open(['class' => 'form-horizontal', 'method' => 'post', 'id' => 'form_modal']) !!}
+                <form method="POST" id="form_modal">
+                    {{ csrf_field() }}
+
                     {!! Form::hidden('id', null) !!}
+
                     <div class="form-group">
-                        {!! Form::label('parent_id', 'Trực thuộc', [
-                            'class' => 'col-md-3 control-label'
-                        ]) !!}
-                        <div class="col-md-8">
-                            {!! Form::select('parent_id', [], null, [
-                                'class' => 'form-control',
-                                'placeholder' => 'Chọn cơ quan trực thuộc'
-                            ]) !!}
-                        </div>
+                        <label for="name">Tên</label>
+                        <input type="text" name="name" id="name" class="form-control" placeholder="Tên...">
                     </div>
                     <div class="form-group">
-                        {!! Form::label(
-                            'name',
-                            'Tên cơ quan ban hành',
-                            ['class' => 'col-md-3 control-label']
-                        ) !!}
-                        <div class="col-md-8">
-                            {!! Form::text('name', null, [
-                                'class' => 'form-control',
-                                'placeholder' => 'Điền tên cơ quan'
-                            ]) !!}
-                        </div>
+                        <label for="display_name">Tên hiển thị</label>
+                        <input type="text" name="display_name" id="display_name" class="form-control" placeholder="Tên hiển thị...">
                     </div>
                     <div class="form-group">
-                        <div class="col-md-3 col-md-offset-9">
-                            {!! Form::submit('Save', ['class' => 'btn btn-primary btn_save']) !!}
-                        </div>
+                        <label for="description">Mô tả</label>
+                        <input type="text" name="description" id="description" class="form-control" placeholder="Mô tả...">
                     </div>
-                {!! Form::close() !!}
+                    <div class="form-group" id="list-permission">
+                    </div>
+                    <button class="btn btn-primary btn_save" type="submit">Lưu</button>
+                </form>
                 <!--end modal-body-->
             </div>
             <!--end modal-content-->
         </div>
     </div>
-</div> --}}
+</div>
 @endsection
 
 @include('includes.ajaxSendRequest')
 @include('includes.datatableBase')
 
 @push('scripts')
-{!! Html::script('js/adminOrganization.js') !!}
+{!! Html::script('js/adminRole.js') !!}
 <script type="text/javascript">
     $(document).ready(function () {
 
-        var Organization = new organization({
+        var Role = new role({
             url: {
                 'ajaxList': '{!! route('admin.role.ajax.list') !!}',
-                'ajaxCreate': '',
+                'ajaxCreate': '{!! route('admin.role.ajax.create') !!}',
                 'ajaxUpdate': '',
-                'ajaxDelete': '',
-                'ajaxListOnly': '',
+                'ajaxDelete': '{!! route('admin.role.ajax.delete') !!}',
+                'ajaxListPermisstion': '{!! route('admin.permisstion.ajax.list') !!}',
+                'ajaxGetPermissionBaseRole': '{!! route('admin.role.ajax.permisstion.list') !!}'
             },
             lang: {
                 'trans': {
-                    'title_create': 'Tạo mới',
-                    'title_update': 'Cập nhật',
+                    'title_create': 'Tạo mới Role',
+                    'title_update': 'Cập nhật Role',
                 },
             }
         });

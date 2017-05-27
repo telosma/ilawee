@@ -63,6 +63,7 @@ return [
     | Supported: "database", "eloquent"
     |
     */
+    'model' => App\Models\User::class,
 
     'providers' => [
         'users' => [

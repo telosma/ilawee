@@ -56,7 +56,7 @@
                             <div class="col-md-12 col-lg-12">
                                 <div id="comments" class="post-section">
                                     <h3 class="post-section-title"><strong>Trả lời</strong></h3>
-                                    @if (Auth::check())
+                                    @permission('comment-create')
                                     <div class="comments-form">
                                         <div class="tab-content">
                                             <form id="comments-form" action="{{ route('comment.create') }}" method="post">
@@ -78,7 +78,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                    @endif
+                                    @endpermission
                                     <div id="comment-111" class="comment-origin" style="padding-left:1.5rem;">
                                         <div class="flex-box">
                                             <div class="full-width">

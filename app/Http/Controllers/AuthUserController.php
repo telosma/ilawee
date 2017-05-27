@@ -21,7 +21,7 @@ class AuthUserController extends Controller
         try {
             $user = User::create($params);
             if ($user) {
-                $user->roles()->attach(Role::where('name', 'User')->first());
+                $user->attachRole(Role::where('name', 'user')->first());
                 $contactInfo = $user;
                 $contactInfo['subject'] = 'Xác nhận tài khoản';
                 $mailer->to($contactInfo['email'])
@@ -46,6 +46,21 @@ class AuthUserController extends Controller
 
     public function postSignin(SigninRequest $request)
     {
+        $unActive = User::where('email', $request->email)->where('confirmed', 0)->first();
+        if ($unActive) {
+            return redirect()->back()->with([
+                config('common.flash_message') => 'Bạn cần xác nhận email đăng ký tài khoản',
+                config('common.flash_level_key') => 'error',
+            ]);
+        }
+
+        if (Auth::check()) {
+            return redirect()->back()->with([
+                config('common.flash_message') => 'Đăng xuất trước khi đăng nhập tài khoản khác',
+                config('common.flash_level_key') => 'error',
+            ]);
+        }
+
         $loginSuccess = Auth::attempt([
             'email' => $request->email,
             'password' => $request->password

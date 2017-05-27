@@ -7,4 +7,5 @@ use App\Models\User;
 
 class Permission extends EntrustPermission
 {
+    protected $table = 'permissions';
 }

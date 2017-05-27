@@ -15,6 +15,7 @@ function Signer(option) {
         'trans': {
             'title_create': 'Tạo mới thông tin người ký',
             'title_update': 'Cập nhật thông tin người ký',
+            'confirm_delete': 'Xác nhận xóa người ký'
         },
     };
     this.url = {

@@ -10,6 +10,11 @@ use Auth;
 
 class CommentController extends Controller
 {
+    public function __construct ()
+    {
+        $this->middleware('role:manager');
+    }
+
     public function store(CommentCreateRequest $request)
     {
         try {

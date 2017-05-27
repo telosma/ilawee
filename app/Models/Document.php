@@ -34,65 +34,64 @@ class Document extends Model
     protected $appends = [
         'short_description',
     ];
-    protected $indexSettings = [
-        'analysis' => [
-            'char_filter' => [
-                'replace' => [
-                    'type' => 'mapping',
-                    'mappings' => [
-                        '&=> and '
-                    ],
-                ],
-            ],
-            'filter' => [
-                'word_delimiter' => [
-                    'type' => 'word_delimiter',
-                    'split_on_numerics' => false,
-                    'split_on_case_change' => true,
-                    'generate_word_parts' => true,
-                    'generate_number_parts' => true,
-                    'catenate_all' => true,
-                    'preserve_original' => true,
-                    'catenate_numbers' => true,
-                ]
-            ],
-            'analyzer' => [
-                'default' => [
-                    'type' => 'custom',
-                    'char_filter' => [
-                        'html_strip',
-                        'replace',
-                    ],
-                    'tokenizer' => 'whitespace',
-                    'filter' => [
-                        'lowercase',
-                        'word_delimiter',
-                    ],
-                ],
-            ],
-        ],
-    ];
+    // protected $indexSettings = [
+    //     'analysis' => [
+    //         'char_filter' => [
+    //             'replace' => [
+    //                 'type' => 'mapping',
+    //                 'mappings' => [
+    //                     '&=> and '
+    //                 ],
+    //             ],
+    //         ],
+    //         'filter' => [
+    //             'word_delimiter' => [
+    //                 'type' => 'word_delimiter',
+    //                 'split_on_numerics' => false,
+    //                 'split_on_case_change' => true,
+    //                 'generate_word_parts' => true,
+    //                 'generate_number_parts' => true,
+    //                 'catenate_all' => true,
+    //                 'preserve_original' => true,
+    //                 'catenate_numbers' => true,
+    //             ]
+    //         ],
+    //         'analyzer' => [
+    //             'default' => [
+    //                 'type' => 'custom',
+    //                 'char_filter' => [
+    //                     'html_strip',
+    //                     'replace',
+    //                 ],
+    //                 'tokenizer' => 'whitespace',
+    //                 'filter' => [
+    //                     'lowercase',
+    //                     'word_delimiter',
+    //                 ],
+    //             ],
+    //         ],
+    //     ],
+    // ];
     protected $mappingProperties = array(
         'description' => array(
-            'type' => 'text',
-            'analyzer' => 'standard',
+            'type' => 'string',
+            'analyzer' => 'vi_analyzer',
             'store' => true
         ),
         'publish_date' => array(
             'type' => 'date',
+            'format' => 'yyyy-MM-dd || strict_date_optional_time||epoch_millis',
             'store' => true
         ),
         'content' => array(
-            'type' => 'text',
-            'analyzer' => 'standard',
+            'type' => 'string',
+            'analyzer' => 'vi_analyzer',
             'store' => true
         ),
         'start_date' => array(
             'type' => 'date',
+            'format' => 'yyyy-MM-dd || strict_date_optional_time||epoch_millis',
             'store' => true
-        ),
-        'doc_type_id' => array(
-            'type' => 'integer'
         ),
         'doc_type_id' => array(
             'type' => 'integer'
@@ -107,16 +106,16 @@ class Document extends Model
             'type' => 'string'
         ),
         'effective' => array(
-            'type' => 'boolean'
+            'type' => 'string'
         ),
         'source' => array(
             'type' => 'string'
         ),
-        'context' => array(
-            'type' => 'text'
-        ),
         'confirmed' => array(
-            'type' => 'boolean'
+            'type' => 'integer'
+        ),
+        'view_count' => array(
+            'type' => 'integer'
         )
     );
 
@@ -160,15 +159,15 @@ class Document extends Model
         return $this->belongsToMany(Document::class, 'related_documents', 'document_id', 'base_doc_id');
     }
 
-    public function getStartDateAttribute($value)
-    {
-        return Carbon::parse($value)->format('d-m-Y');
-    }
+    // public function getStartDateAttribute($value)
+    // {
+    //     return Carbon::parse($value)->format('d-m-Y');
+    // }
 
-    public function getPublishDateAttribute($value)
-    {
-        return Carbon::parse($value)->format('d-m-Y');
-    }
+    // public function getPublishDateAttribute($value)
+    // {
+    //     return Carbon::parse($value)->format('d-m-Y');
+    // }
 
     public function getShortDescriptionAttribute()
     {

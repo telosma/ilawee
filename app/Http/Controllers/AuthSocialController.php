@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Socialite;
 Use Auth;
-use App\Models\{User, Social};
+use App\Models\{User, Social, Role};
 
 class AuthSocialController extends Controller
 {
@@ -50,6 +50,7 @@ class AuthSocialController extends Controller
             ]);
 
             if ($newUser) {
+                $newUser->attachRole(Role::where('name', 'user')->first());
                 $createSocialUser =  Social::firstOrCreate([
                     'user_id' => $newUser->id,
                     'provider' => $provider,

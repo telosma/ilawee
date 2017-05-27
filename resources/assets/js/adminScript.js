@@ -57,6 +57,15 @@ function drawDocTypeList(types) {
     return response;
 }
 
+function drawPermissionList(permisstions) {
+    var response = '';
+    $.each(permisstions, function (key, permisstion) {
+        response += '<input type="checkbox" name="permissions[]" value="' + key + '">' + permisstion + '<br>';
+    });
+
+    return response;
+}
+
 $(document).ready(function () {
         $('#side-menu').metisMenu();
         $('.alert').delay(3000).slideUp();

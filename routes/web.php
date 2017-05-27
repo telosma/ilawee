@@ -45,7 +45,7 @@ Route::group(['domain' => 'ilawee.dev'], function() {
         Route::get('/search', ['uses' => 'PostController@search', 'as' => 'post.search']);
         Route::group(['prefix' => 'cau-hoi'], function() {
             Route::get('/{id}', ['uses' => 'PostController@show', 'as' => 'post.show']);
-            Route::group(['prefix' => 'tra-loi'], function() {
+            Route::group(['prefix' => 'tra-loi', 'middleware' => 'role:manager'], function() {
                 Route::post('/create', ['uses' => 'CommentController@store', 'as' => 'comment.create']);
                 Route::delete('/delete', ['uses' => 'CommentController@destroy', 'as' => 'comment.ajax.delete']);
             });
@@ -56,39 +56,57 @@ Route::group(['domain' => 'ilawee.dev'], function() {
 });
 
 
-Route::group(['domain' => 'admin.ilawee.dev', 'namespace' => 'Admin'], function() {
-    Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
+Route::group(['domain' => 'admin.ilawee.dev', 'namespace' => 'Admin'], function() { //, 'middleware' => 'role:admin'
+    Route::get('login', ['uses' => 'HomeController@getLogin', 'as' => 'admin.getLogin']);
+    Route::post('login', ['uses' => 'HomeController@postLogin', 'as' => 'admin.postLogin']);
 
-    Route::group(['prefix' => 'co-quan-ban-hanh'], function() {
-        Route::get('/', ['uses' => 'OrganizationController@index', 'as' => 'admin.organization.index']);
-        Route::group(['prefix' => 'ajax'], function () {
-            Route::get('list', ['uses' => 'OrganizationController@ajaxList', 'as' => 'admin.organization.ajax.list']);
-            Route::get('list-only', ['uses' => 'OrganizationController@ajaxListOnly', 'as' => 'admin.organization.ajax.listOnly']);
-            Route::post('update', ['uses' => 'OrganizationController@ajaxUpdate', 'as' => 'admin.organization.ajax.update']);
-            Route::post('create', ['uses' => 'OrganizationController@ajaxCreate', 'as' => 'admin.organization.ajax.create']);
-            Route::delete('delete', ['uses' => 'OrganizationController@ajaxDelete', 'as' => 'admin.organization.ajax.delete']);
+    // Route::group(['middleware' => 'role:admin'], function () {
+        Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
+        Route::get('logout', ['uses' => 'HomeController@logout', 'as' => 'admin.logout']);
+        Route::group(['prefix' => 'co-quan-ban-hanh'], function() {
+            Route::get('/', ['uses' => 'OrganizationController@index', 'as' => 'admin.organization.index']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'OrganizationController@ajaxList', 'as' => 'admin.organization.ajax.list']);
+                Route::get('list-only', ['uses' => 'OrganizationController@ajaxListOnly', 'as' => 'admin.organization.ajax.listOnly']);
+                Route::post('update', ['uses' => 'OrganizationController@ajaxUpdate', 'as' => 'admin.organization.ajax.update']);
+                Route::post('create', ['uses' => 'OrganizationController@ajaxCreate', 'as' => 'admin.organization.ajax.create']);
+                Route::delete('delete', ['uses' => 'OrganizationController@ajaxDelete', 'as' => 'admin.organization.ajax.delete']);
+            });
         });
-    });
 
-    Route::group(['prefix' => 'nguoi-ky'], function() {
-        Route::get('/', ['uses' => 'SignerController@index', 'as' => 'admin.signer.index']);
-        Route::group(['prefix' => 'ajax'], function () {
-            Route::get('list', ['uses' => 'SignerController@ajaxList', 'as' => 'admin.signer.ajax.list']);
-            Route::get('list-only', ['uses' => 'SignerController@ajaxOrganizationListOnly', 'as' => 'admin.signer.ajax.listOnly']);
-            Route::post('update', ['uses' => 'SignerController@ajaxUpdate', 'as' => 'admin.signer.ajax.update']);
-            Route::post('create', ['uses' => 'SignerController@ajaxCreate', 'as' => 'admin.signer.ajax.create']);
-            Route::delete('delete', ['uses' => 'SignerController@ajaxDelete', 'as' => 'admin.signer.ajax.delete']);
+        Route::group(['prefix' => 'nguoi-ky'], function() {
+            Route::get('/', ['uses' => 'SignerController@index', 'as' => 'admin.signer.index']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'SignerController@ajaxList', 'as' => 'admin.signer.ajax.list']);
+                Route::get('list-only', ['uses' => 'SignerController@ajaxOrganizationListOnly', 'as' => 'admin.signer.ajax.listOnly']);
+                Route::post('update', ['uses' => 'SignerController@ajaxUpdate', 'as' => 'admin.signer.ajax.update']);
+                Route::post('create', ['uses' => 'SignerController@ajaxCreate', 'as' => 'admin.signer.ajax.create']);
+                Route::delete('delete', ['uses' => 'SignerController@ajaxDelete', 'as' => 'admin.signer.ajax.delete']);
+            });
         });
-    });
 
-    Route::group(['prefix' => 'van-ban'], function() {
-        Route::get('/', ['uses' => 'DocumentController@index', 'as' => 'admin.document.index']);
-        Route::get('/{id}', ['uses' => 'DocumentController@preview', 'as' => 'admin.document.preview']);
-        Route::group(['prefix' => 'ajax'], function () {
-            Route::get('list', ['uses' => 'DocumentController@ajaxList', 'as' => 'admin.document.ajax.list']);
-            Route::get('show', ['uses' => 'DocumentController@ajaxShow', 'as' => 'admin.document.ajax.show']);
+        Route::group(['prefix' => 'van-ban'], function() {
+            Route::get('/', ['uses' => 'DocumentController@index', 'as' => 'admin.document.index']);
+            Route::get('/{id}', ['uses' => 'DocumentController@preview', 'as' => 'admin.document.preview']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'DocumentController@ajaxList', 'as' => 'admin.document.ajax.list']);
+                Route::get('show', ['uses' => 'DocumentController@ajaxShow', 'as' => 'admin.document.ajax.show']);
+            });
         });
-    });
+
+        Route::group(['prefix' => 'role'], function() {
+            Route::get('/', ['uses' => 'RoleController@index', 'as' => 'admin.role.index']);
+            // Route::get('/{id}', ['uses' => 'DocumentController@preview', 'as' => 'admin.document.preview']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'RoleController@ajaxList', 'as' => 'admin.role.ajax.list']);
+                Route::post('create', ['uses' => 'RoleController@ajaxCreate', 'as' => 'admin.role.ajax.create']);
+                Route::delete('delete', ['uses' => 'RoleController@ajaxDelete', 'as' => 'admin.role.ajax.delete']);
+                Route::get('permisstion/list', ['uses' => 'RoleController@ajaxPermissionList', 'as' => 'admin.role.ajax.permisstion.list']);
+            });
+        });
+
+        Route::get('permisstion/ajax/list', ['as' => 'admin.permisstion.ajax.list', 'uses' => 'RoleController@ajaxListPermission']);
+    // });
 });
 
 Route::group(['domain' => 'manager.ilawee.dev', 'namespace' => 'Manager'], function() {
