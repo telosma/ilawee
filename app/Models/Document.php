@@ -74,7 +74,7 @@ class Document extends Model
     // ];
     protected $mappingProperties = array(
         'description' => array(
-            'type' => 'string',
+            'type' => 'text',
             'analyzer' => 'vi_analyzer',
             'store' => true
         ),
@@ -84,7 +84,7 @@ class Document extends Model
             'store' => true
         ),
         'content' => array(
-            'type' => 'string',
+            'type' => 'text',
             'analyzer' => 'vi_analyzer',
             'store' => true
         ),
@@ -97,19 +97,19 @@ class Document extends Model
             'type' => 'integer'
         ),
         'limit' => array(
-            'type' => 'string'
+            'type' => 'text'
         ),
         'fields' => array(
-            'type' => 'string'
+            'type' => 'text'
         ),
         'notation' => array(
-            'type' => 'string'
+            'type' => 'text'
         ),
         'effective' => array(
-            'type' => 'string'
+            'type' => 'text'
         ),
         'source' => array(
-            'type' => 'string'
+            'type' => 'text'
         ),
         'confirmed' => array(
             'type' => 'integer'

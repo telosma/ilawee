@@ -3,15 +3,15 @@ version: "2"
 services:
 
     ilawee_elasticsearch:
-        # image: thangtd90/elasticsearch
-        image: elasticsearch
+        image: telosma/elasticsearch:5.2.1
+        # image: elasticsearch
         ports:
             - "9300:9200"
         networks:
             - back-tier
         volumes:
-            # - ./els-data-vi/:/usr/share/elasticsearch/data
-            - ./els-data/:/usr/share/elasticsearch/data
+            - ./els-data-vi/:/usr/share/elasticsearch/data
+            # - ./els-data/:/usr/share/elasticsearch/data
         hostname: elasticsearch
         cpu_shares: 512             # 0.5 CPU
         mem_limit: 536870912        # 512 MB RAM
