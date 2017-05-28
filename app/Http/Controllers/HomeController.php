@@ -23,9 +23,9 @@ class HomeController extends Controller
         $ministries = Organization::where('type', config('common.type.bonganh'))->get();
         $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
         $perPage = 10;
-        $rangeDay = 30;
+        $rangeMonth = 6;
         $lawStartInMonths = $this->getLawStartInMonth(Carbon::now()->month, Carbon::now()->year, $perPage);
-        $newLaws = $this->getNewLawByPublish( Carbon::createFromFormat('Y-m-d', Carbon::now()->toDateString())->subDays($rangeDay), $perPage );
+        $newLaws = $this->getNewLawByPublish( Carbon::createFromFormat('Y-m-d', Carbon::now()->toDateString())->subMonths($rangeMonth), $perPage );
         $topDocuments = Document::orderBy('view_count', 'desc')->take(10)->with('docType')->get();
 
         return view('user.index')->with([

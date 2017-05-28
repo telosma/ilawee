@@ -49,14 +49,18 @@ class ESMonthlyRefresh extends Command
 
             }
             for ($i = 0; $i <= $part; $i++) {
+                echo nl2br( "Đánh chỉ mục từ bản ghi" . ($i * 500) . "\n");
                 if (($i == $part) && ($i*500 !== $count)) {
                     Document::skip($i* 500)->take($count - ($i * 500))->with(['docType', 'organizations', 'signers'])->get()->addToIndex();
                 }
 
                 Document::skip($i* 500)->take(500)->with(['docType', 'organizations', 'signers'])->get()->addToIndex();
             }
+
+            echo nl2br("\n Hoành thành job cập nhật chỉ mục trong ES");
         } catch(Exception $e) {
             Log::error($e->getMessage);
+            echo "Lỗi kết nối tới service ES";
         }
     }
 }

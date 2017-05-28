@@ -31,7 +31,7 @@
                                         </ul>
                                     </div>
                                     <div>
-                                        @if (!(empty($document->content)))
+                                        {{-- @if (!(empty($document->content)))
                                             <div class="document-required row">
                                                 <table width="30%" cellpadding="1" border="0" align="left" style="margin-left: 5px;">
                                                     <tbody>
@@ -67,7 +67,7 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                        @endif
+                                        @endif --}}
                                         <div style="display: none;">
                                             <textarea id="sourceTA" data-text="{{ $document->content }}">
                                             </textarea>

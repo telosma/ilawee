@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use App\Traits\DocumentMethod;
 use App\Http\Requests\AdvancedSearchRequest;
 use Carbon\Carbon;
+use Validator;
 
 class SearchController extends Controller
 {
@@ -78,43 +79,44 @@ class SearchController extends Controller
 
     public function normalSearch(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'query' => 'required|min:3'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->with([
+                            config('common.flash_message') => 'Yêu cầu nhập từ khóa',
+                            config('common.flash_level_key') => 'warning'
+                        ])
+                        ->withInput();
+        }
         $page = $request->page ? $request->page : 1;
         $doctypes = DocType::all();
         $governments = Organization::where('type', config('common.type.trunguong'))->get();
         $ministries = Organization::where('type', config('common.type.bonganh'))->get();
         $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
-        $perPage = 10;
+        $perPage = 20;
         $documents = Document::complexSearch(array(
             'body' => array(
-                "min_score" => 5,
+                "min_score" => 2,
                 "sort" => [
                     "_score"
                 ],
-                // "query" => [
-                //     "match" => [
-                //         "description" => trim($request->input('query'))
-                //     ]
-                // ],
                 "query" => [
                     "bool" => [
-                        // "filter" => [
-                        //     "term" => [ "confirmed" => true ]
-                        // ],
+                        "filter" => [
+                                "term" => [
+                                    "confirmed" => 1
+                                ]
+                        ],
                         "must" => [
                             "multi_match" => [
                                 "query" => trim($request->input('query')),
-                                "fields" => ["description", "content"],
-                                "operator" => "and"
+                                // "analyzer" => 'vi_analyzer',
+                                "fields" => ["content", "description", "notaion"],
+                                "fuzziness" => "2"
                             ]
                         ],
-                        // "filter" => [
-                        //     "range" => [
-                        //                 "start_date" => [
-                        //                     "gte" => "2017-04-18",
-                        //                     "format"=> "yyyy-MM-dd"
-                        //                 ]
-                        //             ]
-                        // ]
                     ]
                 ],
                 "highlight" => [
@@ -122,44 +124,18 @@ class SearchController extends Controller
                     "fields" => [
                         "description" => [
                             "force_source" => true,
-                            // "fragment_size" => 150,
-                            // "number_of_fragments" => 3,
+                            "fragment_size" => 150,
+                            "number_of_fragments" => 3,
                             "pre_tags" => ["<span class=\"highlight\">"],
-                            "post_tags" => ["</span>"],
-                            // "highlight_query"=> [
-                            //     "bool"=> [
-                            //         "must"=> [
-                            //             "match"=> [
-                            //                 "description"=> [
-                            //                     "query"=> "sử dụng nguồn tăng bội"
-                            //                 ]
-                            //             ]
-                            //         ]
-                            //         "should"=> [
-                            //             "match_phrase"=> [
-                            //                 "content"=> [
-                            //                     "query"=> "tăng bội",
-                            //                     "slop"=> 1,
-                            //                     "boost"=> 10.0
-                            //                 ]
-                            //             ]
-                            //         ],
-                            //         "minimum_should_match"=> 0
-                                // ]
-                            // ]
+                            "post_tags" => ["</span>"]
                         ]
                     ]
                 ],
-                'from' => ($page-1) * $perPage,
-                'size' => $perPage
+                "from" => ($page-1) * $perPage,
+                "size" => $perPage
             )
         )
         )->paginate($perPage);
-        // $documents->appends(Input::except('page'));
-        // dd($documents);
-        // foreach ($documents->hits['hits'] as $document) {
-        //     dd($document);
-        // }
         return view('user.elasticLawSearch')->with([
             'doctypes' => $doctypes,
             'governments' => $governments,
@@ -167,6 +143,8 @@ class SearchController extends Controller
             'provinces' => $provinces,
             'documents' => $documents->hits['hits'],
             'links' => $documents->appends(Input::except('page')),
+            'old_query' => $request->input('query'),
+            'total' => $documents->hits['total'],
         ]);
     }
 
@@ -187,12 +165,28 @@ class SearchController extends Controller
 
     public function ajaxGetResultSearch(AdvancedSearchRequest $request)
     {
+        // if ($request->has('from') && $request->has('to')) {
+        //     if ($request->input('from') >= $request->input('to')) {
+        //         return [
+        //             config('common.flash_message') => $request->from,
+        //             config('common.flash_level_key') => 'warning'
+        //         ];
+        //     }
+        // }
+        if ($request->has('from') && $request->has('to')) {
+            if ($request->input('from') >= $request->input('to')) {
+                return [
+                    config('common.flash_message') => 'Thời gian ban hành phải sớm hơn thời gian có hiệu lực',
+                    config('common.flash_level_key') => 'warning'
+                ];
+            }
+        }
         $perPage = 10;
         $page = $request->page ? $request->page : 1;
 
         $searchQuery = array (
             "body" => array(
-                "min_score" => 5,
+                "min_score" => 2,
                 "sort" => [ "_score" ],
                 "query" => [
                     "bool" => [
@@ -226,18 +220,12 @@ class SearchController extends Controller
 
         $filterContent = array('range' => array('start_date' => array()));
 
-        if ($request->has('from') && $request->has('to')) {
-            if ($request->input('from') >= $request->input('to')) {
-                return redirect()->back();
-            }
-        }
-
         if ($request->has('from')) {
-            $filterContent['range']['start_date']['from'] = $request->input('from');
+            $filterContent['range']['start_date']['gte'] = $request->input('from');
         }
 
         if ($request->has('to')) {
-            $filterContent['range']['start_date']['to'] = $request->input('to');
+            $filterContent['range']['start_date']['lte'] = $request->input('to');
         }
 
         if (count($filterContent['range']['start_date']) > 0) {

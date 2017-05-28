@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-sm-7">
                             <div class="input-query">
-                                {{ Form::text('query', old('query'), ['class' => 'form-control']) }}
+                                {{ Form::text('query', isset($old_query) ? $old_query : old('query'), ['class' => 'form-control']) }}
                             </div>
                         </div>
                         <div class="col-sm-2">

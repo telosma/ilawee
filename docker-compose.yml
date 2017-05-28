@@ -2,7 +2,8 @@ version: "2"
 
 services:
 
-    ilawee_elasticsearch:
+    ilawee_elasticsearch_vi:
+    # ilawee_elasticsearch:
         image: telosma/elasticsearch:5.2.1
         # image: elasticsearch
         ports:
