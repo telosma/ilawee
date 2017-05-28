@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['domain' => 'ilawee.dev'], function() {
+Route::group(['domain' => 'ilawee.vn'], function() {
     Route::get('/import-data', ['as' => 'import.data', 'uses' => 'Controller@importData']);
     Route::post('/signup', ['as' => 'signup', 'uses' => 'AuthUserController@postSignup']);
     Route::post('/signin', ['as' => 'signin', 'uses' => 'AuthUserController@postSignin']);
@@ -56,7 +56,7 @@ Route::group(['domain' => 'ilawee.dev'], function() {
 });
 
 
-Route::group(['domain' => 'admin.ilawee.dev', 'namespace' => 'Admin'], function() { //, 'middleware' => 'role:admin'
+Route::group(['domain' => 'admin.ilawee.vn', 'namespace' => 'Admin'], function() { //, 'middleware' => 'role:admin'
     Route::get('login', ['uses' => 'HomeController@getLogin', 'as' => 'admin.getLogin']);
     Route::post('login', ['uses' => 'HomeController@postLogin', 'as' => 'admin.postLogin']);
 
@@ -109,7 +109,7 @@ Route::group(['domain' => 'admin.ilawee.dev', 'namespace' => 'Admin'], function(
     // });
 });
 
-Route::group(['domain' => 'manager.ilawee.dev', 'namespace' => 'Manager'], function() {
+Route::group(['domain' => 'manager.ilawee.vn', 'namespace' => 'Manager'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'manager.index']);
     Route::group(['prefix' => 'van-ban'], function () {
         Route::group(['prefix' => 'ajax'], function () {
