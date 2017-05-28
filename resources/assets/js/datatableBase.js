@@ -252,6 +252,7 @@ function datatableBase(option) {
             inputs.prop('disabled', true);
             SendRequest.send($(this).prop('action'), current.request, 'post', function (data) {
                 current.showMessage(data);
+                // console.log(data);
                 if (typeof current.item.complete === 'function') {
                     current.item.complete();
                 } else {
@@ -295,7 +296,8 @@ function datatableBase(option) {
     this.showMessage = function (data) {
         message(
             data.responseJSON[current.lang.response.message_name],
-            data.responseJSON[current.lang.response.key_name]
+            data.responseJSON[current.lang.response.key_name],
+            2000
         );
     };
     this.deleteById = function (id) {

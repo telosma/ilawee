@@ -1,13 +1,13 @@
-// $(window).on('hashchange', function() {
-//     if (window.location.hash) {
-//         var page = window.location.hash.replace('#', '');
-//         if (page == Number.NaN || page <= 0) {
-//             return false;
-//         } else {
-//             getLaws(page);
-//         }
-//     }
-// });
+$(window).on('hashchange', function() {
+    if (window.location.hash) {
+        var page = window.location.hash.replace('#', '');
+        if (page == Number.NaN || page <= 0) {
+            return false;
+        } else {
+            getLaws(page);
+        }
+    }
+});
 
 $(document).ready(function() {
     $(document).on('click', '.pagination li a', function (e) {
@@ -38,18 +38,24 @@ $('#advanced-search-form').submit(function() {
             query: $(form).find('input[name=query]').val(),
             match: $(form).find('input[name=match]:checked').val(),
             field: $(form).find('input[name=field]:checked').val(),
-            from: $(form).find('input[name=date_from]').val(),
-            to: $(form).find('input[name=date_to]').val()
+            from: $(form).find('input[name=from]').val(),
+            to: $(form).find('input[name=to]').val()
         },
         success: function(response) {
-            $('.advanced-search-render-html').html(response['renderHtml']);
+            if (response['flash_message']) {
+                message(response['flash_message'], response['flash_level_key'], 2000);
+                // console.log(response['flash_message']);
+            } else {
+                $('.advanced-search-render-html').html(response['renderHtml']);
+            }
         },
         complete: function() {
             $(form).find('input[type=submit]').prop('disabled', false);
             $('#flash-overlay').hide();
         },
         error: function(xhr, ajaxOption, thrownerror) {
-            location.reload();
+            message('Có lỗi xảy ra', 'warning', 2000);
+            // location.reload();
         }
     });
 

@@ -14,7 +14,7 @@ return array(
     */
 
     'config' => [
-        'hosts'     => ['localhost:9300'],
+        'hosts'     => [env('ELASTIC_HOST', 'localhost:9300')],
         'retries'   => 1,
     ],
 

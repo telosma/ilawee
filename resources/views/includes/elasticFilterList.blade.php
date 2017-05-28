@@ -1,4 +1,4 @@
-<div class="alert alert-info">{{ $total ? $total : 0}} kết quả</div>
+<div class="alert alert-info">{{ isset($total) ? $total : 0}} kết quả</div>
 
 <ul class="listLaw">
 @forelse ($documents as $document)

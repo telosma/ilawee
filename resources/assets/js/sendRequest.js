@@ -108,9 +108,7 @@ function sendRequest(options) {
                             $.each(val, function (k, v) {
                                 error += v + '</br>';
                             });
-                            setTimeout(function () {
-                                message(error, 'error');
-                            }, i * 1000);
+                                message(error, 'error', i*1000);
                             i++;
                         });
                         break;

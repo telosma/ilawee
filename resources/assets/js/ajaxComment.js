@@ -2,6 +2,7 @@ var requestRunning = false;
 $('#comments-form').on('click', '.comment-actions #btn-cancel-comment', function () {
     $('#comments-form')[0].reset();
 });
+var inputHeight = $('#comments-form .comment-input').height();
 $('#comments-form').submit(function() {
     var form = this;
     if ($(form).find('textarea[name=content]').val().trim() == '') {
@@ -27,6 +28,7 @@ $('#comments-form').submit(function() {
         },
         complete: function() {
             $(form).find('input[type=submit]').prop('disabled', false);
+            $('#comments-form .comment-input').height(inputHeight);
         },
         error: function(xhr, ajaxOption, thrownerror) {
             // location.reload();

@@ -181,7 +181,7 @@ class SearchController extends Controller
                 ];
             }
         }
-        $perPage = 10;
+        $perPage = 20;
         $page = $request->page ? $request->page : 1;
 
         $searchQuery = array (
@@ -258,15 +258,14 @@ class SearchController extends Controller
             // dd($documents);
             if (empty($documents->hits['hits'])) {
                 return [
-                    'renderHtml' => '<span class="alert alert-info">' .
-                                    'Không tìm thấy văn bản phù hợp' .
-                                    '</span>'
+                    'renderHtml' => "",
                 ];
             } else {
                 return [
                     'renderHtml' => view('includes.elasticFilterList', [
                             'documents' => $documents->hits['hits'],
                             'links' => $documents->appends(Input::except('page')),
+                            'total' => $documents->hits['total'],
                         ])->render()
                 ];
             }
