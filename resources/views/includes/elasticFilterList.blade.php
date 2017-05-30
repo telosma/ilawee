@@ -4,13 +4,13 @@
 @forelse ($documents as $document)
     @include('includes.elasticListLaw')
 @empty
-	@push('scripts')
+{{-- 	@push('scripts')
 		<script>
 			$(function () {
-				message('Không tìm thấy văn bản phù hợp', 'warning', 2000);
+				message('Không tìm thấy văn bản phù hợp', 'infor', 2000);
 			});
 		</script>
-	@endpush
+	@endpush --}}
 @endforelse
 </ul>
 <div>

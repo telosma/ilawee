@@ -79,8 +79,7 @@ class Document extends Model
             'store' => true
         ),
         'publish_date' => array(
-            'type' => 'text',
-            'store' => true
+            'type' => 'date'
         ),
         'content' => array(
             'type' => 'text',
@@ -88,8 +87,7 @@ class Document extends Model
             'store' => true
         ),
         'start_date' => array(
-            'type' => 'text',
-            'store' => true
+            'type' => 'date'
         ),
         'doc_type_id' => array(
             'type' => 'integer'

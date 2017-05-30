@@ -10,6 +10,7 @@ use App\Traits\DocumentMethod;
 use App\Http\Requests\AdvancedSearchRequest;
 use Carbon\Carbon;
 use Validator;
+use Exception;
 
 class SearchController extends Controller
 {
@@ -72,80 +73,81 @@ class SearchController extends Controller
                 'ministries' => $ministries,
                 'provinces' => $provinces
             ]);
-            // dd($organization->documents()->paginate(2));
         }
-        // $documents = $organization->documents;
     }
 
     public function normalSearch(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'query' => 'required|min:3'
-        ]);
-        if ($validator->fails()) {
-            return redirect()->back()
-                        ->with([
+        try {
+            $validator = Validator::make($request->all(), [
+                'query' => 'required|min:3'
+            ]);
+            if ($validator->fails()) {
+                return [
                             config('common.flash_message') => 'Yêu cầu nhập từ khóa',
                             config('common.flash_level_key') => 'warning'
-                        ])
-                        ->withInput();
-        }
-        $page = $request->page ? $request->page : 1;
-        $doctypes = DocType::all();
-        $governments = Organization::where('type', config('common.type.trunguong'))->get();
-        $ministries = Organization::where('type', config('common.type.bonganh'))->get();
-        $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
-        $perPage = 20;
-        $documents = Document::complexSearch(array(
-            'body' => array(
-                "min_score" => 2,
-                "sort" => [
-                    "_score"
-                ],
-                "query" => [
-                    "bool" => [
-                        "filter" => [
-                                "term" => [
-                                    "confirmed" => 1
+                        ];
+            }
+            $page = $request->page ? $request->page : 1;
+            $perPage = 20;
+            $documents = Document::complexSearch(array(
+                'body' => array(
+                    "min_score" => 2,
+                    "sort" => [
+                        "_score"
+                    ],
+                    "query" => [
+                        "bool" => [
+                            "filter" => [
+                                    "term" => [
+                                        "confirmed" => 1
+                                    ]
+                            ],
+                            "must" => [
+                                "multi_match" => [
+                                    "query" => trim($request->input('query')),
+                                    "analyzer" => 'vi_analyzer',
+                                    "type" => "best_fields",
+                                    "fields" => ["content", "description", "notaion"],
+                                    "fuzziness" => "1",
+                                    // "operator" => "and",
                                 ]
-                        ],
-                        "must" => [
-                            "multi_match" => [
-                                "query" => trim($request->input('query')),
-                                // "analyzer" => 'vi_analyzer',
-                                "fields" => ["content", "description", "notaion"],
-                                "fuzziness" => "2"
-                            ]
-                        ],
-                    ]
-                ],
-                "highlight" => [
-                    "order" => "score",
-                    "fields" => [
-                        "description" => [
-                            "force_source" => true,
-                            "fragment_size" => 150,
-                            "number_of_fragments" => 3,
-                            "pre_tags" => ["<span class=\"highlight\">"],
-                            "post_tags" => ["</span>"]
+                            ],
                         ]
-                    ]
-                ],
-                "from" => ($page-1) * $perPage,
-                "size" => $perPage
-            )
-        )
-        )->paginate($perPage);
-        return view('user.elasticLawSearch')->with([
-            'doctypes' => $doctypes,
-            'governments' => $governments,
-            'ministries' => $ministries,
-            'provinces' => $provinces,
-            'documents' => $documents->hits['hits'],
-            'links' => $documents->appends(Input::except('page')),
-            'old_query' => $request->input('query'),
-            'total' => $documents->hits['total'],
-        ]);
+                    ],
+                    "highlight" => [
+                        // "order" => "score",
+                        "fields" => [
+                            "description" => [
+                                "force_source" => true,
+                                "fragment_size" => 150,
+                                "number_of_fragments" => 3,
+                                "pre_tags" => ["<span class=\"highlight\">"],
+                                "post_tags" => ["</span>"]
+                            ]
+                        ]
+                    ],
+                    "from" => ($page-1) * $perPage,
+                    "size" => $perPage
+                )
+            ))->paginate($perPage);
+            if ($request->ajax()) {
+                return [
+                    'renderHtml' => view('includes.content.normalSearch', [
+                        'documents' => $documents->hits['hits'],
+                        'links' => $documents->appends(Input::except('page')),
+                        'total' => $documents->hits['total'],
+                    ])->render()
+                ];
+            } else {
+                return redirect()->back();
+            }
+        } catch (Exception $e) {
+            return [
+                config('common.flash_message') => 'Tìm kiểm xảy ra lỗi,vui lòng thử lại sau',
+                config('common.flash_level_key') => 'error'
+            ];
+        }
     }
 
     public function getAdvancedSearch()
@@ -165,14 +167,6 @@ class SearchController extends Controller
 
     public function ajaxGetResultSearch(AdvancedSearchRequest $request)
     {
-        // if ($request->has('from') && $request->has('to')) {
-        //     if ($request->input('from') >= $request->input('to')) {
-        //         return [
-        //             config('common.flash_message') => $request->from,
-        //             config('common.flash_level_key') => 'warning'
-        //         ];
-        //     }
-        // }
         if ($request->has('from') && $request->has('to')) {
             if ($request->input('from') >= $request->input('to')) {
                 return [
@@ -228,9 +222,9 @@ class SearchController extends Controller
             $filterContent['range']['start_date']['lte'] = $request->input('to');
         }
 
-        if (count($filterContent['range']['start_date']) > 0) {
-            $filterContent['range']['start_date']['format'] = "Y-m-d";
-            $searchQuery['body']['query']['bool']['filter'] = $filterContent;
+        if (($filterContent['range']['start_date'])) {
+            $filterContent['range']['start_date']['format'] = "y-M-d";
+            $searchQuery['body']['query']['bool']['filter'][] = $filterContent;
         }
 
         $multi_match = array(
@@ -244,23 +238,19 @@ class SearchController extends Controller
             $multi_match['multi_match']['type'] = "phrase";
         } else {
             $multi_match['multi_match']['operator'] = "and";
+            // $multi_match['multi_match']["fuzziness"] = "1";
         }
 
         array_push($searchQuery['body']['query']['bool']['must'], $multi_match);
 
+        // return ['renderHtml' => $searchQuery];
         // dd($searchQuery);
-        $doctypes = DocType::all();
-        $governments = Organization::where('type', config('common.type.trunguong'))->get();
-        $ministries = Organization::where('type', config('common.type.bonganh'))->get();
-        $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
+        // $doctypes = DocType::all();
+        // $governments = Organization::where('type', config('common.type.trunguong'))->get();
+        // $ministries = Organization::where('type', config('common.type.bonganh'))->get();
+        // $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
         try {
-            $documents = Document::complexSearch($searchQuery)->paginate($perPage);
-            // dd($documents);
-            if (empty($documents->hits['hits'])) {
-                return [
-                    'renderHtml' => "",
-                ];
-            } else {
+            $documents = Document::complexSearch($searchQuery)->paginate($perPage);{
                 return [
                     'renderHtml' => view('includes.elasticFilterList', [
                             'documents' => $documents->hits['hits'],

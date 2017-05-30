@@ -8,3 +8,6 @@
 @include('includes.error')
 @include('includes.userContentIndex2')
 @endsection()
+@push('scripts')
+	{{ Html::script('js/ajaxNormalSearch.js') }}
+@endpush

@@ -5,7 +5,7 @@ function message(text, type, timeout) {
 		  theme: 'mint',
 		  text: text,
 		  maxVisible: 5,
-		  timeout: typeof timeout === 'Number' ? timeout : 5000,
+		  timeout: typeof timeout === 'Number' ? timeout : 3000,
 		  progressBar: true,
 		  closeWith: ['click', 'button'],
 		  animation: {

@@ -29,7 +29,7 @@ class MyMail extends Mailable
      */
     public function build()
     {
-        return $this->from('admin@ilawee.dev')
+        return $this->from( env('MAIL_ADMIN'))
             ->view('email.mymail');
     }
 }

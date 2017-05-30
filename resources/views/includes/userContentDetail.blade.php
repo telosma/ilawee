@@ -13,13 +13,13 @@
                         {!! Breadcrumbs::render('vanban.show', $document->id) !!}
                         {{-- end breadscrum --}}
                         <ul class="nav nav-tabs">
-                            <li class="{{ empty($tab) || ($tab == 'itemtoanvan') ? 'active' : ''}}"><a href="#itemtoanvan" data-toggle="tab">Toàn văn</a></li>
-                            <li class="{{ (isset($tab) && $tab == 'itemthuoctinh') ? 'active' : ''}}"><a href="#itemthuoctinh" data-toggle="tab">Thuộc tính</a></li>
+                            <li class="{{ (isset($tab) && $tab == 'itemtoanvan') ? 'active' : ''}}"><a href="#itemtoanvan" data-toggle="tab">Toàn văn</a></li>
+                            <li class="{{ (empty($tab) || $tab == 'itemthuoctinh') ? 'active' : ''}}"><a href="#itemthuoctinh" data-toggle="tab">Thuộc tính</a></li>
                             <li class="{{ (isset($tab) && $tab == 'itemvblienquan') ? 'active' : ''}}""><a href="#itemvblienquan" data-toggle="tab">Văn bản liên quan</a></li>
                             <li class="{{ (isset($tab) && $tab == 'itembanpdf') ? 'active' : ''}}""><a href="#itembanpdf" data-toggle="tab">Bản pdf</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div id="itemtoanvan" class="content tab-pane fade in {{ empty($tab) || ($tab == 'itemtoanvan') ? 'active' : ''}}">
+                            <div id="itemtoanvan" class="content tab-pane fade in {{ isset($tab) && ($tab == 'itemtoanvan') ? 'active' : ''}}">
                                 <div class="fulltext">
                                     <div class="vbInfo">
                                         <ul>
@@ -31,50 +31,11 @@
                                         </ul>
                                     </div>
                                     <div>
-                                        {{-- @if (!(empty($document->content)))
-                                            <div class="document-required row">
-                                                <table width="30%" cellpadding="1" border="0" align="left" style="margin-left: 5px;">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td width="22%" valign="baseline" align="center">
-                                                                <div align="center" style="margin-top: 10px;">
-                                                                    <b>{{ $document->organizations()->first()->name }}</b>
-                                                                </div>
-                                                                <div style="border-bottom: 1px solid #000000;width:40px;"></div>
-                                                                <div style="padding-top:5px;text-align:center;">
-                                                                    Số: {{ $document->notation }}
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <table width="40%" cellpadding="1" border="0" align="right">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <div style="padding: 5px; text-align: center;">
-                                                                    <b>CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM</b></div>
-                                                                <div style="padding: 5px; text-align: center;">
-                                                                    <b style="border-bottom: 1px solid #000000; margin-left: 10px; padding-bottom: 3px;">
-                                                                        Độc lập - Tự do - Hạnh phúc</b></div>
-                                                                <div style="padding: 5px; text-align: center;">
-                                                                    <i>
-                                                                            ngày {{ $document->publish_day }}, tháng {{ $document->publish_month }}, năm {{ $document->publish_year }}
-                                                                    </i>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        @endif --}}
                                         <div style="display: none;">
                                             <textarea id="sourceTA" data-text="{{ $document->content }}">
                                             </textarea>
                                         </div>
                                         <div id="targetDiv" style="clear:both;"></div>
-
-                                            {{-- <div style="clear:both;"></div> --}}
                                             <div class="toanvancontent" id="toanvancontent">
                                                 <div>
                                                     <!-- người ký mới -->
@@ -149,7 +110,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="itemthuoctinh" class="content tab-pane fade in {{ (isset($tab) && $tab == 'itemthuoctinh') ? 'active' : ''}}">
+                            <div id="itemthuoctinh" class="content tab-pane fade in {{ (empty($tab) || $tab == 'itemthuoctinh') ? 'active' : ''}}">
                                 <div class="fulltext">
                                     <div class="vbInfo">
                                         <ul>
@@ -308,31 +269,31 @@
 @push('scripts')
     {{ Html::script('js/showdown.min.js') }}
     <script type="text/javascript">
-            function run() {
-                var text = $('#sourceTA').data('text'),
-                    target = document.getElementById('targetDiv'),
-                    converter = new showdown.Converter(),
-                html = converter.makeHtml(text);
+        function run() {
+            var text = $('#sourceTA').data('text'),
+                target = document.getElementById('targetDiv'),
+                converter = new showdown.Converter(),
+            html = converter.makeHtml(text);
 
-                targetDiv.innerHTML = html;
-                var toc = "";
-                $('#targetDiv').find('a').each(function() {
-                    // console.log($(this).parent().text());
-                    toc += "<li class=\"li-toc\"><span><a href=\"#" + $(this).attr('name') + "\">"
-                    toc += $(this).parent().text();
-                    toc += "</a></span></li>"
-                });
-                if (toc !== "") { // Van ban co toc
-                    $('#menu-toc').prepend(
-                        "<div class=\"top\">" +
-                            "<div>" +
-                                "<a href=\"#\">Mục lục văn bản</a>" +
-                            "</div>" +
-                        "</div>"
-                    );
-                    $('#ul-toc').append(toc);
-                }
+            targetDiv.innerHTML = html;
+            var toc = "";
+            $('#targetDiv').find('a').each(function() {
+                // console.log($(this).parent().text());
+                toc += "<li class=\"li-toc\"><span><a href=\"#" + $(this).attr('name') + "\">"
+                toc += $(this).parent().text();
+                toc += "</a></span></li>"
+            });
+            if (toc !== "") { // Van ban co toc
+                $('#menu-toc').prepend(
+                    "<div class=\"top\">" +
+                        "<div>" +
+                            "<a href=\"#\">Mục lục văn bản</a>" +
+                        "</div>" +
+                    "</div>"
+                );
+                $('#ul-toc').append(toc);
             }
+        }
         $(function() {
             var x = new run();
         })
