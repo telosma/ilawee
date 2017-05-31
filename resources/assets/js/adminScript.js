@@ -66,6 +66,15 @@ function drawPermissionList(permisstions) {
     return response;
 }
 
+function drawRoleList(roles) {
+    var response = '';
+    $.each(roles, function (key, role) {
+        response += '<input type="checkbox" name="roles[]" value="' + key + '">' + role + '<br>';
+    });
+
+    return response;
+}
+
 $(document).ready(function () {
         $('#side-menu').metisMenu();
         $('.alert').delay(3000).slideUp();

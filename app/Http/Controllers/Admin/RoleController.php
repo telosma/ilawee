@@ -24,6 +24,11 @@ class RoleController extends Controller
         return [ 'data' => Role::with('perms')->get() ];
     }
 
+    public function ajaxListOnly()
+    {
+        return [ 'data' => Role::pluck('name', 'id') ];
+    }
+
     public function ajaxListPermission()
     {
         return [ 'data' => Permission::pluck('description', 'id') ];
@@ -63,7 +68,7 @@ class RoleController extends Controller
                 ];
             }
         } catch(Exeption $e) {
-            DB::roleback();
+            DB::rollback();
 
             return [
                 config('common.flash_level_key') => config('admin.noty_status.error'),

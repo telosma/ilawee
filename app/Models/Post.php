@@ -8,10 +8,12 @@ use App\Models\{User, Comment, Field};
 use Str;
 use Html2Text\Html2Text;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    // use ElasticquentTrait;
+    use SoftDeletes;
+
     protected $table = 'posts';
     protected $fillable = [
         'user_id',

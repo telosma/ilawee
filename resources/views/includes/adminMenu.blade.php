@@ -97,16 +97,16 @@
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="{{ asset('images/default_ava.png') }}" class="user-image" alt="User Image">
-            <span class="hidden-xs">DuyLX</span>
+            <img src="{{ Auth::user()->avatar_link }}" class="user-image" alt="User Image">
+            <span class="hidden-xs">{{ Auth::user()->name }}</span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="{{ asset('images/default_ava.png') }}" class="img-circle" alt="User Image">
+              <img src="{{ Auth::user()->avatar_link }}" class="img-circle" alt="User Image">
               <p>
-                DuyLX - Quản trị viên
-                <small>Member since Nov. 2012</small>
+                {{ Auth::user()->name }} - Quản trị viên
+                {{-- <small>Member since {{ Auth::user()->created_at }}</small> --}}
               </p>
             </li>
             <!-- Menu Body -->

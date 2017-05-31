@@ -102,6 +102,18 @@ Route::group(['domain' => 'admin.ilawee.vn', 'namespace' => 'Admin'], function()
                 Route::post('create', ['uses' => 'RoleController@ajaxCreate', 'as' => 'admin.role.ajax.create']);
                 Route::delete('delete', ['uses' => 'RoleController@ajaxDelete', 'as' => 'admin.role.ajax.delete']);
                 Route::get('permisstion/list', ['uses' => 'RoleController@ajaxPermissionList', 'as' => 'admin.role.ajax.permisstion.list']);
+                Route::get('list-only', ['uses' => 'RoleController@ajaxListOnly', 'as' => 'admin.role.ajax.listOnly']);
+            });
+        });
+
+        Route::group(['prefix' => 'account'], function() {
+            Route::get('/', ['uses' => 'UserController@index', 'as' => 'admin.account.index']);
+            // Route::get('/{id}', ['uses' => 'DocumentController@preview', 'as' => 'admin.document.preview']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'UserController@ajaxList', 'as' => 'admin.account.ajax.list']);
+                Route::post('create', ['uses' => 'UserController@ajaxCreate', 'as' => 'admin.account.ajax.create']);
+                Route::delete('delete', ['uses' => 'UserController@ajaxDelete', 'as' => 'admin.account.ajax.delete']);
+                // Route::get('permisstion/list', ['uses' => 'RoleController@ajaxPermissionList', 'as' => 'admin.role.ajax.permisstion.list']);
             });
         });
 

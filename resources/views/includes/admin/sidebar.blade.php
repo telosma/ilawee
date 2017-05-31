@@ -7,7 +7,7 @@
                 <img src="{{ asset('images/default_ava.png') }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>DuyLX</p>
+                <p>{{ Auth::user()->name }}</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -66,6 +66,9 @@
                         <li>
                             <a href="{{ route('admin.role.index') }}">
                                 <i class="fa fa-user-circle-o"><span> Quyền</span></i>
+                            </a>
+                            <a href="{{ route('admin.account.index') }}">
+                                <i class="fa fa-user-circle-o"><span> Tài khoản</span></i>
                             </a>
                         </li>
                     </ul>
