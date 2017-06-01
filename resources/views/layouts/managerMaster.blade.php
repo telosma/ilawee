@@ -14,7 +14,7 @@
         @include('includes.manager.sidebar');
         <div class="content-wrapper">
             <section class="content-header">
-                <h1>Cộng tác viên</h1>
+                <h1>@yield('content-header')</h1>
             </section>
             <section class="content">
                 <div class="row">

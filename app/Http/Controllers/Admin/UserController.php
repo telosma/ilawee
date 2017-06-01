@@ -12,11 +12,17 @@ use Auth;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin')->except('getLogin', 'postLogin');
+    }
+
     public function index()
     {
         $numDoc = Document::count();
+        $numConfirming = Document::where('confirmed', 0)->count();
 
-        return view('admin.user.index', compact('numDoc'));
+        return view('admin.user.index')->with(['numDoc' => $numDoc, 'numConfirming' => $numConfirming]);
     }
 
     public function ajaxList()

@@ -18,8 +18,9 @@ class HomeController extends Controller
     public function index()
     {
         $numDoc = Document::count();
+        $numConfirming = Document::where('confirmed', '0')->count();
 
-        return view('admin.home')->with(['numDoc' => $numDoc]);
+        return view('admin.home')->with(['numDoc' => $numDoc, 'numConfirming' => $numConfirming]);
     }
 
     public function getLogin()

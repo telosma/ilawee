@@ -22,9 +22,11 @@
                         </div>
                         <div class="content">
                             <ul class="category" id="capCQ">
-                                @for($i = 0; $i < 5; $i++)
-                                    <li><span><a href="#">Lĩnh vực </a></span></li>
-                                @endfor()
+                                @foreach($fields as $key => $field)
+                                    <li class='{{ (isset($linhvuc) && $linhvuc == $field) ? 'active' : ''}}'>
+                                        <span><a href="{{ route('field.post.list', $field) }}">{!! $field !!} </a></span>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="bottom">
@@ -49,7 +51,7 @@
                                             </div>
                                             <div class="row">
                                                 <p class="field">
-                                                    <a href=""><span class="badge">{{ $post->field->name }}</span></a>
+                                                    <a href="{{ route('post.show', $post->id) }}"><span class="badge">{{ $post->field->name }}</span></a>
                                                 </p>
                                             </div>
                                         </div>

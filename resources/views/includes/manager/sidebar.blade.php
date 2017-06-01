@@ -4,10 +4,10 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="{{ asset('images/default_ava.png') }}" class="img-circle" alt="User Image">
+        <img src="{{ Auth::user()->avatar_link }}" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>CTV01</p>
+        <p>{{ Auth::user()->name }}</p>
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
       </div>
     </div>
@@ -25,13 +25,17 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
       <li class="header">QUẢN LÝ</li>
-{{--       <li class="active treeview">
-        <a href="#">
-          <i class="fa fa-book"></i> <span>Văn bản</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
+      <li class="active treeview">
+        <a href="{{ route('manager.index') }}">
+          <i class="fa fa-book"></i> <span>Cập nhật văn bản</span>
         </a>
+      </li>
+      <li class="active treeview">
+        <a href="{{ route('manager.signer.index') }}">
+          <i class="fa fa-user-o"></i> <span>Người ký</span>
+        </a>
+      </li>
+{{--
         <ul class="treeview-menu">
           <li><a href="{{ route('admin.organization.index') }}"><i class="fa fa-sitemap"></i> Cơ quan ban hành</a></li>
           <li class="active"><a href="{{ route('admin.signer.index') }}"><i class="fa fa-user"></i> Người ký</a></li>

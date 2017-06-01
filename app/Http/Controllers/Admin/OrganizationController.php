@@ -11,11 +11,17 @@ use Validator;
 
 class OrganizationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin')->except('getLogin', 'postLogin', 'ajaxListOnly');
+    }
+
     public function index()
     {
         $numDoc = Document::count();
+        $numConfirming = Document::where('confirmed', 0)->count();
 
-        return view('admin.organization.list')->with(['numDoc' => $numDoc]);
+        return view('admin.organization.list')->with(['numDoc' => $numDoc, 'numConfirming' => $numConfirming]);
     }
 
     public function ajaxList()

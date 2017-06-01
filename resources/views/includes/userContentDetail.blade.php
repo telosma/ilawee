@@ -56,22 +56,20 @@
                                                     </div>
                                                     <div class="content">
                                                         <ul>
-                                                            <li>
-                                                                <span>Bản PDF:</span>
-                                                          {{--       <a href="#" download="{{$document->fileStore->link}}">
-                                                                    {{ basename($document->fileStore->link) }}
-                                                                </a> --}}
+                                                            <li><span>File đính kèm:</span>
+                                                                <ul>
+                                                                @if ($document->fileStore && Auth::check())
+                                                                    <li class="download">
+                                                                        <a href="{{ route('vanban.download', ['key' => $document->fileStore->key, 'id' => $document->fileStore->id]) }}">{{ basename($document->fileStore->link) }}</a></li>
+                                                                @endif
+                                                                {{--     <li>
+                                                                        <a href="#">
+                                                                            07-2017-QD-TTg.doc
+                                                                        </a>
+                                                                        <br>
+                                                                    </li> --}}
+                                                                </ul>
                                                             </li>
-                                                        <li><span>File đính kèm:</span>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="#">
-                                                                        07-2017-QD-TTg.doc
-                                                                    </a>
-                                                                    <br>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -89,10 +87,10 @@
                                                 </div>
                                                 <!-- văn bản liên quan -->
                                                 <!-- Thông tin bình luận độc giả -->
-                                                <div class="vbLienQuan" style="border: 1px solid #dddddd;">
+{{--                                                 <div class="vbLienQuan" style="border: 1px solid #ddđ;">
                                                     <div class="header">
                                                         <div style="float: right;">
-                                                            <img src="images/email.gif"><span> <a href="javascript:void(0);" onclick="javascript:execute('form-comment');">Gửi phản hồi </a></span>
+                                                            <img src="images/email.gì"><span> <a href="javascript:void(0);" onclick="javascript:execute('form-comment');">Gửi phản hồi </a></span>
                                                         </div>
                                                     </div>
                                                     <div class="content">
@@ -101,7 +99,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <!-- Hết thông tin bình luần độc giả-->
                                             </div>
                                         </div>

@@ -1,5 +1,5 @@
 @extends('layouts.managerMaster')
-
+@section('content-header', 'Cộng tác viên - Danh sách văn bản tải lên')
 @section('content')
 {{-- @include('includes.message') --}}
 <table id="table" class="display" cellspacing="0" width="100%">
@@ -8,6 +8,7 @@
             <th></th>
             <th>Ký hiệu</th>
             <th>Trích dẫn</th>
+            <th>Trạng thái</th>
             <th></th>
             <th></th>
             <th></th>
@@ -28,11 +29,11 @@
             <div class="modal-body">
                 {{ Form::open(['route' => 'manager.document.ajax.create', 'method' => 'post', 'id' => 'form_modal_create_doc', 'enctype' => 'multipart/form-data']) }}
                     <div class="form-group">
-                        <label for="vb-notation">Ký hiệu (Văn bản số)</label>
+                        <label for="vb-notation">Ký hiệu (Văn bản số)(*)</label>
                         <input type="text" name="notation" class="form-control" id="vb-notation">
                     </div>
                     <div class="form-group">
-                        <label for="vb-type">Loại văn bản</label>
+                        <label for="vb-type">Loại văn bản(*)</label>
                         {!! Form::select('type', [], null, [
                             'class' => 'form-control',
                             'placeholder' => 'Chọn loại văn bản',
@@ -40,19 +41,19 @@
                         ]) !!}
                     </div>
                     <div class="form-group">
-                        <label for="vb-limit">Giới hạn</label>
+                        <label for="vb-limit">Giới hạn(*)</label>
                         <input type="text" name="limit" id="vb-limit" class="form-control" placeholder="vd: Hiệu lực toàn quốc,..">
                     </div>
                     <div class="form-group">
-                        <label for="vb-field">Lĩnh vực</label>
+                        <label for="vb-field">Lĩnh vực(*)</label>
                         <input type="text" name="field" id="vb-field" class="form-control" placeholder="vd: Hành chính,..">
                     </div>
                     <div class="form-group">
-                        <label for="vb-publish-date">Ngày ban hành</label>
+                        <label for="vb-publish-date">Ngày ban hành(*)</label>
                         <input type="text" name="publishDate" id="vb-publish-date" class="form-control" placeholder="YYYY-mm-dd">
                     </div>
                     <div class="form-group">
-                        <label for="vb-start-date">Ngày có hiệu lực</label>
+                        <label for="vb-start-date">Ngày có hiệu lực(*)</label>
                         <input type="text" name="startDate" id="vb-start-date" class="form-control" placeholder="YYYY-mm-dd">
                     </div>
                     <div class="form-group">
@@ -60,7 +61,7 @@
                         <input type="text" name="endDate" id="vb-end-date" class="form-control" placeholder="YYYY-mm-dd">
                     </div>
                     <div class="form-group">
-                        <label for="vb-effective">Tình trang hiệu lực</label>
+                        <label for="vb-effective">Tình trang hiệu lực(*)</label>
                         <select name="effective" id="vb-effective" class="form-control">
                             <option value="">Chọn tình trạng hiệu lực</option>
                             <option value="Còn hiệu lực">Còn hiệu lực</option>
@@ -69,7 +70,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="vb-description">Trích dẫn</label>
+                        <label for="vb-description">Trích dẫn(*)</label>
                         <input type="text" name="description" id="vb-description" class="form-control">
                     </div>
                     <div class="form-group">
@@ -77,20 +78,20 @@
                         <input type="text" name="source" id="vb-source" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="vb-signer">Người ký (Theo thứ tự bắt đầu từ trái)</label>
+                        <label for="vb-signer">Người ký (Theo thứ tự bắt đầu từ trái)(*)</label>
                         <input type="text" name="signer" id="vb-signer" data-role="tagsinput">
                     </div>
                     <div class="form-group">
-                        <label for="content">Nội dung văn bản</label>
+                        <label for="content">Nội dung văn bản(*)</label>
                         {{ Form::textarea('content', old('content'), ['id' => 'vbcontent', 'class' => 'form-control']) }}
                     </div>
                     <script>
                         CKEDITOR.replace('content');
                     </script>
                     <div class="form-group">
-                        <label for="vb-file">Bản PDF văn bản</label>
+                        <label for="vb-file">Bản đính kèm văn bản</label>
                         {{-- accept="application/pdf" --}}
-                        {{ Form::file('docFile', ['id' => 'vb-file', 'class' => 'form-control', 'accept' => 'application/pdf']) }}
+                        {{ Form::file('docFile', ['id' => 'vb-file', 'class' => 'form-control', 'enctype' => 'multipart/form-data']) }}
                     </div>
                     {{ Form::submit('Thêm văn bản', ['id' => 'btn-vb-submit-form']) }}
                 {{ Form::close() }}

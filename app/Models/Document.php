@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Elasticquent\ElasticquentTrait;
-use App\Models\{FileStore, DocType, Organization, Singer, History, Document};
+use App\Models\{FileStore, DocType, Organization, Singer, History, Document, Upload};
 use Str;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -133,6 +133,11 @@ class Document extends Model
     public function fileStore()
     {
         return $this->hasOne(FileStore::class, 'document_id');
+    }
+
+    public function upload()
+    {
+        return $this->hasOne(Upload::class, 'document_id');
     }
 
     public function histories()

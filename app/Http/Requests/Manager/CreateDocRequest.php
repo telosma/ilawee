@@ -34,7 +34,7 @@ class CreateDocRequest extends FormRequest
             'effective' => 'required',
             'description' => 'required',
             'content' => 'required|min:200',
-            'docFile' => 'required'
+            // 'docFile' => 'required|file'
         ];
     }
 

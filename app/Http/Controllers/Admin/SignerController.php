@@ -11,11 +11,16 @@ use DB;
 
 class SignerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin');
+    }
     public function index()
     {
         $numDoc = Document::count();
+        $numConfirming = Document::where('confirmed', 0)->count();
 
-        return view('admin.signer.index')->with(['numDoc' => $numDoc]);
+        return view('admin.signer.index')->with(['numDoc' => $numDoc, 'numConfirming' => $numConfirming]);
     }
 
     public function ajaxList()
@@ -112,5 +117,14 @@ class SignerController extends Controller
                 config('common.flash_message') => 'Đã có lỗi xảy ra'
             ];
         }
+    }
+
+    public function ajaxListFullInfo()
+    {
+        $signers = Signer::with('organization')->get();
+        foreach ($signers as $signer) {
+            $signer['info'] = $signer->name . ' - ' . $signer->jobTitle . ' - ' . $signer->organization->name;
+        }
+        return $signers;
     }
 }

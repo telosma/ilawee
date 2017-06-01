@@ -36,11 +36,11 @@
                     <li><a href="{{ route('admin.organization.index') }}"><i class="fa fa-sitemap"></i> Cơ quan ban hành</a></li>
                     <li><a href="{{ route('admin.signer.index') }}"><i class="fa fa-user"></i> Người ký</a></li>
                     <li>
-                        <a href="">
+                        <a href="/van-ban-cho-phe-duyet">
                                 <i class="fa fa-files-o"></i>
                             <span>Văn bản chờ phê duyệt</span>
                             <span class="pull-right-container">
-                                <span class="label label-primary pull-right">4</span>
+                                <span class="label label-primary pull-right">{{ $numConfirming }}</span>
                             </span>
                         </a>
                     </li>

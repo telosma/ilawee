@@ -63,13 +63,15 @@ class HomeController extends Controller
         $governments = Organization::where('type', config('common.type.trunguong'))->get();
         $ministries = Organization::where('type', config('common.type.bonganh'))->get();
         $provinces = Organization::where('type', config('common.type.diaphuong'))->get();
+        $fields = Field::pluck('name', 'id');
         if ($posts) {
             return view('user.post')->with([
                 'doctypes' => $doctypes,
                 'governments' => $governments,
                 'ministries' => $ministries,
                 'provinces' => $provinces,
-                'posts' => $posts
+                'posts' => $posts,
+                'fields' => $fields
             ]);
         } else {
             return redirect()->back()->with([

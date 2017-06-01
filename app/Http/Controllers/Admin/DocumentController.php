@@ -6,14 +6,22 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\{Document, DocType, Organization, FileStore};
 use Carbon\Carbon;
+use DB;
+use Exception;
 
 class DocumentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin')->except('getLogin', 'postLogin');
+    }
+
     public function index()
     {
-        $numDoc = Document::count();
+        $numDoc = Document::where('confirmed', 1)->count();
+        $numConfirming = Document::where('confirmed', 0)->count();
 
-        return view('admin.document.index')->with(['numDoc' => $numDoc]);
+        return view('admin.document.index')->with(['numDoc' => $numDoc, 'numConfirming' => $numConfirming]);
     }
 
     public function ajaxList()
@@ -29,6 +37,7 @@ class DocumentController extends Controller
     public function preview($id, Request $request)
     {
         $numDoc = Document::count();
+        $numConfirming = Document::where('confirmed', 0)->count();
         $document = Document::with([
             'fileStore',
             'docType',
@@ -49,6 +58,51 @@ class DocumentController extends Controller
             'document' => $document,
             'tab' => $request->tab,
             'numDoc' => $numDoc,
+            'numConfirming' => $numConfirming
         ]);
+    }
+
+    public function indexConfirming()
+    {
+        $numDoc = Document::where('confirmed', 1)->count();
+        $numConfirming = Document::where('confirmed', 0)->count();
+
+        return view('admin.document.confirming')->with(['numDoc' => $numDoc, 'numConfirming' => $numConfirming]);
+    }
+
+    public function ajaxListConfirming()
+    {
+        return [ 'data' => Document::where('confirmed', 0)->with('upload')->get(['id', 'notation', 'description']) ];
+    }
+
+    public function ajaxApprove(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            // foreach ($request->intput('id') as $item_id) {
+                $doc = Document::where('id', $request->id)->update(['confirmed' => 1]);
+                if ($doc) {
+                    return [
+                        config('common.flash_message') => 'Văn bản đã đưọc cập nhật vào hệ thống',
+                        config('common.flash_level_key') => 'success'
+                    ];
+                } else {
+                    DB::rollback();
+                    return [
+                        config('common.flash_message') => 'Văn bản không tồn tại',
+                        config('common.flash_level_key') => 'error'
+                    ];
+                }
+            // }
+            Document::where('id', $request->input('id'))->get()->addToIndex();
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+
+            return [
+                config('common.flash_message') => $request->id,
+                config('common.flash_level_key') => 'error'
+            ];
+        }
     }
 }

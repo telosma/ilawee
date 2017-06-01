@@ -7,6 +7,7 @@
         <link rel="SHORTCUT ICON" href="{!! asset('images/favicon.ico') !!}">
         @include('includes.adminStyle')
         @yield('style')
+        @stack('header')
     </head>
     <body class="skin-blue sidebar-mini" style="height: auto;">
         @include('includes.adminMenu')

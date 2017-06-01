@@ -18,13 +18,6 @@
                             VB liên quan</a></li>
                         <li class="thuoctinh"><a href="{{ route('vanban.show', $document->id) . "/?tab=itemthuoctinh" }}">
                             Thuộc tính</a></li>
-                        <li class="map"><a href="#">
-                            Lược đồ</a></li>
-
-                        @if ($document->fileStore)
-                            <li class="download"><a href="{{ route('vanban.download', ['key' => $document->fileStore->key, 'id' => $document->fileStore->id]) }}">Tải về</a></li>
-                        @endif
-
                         <div id="divShowDialogDownload_120226" title="Danh sách văn bản tải về"
                             style="display: none">
                             <ul class="fileAttack">

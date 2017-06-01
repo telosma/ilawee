@@ -94,9 +94,16 @@ Route::group(['domain' => 'admin.ilawee.vn', 'namespace' => 'Admin'], function()
             });
         });
 
+        Route::group(['prefix' => 'van-ban-cho-phe-duyet'], function() {
+            Route::get('/', ['uses' => 'DocumentController@indexConfirming', 'as' => 'admin.confiming']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'DocumentController@ajaxListConfirming', 'as' => 'admin.confirming.ajax.list']);
+                Route::post('approve', ['uses' => 'DocumentController@ajaxApprove', 'as' => 'admin.confirming.ajax.approve']);
+            });
+        });
+
         Route::group(['prefix' => 'role'], function() {
             Route::get('/', ['uses' => 'RoleController@index', 'as' => 'admin.role.index']);
-            // Route::get('/{id}', ['uses' => 'DocumentController@preview', 'as' => 'admin.document.preview']);
             Route::group(['prefix' => 'ajax'], function () {
                 Route::get('list', ['uses' => 'RoleController@ajaxList', 'as' => 'admin.role.ajax.list']);
                 Route::post('create', ['uses' => 'RoleController@ajaxCreate', 'as' => 'admin.role.ajax.create']);
@@ -122,19 +129,31 @@ Route::group(['domain' => 'admin.ilawee.vn', 'namespace' => 'Admin'], function()
 });
 
 Route::group(['domain' => 'manager.ilawee.vn', 'namespace' => 'Manager'], function() {
-    Route::get('/', ['uses' => 'HomeController@index', 'as' => 'manager.index']);
-    Route::group(['prefix' => 'van-ban'], function () {
-        Route::group(['prefix' => 'ajax'], function () {
-            Route::get('list', ['uses' => 'HomeController@ajaxListDoc', 'as' => 'manager.document.ajax.list']);
-            Route::get('loai-van-ban/list', ['uses' => 'HomeController@ajaxListType', 'as' => 'manager.docType.ajax.list']);
-            Route::post('create', ['uses' => 'DocumentController@ajaxCreate', 'as' => 'manager.document.ajax.create']);
+
+        Route::get('/', ['uses' => 'HomeController@index', 'as' => 'manager.index']);
+        Route::get('login', ['uses' => 'AuthController@getLogin', 'as' => 'manager.getLogin']);
+        Route::post('login', ['uses' => 'AuthController@postLogin', 'as' => 'manager.postLogin']);
+
+        Route::group(['prefix' => 'van-ban'], function () {
+            Route::get('/', ['uses' => 'HomeController@index', 'as' => 'manager.index']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'HomeController@ajaxListDoc', 'as' => 'manager.document.ajax.list']);
+                Route::get('loai-van-ban/list', ['uses' => 'HomeController@ajaxListType', 'as' => 'manager.docType.ajax.list']);
+                Route::post('create', ['uses' => 'DocumentController@ajaxCreate', 'as' => 'manager.document.ajax.create']);
+            });
         });
-    });
-    Route::group(['prefix' => 'nguoi-ky'], function () {
-        Route::group(['prefix' => 'ajax'], function () {
-            Route::get('list', ['uses' => 'SignerController@ajaxListFullInfo', 'as' => 'manager.signer.ajax.listFullInfo']);
+
+        Route::group(['prefix' => 'nguoi-ky'], function() {
+            Route::get('/', ['uses' => 'SignerController@index', 'as' => 'manager.signer.index']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'SignerController@ajaxList', 'as' => 'manager.signer.ajax.list']);
+                Route::get('list-only', ['uses' => 'SignerController@ajaxOrganizationListOnly', 'as' => 'manager.signer.ajax.listOnly']);
+                Route::post('update', ['uses' => 'SignerController@ajaxUpdate', 'as' => 'manager.signer.ajax.update']);
+                Route::post('create', ['uses' => 'SignerController@ajaxCreate', 'as' => 'manager.signer.ajax.create']);
+                Route::delete('delete', ['uses' => 'SignerController@ajaxDelete', 'as' => 'manager.signer.ajax.delete']);
+                Route::get('list', ['uses' => 'SignerController@ajaxListFullInfo', 'as' => 'manager.signer.ajax.listFullInfo']);
+            });
         });
-    });
 });
 
 Route::get('/remarkable', function() {

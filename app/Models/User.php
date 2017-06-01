@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Hash;
-use App\Models\{Post, Comment, Social, Role};
+use App\Models\{Post, Comment, Social, Role, Upload};
 // use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
@@ -54,10 +54,20 @@ class User extends Authenticatable
         return $this->hasMany(Social::class, 'user_id');
     }
 
+    public function uploads()
+    {
+        return $this->hasMany(Upload::class, 'user_id');
+    }
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
     }
+
+    // public function docs()
+    // {
+    //     return $this->hasManyThrough(Document::class, Upload::class);
+    // }
 
     // relation: roles defined in EntrustUserTrait
 }
