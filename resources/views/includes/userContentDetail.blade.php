@@ -49,10 +49,12 @@
                                                      {{-- <table style="width:100%;" cellpadding="0px" cellspacing="0px" class="table_cqbh_cd_nk"><tbody><tr><td class="upper" style="width:775px"><p></p></td></tr><tr><td class="upper" style="width:775px"><p>Phó Thủ tướng </p></td></tr><tr><td style="width:775px"><p><i>(Đã ký)</i></p></td></tr><tr><td colspan="4">&nbsp;</td></tr><tr><td style="width:775px"><p>Trịnh Đình Dũng</p></td></tr></tbody></table> --}}
                                                 </div>
                                                 <!-- file toàn văn -->
+                                                @permission('document-download')
                                                 <div class="vbFile">
                                                     <div class="header">
                                                         <div>
-                                                            Tải file đính kèm</div>
+                                                            Tải file đính kèm
+                                                        </div>
                                                     </div>
                                                     <div class="content">
                                                         <ul>
@@ -73,6 +75,7 @@
                                                         </ul>
                                                     </div>
                                                 </div>
+                                                @endpermission
                                                 <!-- file toàn văn -->
                                                 <!-- văn bản liên quan -->
                                                 <div class="vbLienQuan">

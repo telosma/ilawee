@@ -107,6 +107,7 @@ Route::group(['domain' => 'admin.ilawee.vn', 'namespace' => 'Admin'], function()
             Route::group(['prefix' => 'ajax'], function () {
                 Route::get('list', ['uses' => 'RoleController@ajaxList', 'as' => 'admin.role.ajax.list']);
                 Route::post('create', ['uses' => 'RoleController@ajaxCreate', 'as' => 'admin.role.ajax.create']);
+                Route::post('update', ['uses' => 'RoleController@ajaxUpdate', 'as' => 'admin.role.ajax.update']);
                 Route::delete('delete', ['uses' => 'RoleController@ajaxDelete', 'as' => 'admin.role.ajax.delete']);
                 Route::get('permisstion/list', ['uses' => 'RoleController@ajaxPermissionList', 'as' => 'admin.role.ajax.permisstion.list']);
                 Route::get('list-only', ['uses' => 'RoleController@ajaxListOnly', 'as' => 'admin.role.ajax.listOnly']);

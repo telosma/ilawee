@@ -66,7 +66,7 @@
             url: {
                 'ajaxList': '{!! route('admin.role.ajax.list') !!}',
                 'ajaxCreate': '{!! route('admin.role.ajax.create') !!}',
-                'ajaxUpdate': '',
+                'ajaxUpdate': '{!! route('admin.role.ajax.update') !!}',
                 'ajaxDelete': '{!! route('admin.role.ajax.delete') !!}',
                 'ajaxListPermisstion': '{!! route('admin.permisstion.ajax.list') !!}',
                 'ajaxGetPermissionBaseRole': '{!! route('admin.role.ajax.permisstion.list') !!}'

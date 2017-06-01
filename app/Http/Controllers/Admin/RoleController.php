@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\{Document, Role, Permission};
+use App\Models\{Document, Role, Permission, PermissionRole};
 use App\Http\Requests\Manager\RoleCreateRequest;
 use  DB;
 use Exeption;
@@ -79,6 +79,33 @@ class RoleController extends Controller
             return [
                 config('common.flash_level_key') => config('admin.noty_status.error'),
                 config('common.flash_message') => $e->getMessage()
+            ];
+        }
+    }
+
+    public function ajaxUpdate(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $role = Role::find($request->id);
+            // foreach ($request->input('permissions') as  $value) {
+            PermissionRole::whereIn('role_id', $request->input('permissions'))->delete();
+            // }
+            foreach ($request->input('permissions') as  $value) {
+                $role->attachPermission($value);
+            }
+            DB::commit();
+
+            return [
+                config('common.flash_level_key') => 'success',
+                config('common.flash_message') => 'Cập nhật quyền thành công',
+            ];
+            } catch (Exeption $e) {
+               DB::rollback();
+
+            return [
+                config('common.flash_level_key') => 'error',
+                config('common.flash_message') => 'Có lỗi xảy ra, thử lại sau',
             ];
         }
     }
